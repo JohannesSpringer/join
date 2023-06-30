@@ -1,0 +1,21 @@
+.legal-notice-content {
+    margin-left: 300px;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.arrow-black {
+    position: absolute;
+    right: 10%;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .legal-notice-content {
+        margin-left: 32px !important;
+        margin-right: 16px;
+        padding-bottom: 75px;
+    }
+}
