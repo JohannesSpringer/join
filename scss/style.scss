@@ -1,13 +1,11 @@
 @import './predefinedStyle';
 @import './fonts';
-
 @import './login';
-@import './forgotpaswd';
-@import './desktop_template';
 @import './legal_notice';
 @import './contacts';
 @import './board';
 @import './summary';
+@import './addTask';
 
 
 
@@ -19,23 +17,3 @@ body {
 }
 
 //Global styles
-
-.name-input {
-    margin-bottom: 25px;
-    width: 60%;
-    @include inputForm('../assets/img/person-icon.png', 94%, 55%);
-    font-size: 14px !important;
-    box-sizing: unset !important;
-}
-
-.email-input {
-    margin-bottom: 25px;
-    width: 60%;
-    @include inputForm('../assets/img/letter-icon.png', 94%, 55%);
-    font-size: 14px !important;
-    box-sizing: unset !important;
-}
-
-.d-none {
-    display: none !important;
-}
