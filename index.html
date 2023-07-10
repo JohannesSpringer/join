@@ -11,11 +11,18 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
     <script src="./js/script.js"></script>
 </head>
 
-<body onload="">
-    
+<body onload="initLogin()">
+
+    <form onsubmit="register(); return false;">
+        <input required type="email" id="email">
+        <input required type="password" id="password">
+        <button id="registerBtn">Registrieren</button>
+    </form>
+
 </body>
 
 </html>
