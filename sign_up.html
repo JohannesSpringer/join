@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/script.js"></script>
+</head>
+
+<body onload="initRegister()">
+
+    <div class="log-in">
+        <img class="log-in-logo" src="assets/img/logo.png">
+        <div class="form-class form-width-mobile">
+            <img onclick="window.history.go(-1); return false;" class="arrow-left-icon" src="assets/img/arrow-left.png">
+            <form onsubmit="registerUser(); return false" class="log-in-form">
+                <span class="log-in-headline mobile-space-bottom">Sign up</span>
+                <input id="registerName" class="name-input mobile-space-bottom" placeholder="Name" type="text" required>
+                <input id="registerEmail" class="email-input mobile-space-bottom" placeholder="Email" type="email" required>
+                <input id="registerPassword" class="password-input mobile-space-bottom" placeholder="Password" type="password" minlength="6" required>
+                <div>
+                    <button id="registerBtn" class="log-in-button mobile-button-width">Sign up</button>
+                </div>
+                <span id="registerSuccess" class="login-popup" style="display: none;">You have successfully registered !</span>
+                <span id="registerError" class="login-popup" style="display: none;" >E-Mail already used !</span>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

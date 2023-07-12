@@ -4,7 +4,7 @@ let users = [];
  * This function initializes the login webpage
  * 
  */
-async function initLogin() {
+async function initRegister() {
     loadUsers();
 }
 
@@ -24,13 +24,20 @@ async function loadUsers() {
  * This function registers a new user with email and password
  * 
  */
-async function register() {
+async function registerUser() {
+    if ( userAlreadyExists() ) {
+        registerEmail.style = 'border-color: red';
+        registerError.style = 'display: flex';
+        return;
+    };
     registerBtn.disabled = true;
     users.push({
-        email: email.value,
-        password: password.value
+        name: registerName.value,
+        email: registerEmail.value,
+        password: registerPassword.value
     });
     await setItem('users', JSON.stringify(users));
+    registerUserSuccess();
     resetForm();
 }
 
@@ -39,7 +46,31 @@ async function register() {
  * 
  */
 function resetForm() {
-    email.value = '';
-    password.value = '';
+    registerName.value = '';
+    registerEmail.value = '';
+    registerPassword.value = '';
     registerBtn.disabled = false;
+    resetRegisterError();
+}
+
+function userAlreadyExists() {
+    res = false;
+    for (let i = 0; i < users.length; i++) {
+        const u = users[i];
+        if ( u.email == registerEmail.value ) {
+            console.log("User mit entsprechender Email exisitert bereits!");
+            res = true;
+            break;
+        }
+    }
+    return res;
+}
+
+function resetRegisterError() {
+    registerEmail.style = 'border-color: unset';
+    registerError.style = 'display: none';
+}
+
+function registerUserSuccess() {
+    registerSuccess.style = 'display: flex'
 }

@@ -84,7 +84,7 @@
     }
 
     .form-class {
-        height: 420px;
+        height: 400px;
         width: 500px;
         background-color: white;
         border-radius: 20px;
@@ -162,7 +162,7 @@
                 @include button-darkblue;
                 font-size: 16px;
                 text-decoration: none;
-                // margin-right: 24px;
+                margin-right: 24px;
             }
 
             .guest-log-in-button {
@@ -178,20 +178,13 @@
         color: white;
         background-color: $darkblue;
         padding: 8px 8px;
-        border-radius: 10px;
+        border-radius: 6px;
         font-weight: 500;
         border: none;
         margin-top: 16px;
         text-align: center;
     }
 
-}
-
-.arrow-left-icon {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    cursor: pointer;
 }
 
 
