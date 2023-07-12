@@ -1,23 +1,9 @@
-let users = [];
-
 /**
  * This function initializes the login webpage
  * 
  */
 async function initRegister() {
     loadUsers();
-}
-
-/**
- * This function loads the users from backend
- * 
- */
-async function loadUsers() {
-    try {
-        users = JSON.parse(await getItem('users'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
 }
 
 /**
@@ -93,6 +79,9 @@ function hideEmailExistsMessage() {
     registerEmail.value = '';
 }
 
+/**
+ * This function adds the new user to the local users array.
+ */
 function addUserToLocalArray() {
     registerBtn.disabled = true;
     users.push({

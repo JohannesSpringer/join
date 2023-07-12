@@ -32,8 +32,8 @@
         <div class="form-class form-width-mobile">
             <form onsubmit="userLogin(); return false" class="log-in-form">
                 <span class="log-in-headline">Log in</span>
-                <input id="login-email" class="email-input" placeholder="Email" type="email" required>
-                <input id="login-password" class="password-input" placeholder="Password" type="password" required>
+                <input id="loginEmail" class="email-input" placeholder="Email" type="email" required>
+                <input id="loginPassword" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
                     <div class="mobile-remember-me">
                         <input id="remember-checkbox" type="checkbox" name="remember-me"><span
@@ -45,8 +45,9 @@
                     <button class="log-in-button">Log in</button>
                     <button onclick="guestLogin()" class="guest-log-in-button">Guest Log in</button>
                 </div>
-                <span id="login-false" class="login-popup" style="display: none;">Data not correct ! Please check for
-                    correctness !</span>
+                <span id="loginError" class="login-popup" style="display: none;">
+                    Password or Email not correct!
+                </span>
             </form>
         </div>
     </div>
