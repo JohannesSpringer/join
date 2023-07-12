@@ -26,16 +26,10 @@ async function loadUsers() {
  */
 async function registerUser() {
     if ( userAlreadyExists() ) {
-        registerEmail.style = 'border-color: red';
-        registerError.style = 'display: flex';
+        handleUserAlreadyRegisteredError();
         return;
     };
-    registerBtn.disabled = true;
-    users.push({
-        name: registerName.value,
-        email: registerEmail.value,
-        password: registerPassword.value
-    });
+    addUserToLocalArray();
     await setItem('users', JSON.stringify(users));
     registerUserSuccess();
     resetForm();
@@ -53,24 +47,57 @@ function resetForm() {
     resetRegisterError();
 }
 
+/**
+ * This function checks the existing user emails and compares it with the
+ * new user email
+ * 
+ * @returns True if the email already exists in backend
+ */
 function userAlreadyExists() {
-    res = false;
-    for (let i = 0; i < users.length; i++) {
-        const u = users[i];
-        if ( u.email == registerEmail.value ) {
-            console.log("User mit entsprechender Email exisitert bereits!");
-            res = true;
-            break;
-        }
-    }
-    return res;
+    return users.some(user => user.email === registerEmail.value);
 }
 
+/**
+ * This functions resets the register form after existing error with email
+ */
 function resetRegisterError() {
     registerEmail.style = 'border-color: unset';
     registerError.style = 'display: none';
 }
 
+/**
+ * This functions shows a message after successfully registered new user
+ */
 function registerUserSuccess() {
-    registerSuccess.style = 'display: flex'
+    registerSuccess.style = 'display: block'
+}
+
+/**
+ * This function shows the Error message for already existing Email 
+ * and mark the email input field
+ */
+function handleUserAlreadyRegisteredError() {
+    registerEmail.style = 'border-color: red';
+    registerError.style = 'display: block';
+    registerPassword.value = '';
+    setTimeout(hideEmailExistsMessage, 3000);
+}
+
+/**
+ * This functions resets the Error message for already existing Email
+ * and resets the email input field
+ */
+function hideEmailExistsMessage() {
+    registerEmail.style = 'border-color: unset';
+    registerError.style = 'display: none';
+    registerEmail.value = '';
+}
+
+function addUserToLocalArray() {
+    registerBtn.disabled = true;
+    users.push({
+        name: registerName.value,
+        email: registerEmail.value,
+        password: registerPassword.value
+    });
 }

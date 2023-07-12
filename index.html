@@ -18,19 +18,19 @@
 <body onload="initRegister()">
 
     <div class="start-animation">
-        <img class="logo-animation" src="assets/img/logo.png">
+        <img class="logo-animation" src="./assets/img/logo.png">
     </div>
     <div class="mobile-start-animation">
-        <img class="mobile-logo-animation" src="assets/img/menu-logo.png">
+        <img class="mobile-logo-animation" src="./assets/img/menu-logo.png">
     </div>
     <div class="log-in">
-        <img class="log-in-logo" src="assets/img/logo.png">
+        <img class="log-in-logo" src="./assets/img/logo.png">
         <div class="sign-up">
             <span>Not a Join user?</span>
             <button onclick="goToSignUp()" class="sign-up-button">Sign up</button>
         </div>
         <div class="form-class form-width-mobile">
-            <form onsubmit="login(); return false" class="log-in-form">
+            <form onsubmit="userLogin(); return false" class="log-in-form">
                 <span class="log-in-headline">Log in</span>
                 <input id="login-email" class="email-input" placeholder="Email" type="email" required>
                 <input id="login-password" class="password-input" placeholder="Password" type="password" required>

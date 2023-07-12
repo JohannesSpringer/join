@@ -6,3 +6,7 @@
 function goToSignUp() {
     window.location.href = "sign_up.html"
 }
+
+function userLogin() {
+    
+}
