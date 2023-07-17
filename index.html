@@ -15,7 +15,7 @@
     <script src="./js/script.js"></script>
 </head>
 
-<body onload="initRegister()">
+<body onload="initRegister(), loadLoginData()">
 
     <div class="start-animation">
         <img class="logo-animation" src="./assets/img/logo.png">
@@ -36,7 +36,7 @@
                 <input id="loginPassword" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
                     <div class="mobile-remember-me">
-                        <input id="remember-checkbox" type="checkbox" name="remember-me"><span
+                        <input id="rememberCheckbox" type="checkbox" name="remember-me"><span
                             class="remember-me">Remember me</span>
                     </div>
                     <a class="forgot-password-link" href="forgot_password.html">Forgot my password</a>

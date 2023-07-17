@@ -1,17 +1,25 @@
 
 
 /**
- * go to sign_up.html
+ * This function changes the current shown webpage to sign_up.html
  */
 function goToSignUp() {
     window.location.href = "sign_up.html";
 }
 
 /**
- * go to index.html
+ * This function changes the current shown webpage to index.html
  */
 function goToIndex() {
     window.location.href = "index.html";
+}
+
+/**
+ * This function changes the current shown webpage to summary.html
+ */
+function goToSummary() {
+    window.location.href = "summary.html";
+    localStorage.setItem('selectedMenuItem', 'summary');
 }
 
 /**
@@ -29,18 +37,19 @@ async function userLogin() {
  */
 function checkValidCredentials() {
     if ( (curUser = userIsExisting()) && isPasswordValid(loginPassword.value, curUser.password) ) {
-        handleLoginSuccess(email, password, rememberMe, user);
+        handleLoginSuccess(loginEmail.value, loginPassword.value, rememberCheckbox.checked, curUser);
     } else {
         handleLoginFailure();
     }
-    //     if ( hashWithSHA256(loginPassword.value) === curUser.password ) {
-    //         goToSummary();
-    //     } else {
-    //         showLoginError();
-    //     }
-    // };
 }
 
+/**
+ * This function checks if the password is correct of the current user
+ * 
+ * @param {string} password - The password in the password input field on login page
+ * @param {*} hashedPassword - The hashed password from the server from the current user
+ * @returns 
+ */
 async function isPasswordValid(password, hashedPassword) {
     return await hashWithSHA256(password) === hashedPassword;
 }
@@ -89,11 +98,14 @@ function clearLoginFields() {
     document.getElementById('loginPassword').value = '';
 }
 
-/**
- * This function changes the current shown webpage to summary site
- */
-function goToSummary() {
-    window.location.href = "summary.html";
+function handleLoginSuccess(email, password, rememberMe, user) {
+    if (rememberMe) {
+        saveLoginData(email, password);
+    } else {
+        clearLoginData();
+    }
+    setCurrentUser(user);
+    goToSummary();
 }
 
 /**
@@ -125,5 +137,38 @@ function highlightSelectedMenuItem() {
             break;
         default:
             break;
+    }
+}
+
+function saveLoginData(email, password) {
+    localStorage.setItem("loginEmail", email);
+    localStorage.setItem("loginPassword", password);
+    localStorage.setItem("rememberMeChecked", true);
+}
+
+function clearLoginData() {
+    localStorage.removeItem("loginEmail");
+    localStorage.removeItem("loginPassword");
+    localStorage.removeItem("rememberMeChecked");
+}
+
+function setCurrentUser(user) {
+    localStorage.setItem("currentUser", user.name);
+}
+
+/**
+ * This functions loads the stored login data from local storage
+ */
+function loadLoginData() {
+    let storedEmail = localStorage.getItem("loginEmail");
+    let storedPassword = localStorage.getItem("loginPassword");
+    let rememberMeChecked = localStorage.getItem("rememberMeChecked");
+
+    if (storedEmail && storedPassword && rememberMeChecked) {
+        document.getElementById("loginEmail").value = storedEmail;
+        document.getElementById("loginPassword").value = storedPassword;
+        rememberCheckbox.checked = true;
+    } else {
+        rememberCheckbox.checked = false;
     }
 }
