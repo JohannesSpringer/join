@@ -8,6 +8,13 @@ function goToSignUp() {
 }
 
 /**
+ * go to index.html
+ */
+function goToIndex() {
+    window.location.href = "index.html";
+}
+
+/**
  * This functions loads all users from backend and checks if the current user
  * with the correct credentials.
  */
@@ -21,13 +28,21 @@ async function userLogin() {
  * will be logged in
  */
 function checkValidCredentials() {
-    if ( (curUser = userIsExisting()) ) {
-        if ( loginPassword.value === curUser.password ) {
-            goToSummary();
-        } else {
-            showLoginError();
-        }
-    };
+    if ( (curUser = userIsExisting()) && isPasswordValid(loginPassword.value, curUser.password) ) {
+        handleLoginSuccess(email, password, rememberMe, user);
+    } else {
+        handleLoginFailure();
+    }
+    //     if ( hashWithSHA256(loginPassword.value) === curUser.password ) {
+    //         goToSummary();
+    //     } else {
+    //         showLoginError();
+    //     }
+    // };
+}
+
+async function isPasswordValid(password, hashedPassword) {
+    return await hashWithSHA256(password) === hashedPassword;
 }
 
 /**
@@ -40,12 +55,38 @@ function userIsExisting() {
 }
 
 /**
+* hash a string with SHA-256
+*/
+async function hashWithSHA256(string) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(string);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    // convert hash to hex string
+    return Array.from(new Uint8Array(hash))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+}
+
+/**
+ * This function handels the false login
+ */
+function handleLoginFailure() {
+    showLoginFailureMessage();
+    clearLoginFields();
+}
+
+/**
  * This function shows an error message for wrong login credentials. 
  * Reset password input value
  */
-function showLoginError() {
-    loginError.style.display = 'flex';
-    loginPassword.value = '';
+function showLoginFailureMessage() {
+    document.getElementById('loginError').style.display = 'block';
+    setTimeout(hideFalseData, 3000);
+}
+
+function clearLoginFields() {
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
 }
 
 /**

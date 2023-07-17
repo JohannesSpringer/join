@@ -2,7 +2,7 @@
  * This function initializes the login webpage
  * 
  */
-async function initRegister() {
+function initRegister() {
     loadUsers();
 }
 
@@ -15,10 +15,11 @@ async function registerUser() {
         handleUserAlreadyRegisteredError();
         return;
     };
-    addUserToLocalArray();
+    await addUserToLocalArray();
     await setItem('users', JSON.stringify(users));
     registerUserSuccess();
     resetForm();
+    setTimeout(goToIndex, 2000);
 }
 
 /**
@@ -30,7 +31,7 @@ function resetForm() {
     registerEmail.value = '';
     registerPassword.value = '';
     registerBtn.disabled = false;
-    resetRegisterError();
+    hideEmailExistsMessage();
 }
 
 /**
@@ -41,14 +42,6 @@ function resetForm() {
  */
 function userAlreadyExists() {
     return users.some(user => user.email === registerEmail.value);
-}
-
-/**
- * This functions resets the register form after existing error with email
- */
-function resetRegisterError() {
-    registerEmail.style = 'border-color: unset';
-    registerError.style = 'display: none';
 }
 
 /**
@@ -74,7 +67,7 @@ function handleUserAlreadyRegisteredError() {
  * and resets the email input field
  */
 function hideEmailExistsMessage() {
-    registerEmail.style = 'border-color: unset';
+    registerEmail.style = 'border-color: #D1D1D1';
     registerError.style = 'display: none';
     registerEmail.value = '';
 }
@@ -82,11 +75,12 @@ function hideEmailExistsMessage() {
 /**
  * This function adds the new user to the local users array.
  */
-function addUserToLocalArray() {
+async function addUserToLocalArray() {
     registerBtn.disabled = true;
+    let hashedPassword = await hashWithSHA256(registerPassword.value);
     users.push({
         name: registerName.value,
         email: registerEmail.value,
-        password: registerPassword.value
+        password: hashedPassword.toString()
     });
 }
