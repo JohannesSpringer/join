@@ -35,8 +35,8 @@ async function userLogin() {
  * This functions is checking the login credentials. If they fit, the user
  * will be logged in
  */
-function checkValidCredentials() {
-    if ( (curUser = userIsExisting()) && isPasswordValid(loginPassword.value, curUser.password) ) {
+async function checkValidCredentials() {
+    if ( (curUser = await userIsExisting()) && await isPasswordValid(loginPassword.value, curUser.password) ) {
         handleLoginSuccess(loginEmail.value, loginPassword.value, rememberCheckbox.checked, curUser);
     } else {
         handleLoginFailure();
@@ -51,7 +51,8 @@ function checkValidCredentials() {
  * @returns 
  */
 async function isPasswordValid(password, hashedPassword) {
-    return await hashWithSHA256(password) === hashedPassword;
+    let hasehdLoginPassword = await hashWithSHA256(password)
+    return hasehdLoginPassword.toString() === hashedPassword;
 }
 
 /**
@@ -140,9 +141,9 @@ function highlightSelectedMenuItem() {
     }
 }
 
-function saveLoginData(email, password) {
+async function saveLoginData(email, password) {
     localStorage.setItem("loginEmail", email);
-    localStorage.setItem("loginPassword", password);
+    localStorage.setItem("loginPassword", await hashWithSHA256(password));
     localStorage.setItem("rememberMeChecked", true);
 }
 
@@ -171,4 +172,15 @@ function loadLoginData() {
     } else {
         rememberCheckbox.checked = false;
     }
+}
+
+/**
+ * Guest Login
+ */
+function guestLogin() {
+    event.preventDefault();
+    currentUser = 'Guest';
+    localStorage.setItem('currentUser', 'Guest');
+    clearLoginData();
+    goToSummary();
 }
