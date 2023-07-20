@@ -94,11 +94,25 @@ function showLoginFailureMessage() {
     setTimeout(hideFalseData, 3000);
 }
 
+/**
+ * This function resets the email and password value
+ */
 function clearLoginFields() {
     document.getElementById('loginEmail').value = '';
     document.getElementById('loginPassword').value = '';
 }
 
+/**
+ * This function handle the successful login
+ * Saving data if remember me checkbox is checked
+ * Set the current user in local storage
+ * Go to the summary webpage
+ * 
+ * @param {string} email - This is the email of the logged in user
+ * @param {string} password - This is the hashed password of the logged in user
+ * @param {boolean} rememberMe - This is the checkbox if the user should be automatically logged in the next time
+ * @param {*} user - This is the user object of the logged in user
+ */
 function handleLoginSuccess(email, password, rememberMe, user) {
     if (rememberMe) {
         saveLoginData(email, password);
@@ -141,18 +155,32 @@ function highlightSelectedMenuItem() {
     }
 }
 
+/**
+ * This function saves the credentials in the local storage
+ * 
+ * @param {string} email - This is the registered email
+ * @param {string} password - This is the hashed password
+ */
 async function saveLoginData(email, password) {
     localStorage.setItem("loginEmail", email);
     localStorage.setItem("loginPassword", await hashWithSHA256(password));
     localStorage.setItem("rememberMeChecked", true);
 }
 
+/**
+ * This function deletes the credentials from local storage
+ */
 function clearLoginData() {
     localStorage.removeItem("loginEmail");
     localStorage.removeItem("loginPassword");
     localStorage.removeItem("rememberMeChecked");
 }
 
+/**
+ * This function saves the logged in username to local storage
+ * 
+ * @param {*} user 
+ */
 function setCurrentUser(user) {
     localStorage.setItem("currentUser", user.name);
 }
