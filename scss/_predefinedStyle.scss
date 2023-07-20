@@ -44,3 +44,17 @@ $gray: #a8a8a8;
     background: white url($imgurl) right no-repeat;
     background-position: $posx $posy;
 }
+
+@mixin inputTask() {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    background-color: white;
+}
+
+@mixin reqInputText() {
+    span{
+        font-size: 12px;
+        color: red;
+    }
+}

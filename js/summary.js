@@ -1,5 +1,5 @@
 let inProgessCount = 0;
-let awitFeedbackCount = 0;
+let awaitFeedbackCount = 0;
 let taskInBoard = 0;
 let todoCount = 0;
 let doneCount = 0;
@@ -9,7 +9,9 @@ let user_name;
 let dates = new Array;
 let upcomingDeadline = '';
 
-
+/**
+ * This functions starts the initialization and checks the day time to greet the user dependend to the time
+ */
 function greet() {
     init();
     currentlyDate = new Date();
@@ -21,6 +23,9 @@ function greet() {
     document.getElementById('greetName').innerHTML = localStorage.getItem('currentUser');
 };
 
+/**
+ * This function initialize the summary webpage
+ */
 async function init() {
     await loadTasks();
     user_name = current_user['name'];
@@ -31,11 +36,17 @@ async function init() {
             checkPrioAndDate(task);
             checkStatus(task.status);
         });
-        dateDeatline(dates);
+        dateDeadline(dates);
     }
-    genHtmlToSeite();
+    genHtmlToSite();
 }
 
+/**
+ * This function counts the urgent priority tasks and push the task due date 
+ * to the dates array
+ * 
+ * @param {*} task - This is the task object
+ */
 function checkPrioAndDate(task) {
     if (task.prio === 'urgent') {
         urgentCount++;
@@ -43,11 +54,18 @@ function checkPrioAndDate(task) {
     }
 }
 
-function dateDeatline(array) {
-    var today = new Date();
+/**
+ * This functions sorts the due dates of task with urgent priority.
+ * The date in the nearest future stays in the dates array
+ * 
+ * @param {*} array 
+ */
+function dateDeadline(array) {
+    let today = new Date();
 
-    var nextDate = array
+    let nextDate = array
         .filter(function (datum) {
+            // Wieso <= today ? sollte due date nicht in Zukunft liegen?
             return new Date(datum) <= today;
         })
         .sort(function (a, b) {
@@ -58,6 +76,11 @@ function dateDeatline(array) {
     formatDate(nextDate);
 }
 
+/**
+ * This function formats the due date to a string with format "DD.MM.YYYY"
+ * 
+ * @param {*} nextDate 
+ */
 function formatDate(nextDate) {
     let d = new Date(nextDate)
     let day = d.getDate();
@@ -66,13 +89,18 @@ function formatDate(nextDate) {
     upcomingDeadline = day + "." + month + "." + year;
 }
 
+/**
+ * This function increase the status count dependend of the tasks status
+ * 
+ * @param {string} status 
+ */
 function checkStatus(status) {
     switch (status) {
         case 'progress':
             inProgessCount++
             break;
         case 'feedback':
-            awitFeedbackCount++
+            awaitFeedbackCount++
             break;
         case 'todo':
             todoCount++
@@ -87,7 +115,7 @@ function checkStatus(status) {
 
 // HTML Teil
 
-function genHtmlToSeite() {
+function genHtmlToSite() {
     document.getElementById('overview').innerHTML = /*html */`
     
     <div class="summery_head">
@@ -118,7 +146,7 @@ function genHtmlToSeite() {
             </a>
             <a href="board.html" class="task_sub">
                 <span class="count">
-                    ${awitFeedbackCount}
+                    ${awaitFeedbackCount}
                 </span>
                 <span class="status">
                     Awaiting <br>

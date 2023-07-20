@@ -1,0 +1,33 @@
+.add-task-content {
+    margin-left: 200px;
+    padding-left: 56px;
+    padding-top: 56px;
+    padding-right: 56px;
+
+    .add-task-header {
+        display: flex;
+
+        h1 {
+            font-size: 48px;
+            margin: unset;
+        }
+    }
+
+    .add-task-inputs {
+        display: flex;
+        margin-top: 20px;
+        margin-left: 20px;
+        // width: 100%;
+    }
+}
+
+.task-title {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    gap: 4px;
+    @include reqInputText();
+
+    #taskTitle {
+        @include inputTask();}
+}

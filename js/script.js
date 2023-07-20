@@ -23,6 +23,14 @@ function goToSummary() {
 }
 
 /**
+ * This function changes the current shown webpage to summary.html
+ */
+function goToAddTask() {
+    window.location.href = "add_task.html";
+    localStorage.setItem('selectedMenuItem', 'addTask');
+}
+
+/**
  * This functions loads all users from backend and checks if the current user
  * with the correct credentials.
  */
