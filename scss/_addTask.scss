@@ -18,16 +18,48 @@
         margin-top: 20px;
         margin-left: 20px;
         // width: 100%;
+
+        .add-task-inputs-left {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
     }
 }
 
 .task-title {
     display: flex;
     flex-direction: column;
-    width: 45%;
+    // width: 45%;
     gap: 4px;
     @include reqInputText();
 
     #taskTitle {
-        @include inputTask();}
+        @include inputTask();
+    }
+}
+
+.task-description {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    @include reqInputText();
+
+    #taskDescription {
+        resize: none;
+        @include inputTask();
+    }
+}
+
+.task-category {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    @include reqInputText();
+
+    #taskCategory {
+        @include inputTask();
+    }
 }

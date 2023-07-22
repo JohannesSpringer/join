@@ -1315,22 +1315,61 @@ a {
   margin-top: 20px;
   margin-left: 20px;
 }
+.add-task-content .add-task-inputs .add-task-inputs-left {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 .task-title {
   display: flex;
   flex-direction: column;
-  width: 45%;
   gap: 4px;
 }
 .task-title span {
   font-size: 12px;
-  color: red;
+  color: #F6F7F8;
 }
 .task-title #taskTitle {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #D1D1D1;
-  background-color: white;
+  background-color: #FFFFFF;
+}
+
+.task-description {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.task-description span {
+  font-size: 12px;
+  color: #F6F7F8;
+}
+.task-description #taskDescription {
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background-color: #FFFFFF;
+}
+
+.task-category {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.task-category span {
+  font-size: 12px;
+  color: #F6F7F8;
+}
+.task-category #taskCategory {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background-color: #FFFFFF;
 }
 
 .menu {
