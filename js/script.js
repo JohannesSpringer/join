@@ -1,4 +1,4 @@
-
+let rememberMeChecked;
 
 /**
  * This function changes the current shown webpage to sign_up.html
@@ -59,6 +59,10 @@ async function checkValidCredentials() {
  * @returns 
  */
 async function isPasswordValid(password, hashedPassword) {
+    debugger;
+    if (rememberMeChecked) return password === hashedPassword;
+    // if (password.length == 64) return password === hashedPassword;
+
     let hasehdLoginPassword = await hashWithSHA256(password)
     return hasehdLoginPassword.toString() === hashedPassword;
 }
@@ -171,7 +175,7 @@ function highlightSelectedMenuItem() {
  */
 async function saveLoginData(email, password) {
     localStorage.setItem("loginEmail", email);
-    localStorage.setItem("loginPassword", await hashWithSHA256(password));
+    if (!rememberMeChecked) localStorage.setItem("loginPassword", await hashWithSHA256(password));
     localStorage.setItem("rememberMeChecked", true);
 }
 
@@ -199,7 +203,7 @@ function setCurrentUser(user) {
 function loadLoginData() {
     let storedEmail = localStorage.getItem("loginEmail");
     let storedPassword = localStorage.getItem("loginPassword");
-    let rememberMeChecked = localStorage.getItem("rememberMeChecked");
+    rememberMeChecked = localStorage.getItem("rememberMeChecked");
 
     if (storedEmail && storedPassword && rememberMeChecked) {
         document.getElementById("loginEmail").value = storedEmail;
