@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/overlay.style.css">
+    <link rel="stylesheet" href="./css/media.querys.addTask.css">
+    <link rel="stylesheet" href="./css/contactAddTask.css">
+    
+    <script src="./js/mini_backend.js"></script>
+    <script src="./js/includeHTML.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/add_task_templates.js"></script>
+    <script src="./js/add_task.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/contacts.js"></script>
+</head>
+
+<body onload="includeHTML(), init()">
+    <div w3-include-html="desktop_template.html"></div>
+    <div id="contacts-container">
+        <div class="contacts-list" id="contacts-list">
+            <div class="list-header">
+                A
+            </div>
+            <div class="list-contact list-contact-activ">
+                <img src="./assets/img/contacts-icons/Frame 79.png" alt="">
+                <div>
+                    <p>Name hierundso</p>
+                    <p>mail@wasauchimmer.de</p>
+                </div>
+            </div>
+           
+        </div>
+        <div class="contact-info d-none-mobile">
+            <div class="contact-headline">
+                <img src="./assets/img/contacts-icons/arrow-left.png" class="arrowLeftMobile" style="display: none;" onclick="hideContactInfo()">
+                <h3>Contacts</h3>
+                <p>Better with a team</p>
+                <div class="seperator" style="display: none;"></div>
+            </div>
+            <div class="contact-details" id="contactDetails"></div>
+            
+        </div>
+        <div class="new-contact" onclick="editShowContact()">
+            New Contact
+            <img src="./assets/img/contacts-icons/addContact.png" alt="">
+        </div>
+    </div>
+
+    <div id="overlayContent" class="d-none"></div>
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
+        <div class="add-task" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            </div>
+            <div id="overlay"></div>
+        </div>
+    </div>
+    <!-- ---------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+    <div class="addBord_box" id="addBordBox">
+        Task added to Board
+        <img src="assets/img/board.png" class="add_board_image">
+    </div>
+    <div class="addBord_box" id="pleaseEnterName">
+        Please enter a Task Name
+    </div>
+    <div class="addBord_box" id="pleaseCategoryName">
+        Please enter a color and a category 
+    </div>
+    <div class="addBord_box" id="missing">
+        Something is missing
+    </div>
+    <div class="addBord_box" id="emailSent">
+        Email sent
+    </div>
+    <div class="addBord_box" id="enterEmail">
+       Please enter a E-Mail
+    </div>
+    <div class="mobile_create_overlay" onclick="createTask()" id="mobileCreate">Create<img src="assets/img/haken.png"></div>
+    <!-----------------------------------------------------------Animation Div's-------------------------------------------------------------------- -->
+</body>
+
+</html>
