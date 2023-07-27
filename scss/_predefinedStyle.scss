@@ -8,6 +8,7 @@ $green: #93E751;
 $pagebackground: #F6F7F8;
 $gray: #a8a8a8;
 $inputbackground: #FFFFFF;
+$lightgray: #D1D1D1;
 
 @mixin button-White() {
     color: $darkblue;
@@ -41,7 +42,7 @@ $inputbackground: #FFFFFF;
 @mixin inputForm($imgurl, $posx, $posy) {
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #D1D1D1;
+    border: 1px solid $lightgray;
     background: white url($imgurl) right no-repeat;
     background-position: $posx $posy;
 }
@@ -49,7 +50,7 @@ $inputbackground: #FFFFFF;
 @mixin inputTask() {
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #D1D1D1;
+    border: 1px solid $lightgray;
     background-color: $inputbackground;
 }
 
