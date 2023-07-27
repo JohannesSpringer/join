@@ -16,7 +16,8 @@ let categoryColors = [
     '#FF8A00',
     '#E200BE',
     '#0038FF'
-]
+];
+let activeCategoryColor;
 
 //displays the current date
 function getDate() {
@@ -73,11 +74,13 @@ function renderCategorys() {
 }
 
 function createNewCategory() {
+    activeCategoryColor = '';
     showCreateNewCategoryHTML();
 }
 
 function setColor(clr) {
     removeSelectedColors();
+    activeCategoryColor = clr;
     document.getElementById(clr).classList.add('selected');
 }
 
@@ -86,6 +89,30 @@ function removeSelectedColors() {
         document.getElementById(ctgryClr).classList.remove('selected');
     });
 }
+
+function clearInputField(id) {
+    document.getElementById(id).value = '';
+}
+
+function addNewCategory() {
+    let categoryValue = document.getElementById('categoryName').value;
+    if (categoryValue.length < 1 || !activeCategoryColor) {
+        // if (!button_delay) {
+        //     button_delay = true;
+        //     showNotice('pleaseCategoryName');
+        //     setTimeout(() => button_delay = false, 2500);
+        // }
+        console.log('Please select color and write Category name');
+    } else {
+        // todo Struktur für Kategorien definieren!
+        categorys['color'].push(color);
+        categorys['category'].push(categoryValue);
+        saveInLocalStorage('categorys', categorys);
+        taskCategory = categoryValue;
+        showCategoryColorHTML();
+        menuOpen = false;
+    }
+};
 
 function setCategory(ctgry, clr) {
     toggleCategory();
@@ -149,7 +176,7 @@ function showCreateNewCategoryHTML() {
         <div class="category-name-box">  
             <input type="text" placeholder="New category name" id="categoryName" required maxlength="29">
             <div class="confirm-category">
-                <div onclick="clearInputField()" class="delete-category">
+                <div onclick="clearInputField('categoryName')" class="delete-category">
                     <img src="./assets/img/x.svg" alt="">
                 </div>
                 <div class="confirm-border"></div>
@@ -159,11 +186,14 @@ function showCreateNewCategoryHTML() {
             </div>
         </div>
         <div class="color-points">
-            <div id="#8AA4FF" class="color-point" onclick="setColor('#8AA4FF')" style="background-color: #8AA4FF;"></div>
-            <div id="#FF0000" class="color-point" onclick="setColor('#FF0000')" style="background-color: #FF0000;"></div>
-            <div id="#2AD300" class="color-point" onclick="setColor('#2AD300')" style="background-color: #2AD300;"></div>
-            <div id="#FF8A00" class="color-point" onclick="setColor('#FF8A00')" style="background-color: #FF8A00;"></div>
-            <div id="#E200BE" class="color-point" onclick="setColor('#E200BE')" style="background-color: #E200BE;"></div>
-            <div id="#0038FF" class="color-point" onclick="setColor('#0038FF')" style="background-color: #0038FF;"></div>
+            ${getCategorysHtml()}
         </div>`;
 };
+
+function getCategorysHtml() {
+    let htmlCategories = '';
+    categoryColors.forEach(ctgry => {
+        htmlCategories += `<div id="${ctgry}" class="color-point" onclick="setColor('${ctgry}')" style="background-color: ${ctgry};"></div>`;
+    });
+    return htmlCategories;
+}

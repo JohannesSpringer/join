@@ -1476,7 +1476,7 @@ a {
   border-color: #000000;
 }
 .task-category .color-points .selected {
-  box-shadow: 0px 4px 3px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
 .scale-up-ver-top {
