@@ -1400,7 +1400,7 @@ a {
   border: 1px solid white;
   margin-left: 10px;
 }
-.task-category .render_categorys_box {
+.task-category .render_categories_box {
   background-color: white;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1412,7 +1412,7 @@ a {
   border-right: 1px solid #D1D1D1;
   border-left: 1px solid #D1D1D1;
 }
-.task-category .render_categorys_box .render_categorys {
+.task-category .render_categories_box .render_categories {
   position: relative;
   border-top: 1px solid #D1D1D1;
   padding: 8px 21px 8px 21px;
@@ -1420,7 +1420,7 @@ a {
   align-items: center;
   animation: ease-in-out;
 }
-.task-category .render_categorys_box .render_categorys:hover {
+.task-category .render_categories_box .render_categories:hover {
   cursor: pointer;
   background-color: #AFAFAF;
   transition: 200ms;

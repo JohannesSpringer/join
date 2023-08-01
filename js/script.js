@@ -59,7 +59,6 @@ async function checkValidCredentials() {
  * @returns 
  */
 async function isPasswordValid(password, hashedPassword) {
-    debugger;
     if (rememberMeChecked) return password === hashedPassword;
     // if (password.length == 64) return password === hashedPassword;
 

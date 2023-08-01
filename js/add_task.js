@@ -1,14 +1,5 @@
 let menuOpen;
-let categorys = {
-    'category': [
-        'Test1',
-        'Test2'
-    ],
-    'color': [
-        '#EEAA00',
-        '#FF0000'
-    ]
-};
+let categories = [];
 let categoryColors = [
     '#8AA4FF',
     '#FF0000',
@@ -17,7 +8,7 @@ let categoryColors = [
     '#E200BE',
     '#0038FF'
 ];
-let activeCategoryColor;
+let selectedCategory = [];
 
 //displays the current date
 function getDate() {
@@ -27,10 +18,10 @@ function getDate() {
 
 function toggleCategory() {
     if (!menuOpen) {
-        openMenu('categorys', 'dropDown')
-        renderCategorys();
+        openMenu('categories', 'dropDown')
+        renderCategories();
     } else {
-        closeMenu('categorys', 'dropDown');
+        closeMenu('categories', 'dropDown');
     }
     menuOpen = !menuOpen;
 }
@@ -49,38 +40,38 @@ function removeBorder(id) {
 
 function closeMenu(id1, id2) {
     document.getElementById(id1).classList.add('scale-down-ver-top');
-    setTimeout(closeCategorys, 200);
+    setTimeout(closeCategories, 200);
 }
 
 function removeAnimationClass() {
-    document.getElementById(`categorys`).classList.remove('scale-up-ver-top');
+    document.getElementById(`categories`).classList.remove('scale-up-ver-top');
 }
 
-function closeCategorys() {
-    document.getElementById('categorys').innerHTML = '';
+function closeCategories() {
+    document.getElementById('categories').innerHTML = '';
     document.getElementById('dropDown').style.borderBottom = `1px solid #D1D1D1`;
     document.getElementById('dropDown').classList.remove('drop_down_open');
-    document.getElementById('categorys').style.borderBottom = `0`;
-    document.getElementById(`categorys`).classList.remove('scale-down-ver-top');
+    document.getElementById('categories').style.borderBottom = `0`;
+    document.getElementById(`categories`).classList.remove('scale-down-ver-top');
 }
 
-function renderCategorys() {
-    document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="createNewCategory()">New category</div>`;
-    for (let i = 0; i < categorys['category'].length; i++) {
-        let clr = categorys['color'][i];
-        let category = categorys['category'][i];
-        renderCategorysHTML(i, category, clr);
+function renderCategories() {
+    document.getElementById('categories').innerHTML = `<div class="render_categories" onclick="createNewCategory()">New category</div>`;
+    for (let i = 0; i < categories.length; i++) {
+        let category = categories[i][0];
+        let clr = categories[i][1];
+        renderCategoriesHTML(i, category, clr);
     }
 }
 
 function createNewCategory() {
-    activeCategoryColor = '';
+    selectedCategory[1] = '';
     showCreateNewCategoryHTML();
 }
 
 function setColor(clr) {
     removeSelectedColors();
-    activeCategoryColor = clr;
+    selectedCategory[1] = clr;
     document.getElementById(clr).classList.add('selected');
 }
 
@@ -94,9 +85,9 @@ function clearInputField(id) {
     document.getElementById(id).value = '';
 }
 
-function addNewCategory() {
-    let categoryValue = document.getElementById('categoryName').value;
-    if (categoryValue.length < 1 || !activeCategoryColor) {
+async function addNewCategory() {
+    selectedCategory[0] = document.getElementById('categoryName').value;
+    if (selectedCategory[0].length < 1 || !selectedCategory[1]) {
         // if (!button_delay) {
         //     button_delay = true;
         //     showNotice('pleaseCategoryName');
@@ -104,12 +95,10 @@ function addNewCategory() {
         // }
         console.log('Please select color and write Category name');
     } else {
-        // todo Struktur für Kategorien definieren!
-        categorys['color'].push(color);
-        categorys['category'].push(categoryValue);
-        saveInLocalStorage('categorys', categorys);
-        taskCategory = categoryValue;
-        showCategoryColorHTML();
+        categories.push([selectedCategory[0], selectedCategory[1]]);
+        await setItem('categories', JSON.stringify(categories));
+        showNewCreatedCategoryHtml();
+        setCategory(selectedCategory[0], selectedCategory[1]);
         menuOpen = false;
     }
 };
@@ -124,15 +113,15 @@ function setCategory(ctgry, clr) {
         </div>`;
 }
 
-function renderCategorysHTML(i, cat, clr) {
-    return document.getElementById('categorys').innerHTML += `
-        <div class="render_categorys" id="ctgry${i}" onclick="setCategory('${cat}', '${clr}')">
+function renderCategoriesHTML(i, cat, clr) {
+    return document.getElementById('categories').innerHTML += `
+        <div class="render_categories" id="ctgry${i}" onclick="setCategory('${cat}', '${clr}')">
             <div class="category-box">
                 ${cat}
                 <div  class="category-color" style="background-color: ${clr};"></div>
             </div>
         </div>`;
-        // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
+    // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
 
 function renderAddTask() {
@@ -163,9 +152,9 @@ function genHtmlInputCategory() {
                 Category
                 <div class="drop_down" id="dropDown" onclick="toggleCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                    <img class="down_image" src="./assets/img/drop-down-arrow.png">
                 </div>
-                <div id="categorys" class="render_categorys_box"></div>
+                <div id="categories" class="render_categories_box"></div>
                 <span id="reqTaskDescription">This field is required</span>
             </div>`;
 }
@@ -186,14 +175,25 @@ function showCreateNewCategoryHTML() {
             </div>
         </div>
         <div class="color-points">
-            ${getCategorysHtml()}
+            ${getCategoriesHtml()}
         </div>`;
 };
 
-function getCategorysHtml() {
+function getCategoriesHtml() {
     let htmlCategories = '';
     categoryColors.forEach(ctgry => {
         htmlCategories += `<div id="${ctgry}" class="color-point" onclick="setColor('${ctgry}')" style="background-color: ${ctgry};"></div>`;
     });
     return htmlCategories;
+}
+
+function showNewCreatedCategoryHtml() {
+    document.getElementById('categoryBox').innerHTML = `
+        Category
+        <div class="drop_down" id="dropDown" onclick="toggleCategory()">
+            Select task category
+            <img class="down_image" src="./assets/img/drop-down-arrow.png">
+        </div>
+        <div id="categories" class="render_categories_box"></div>
+        <span id="reqTaskDescription">This field is required</span>`;
 }

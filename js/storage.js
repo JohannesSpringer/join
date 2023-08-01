@@ -56,3 +56,15 @@ async function loadTasks() {
         console.error('Loading error:', e);
     }
 }
+
+/**
+ * This function loads the categories from backend
+ * 
+ */
+async function loadCategories() {
+    try {
+        categories = JSON.parse(await getItem('categories'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
