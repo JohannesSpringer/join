@@ -108,12 +108,8 @@ function noName() {
 async function addNewCategory() {
     selectedCategory[0] = document.getElementById('categoryName').value;
     if (selectedCategory[0].length < 1 || !selectedCategory[1]) {
-        // if (!button_delay) {
-        //     button_delay = true;
-        //     showNotice('pleaseCategoryName');
-        //     setTimeout(() => button_delay = false, 2500);
-        // }
-        console.log('Please select color and write Category name');
+        document.getElementById('reqCatTitleAndColor').style.color = 'red';
+        document.getElementById('reqCatTitleAndColor').style.display = 'block';
     } else {
         categories.push([selectedCategory[0], selectedCategory[1]]);
         await setItem('categories', JSON.stringify(categories));
@@ -196,7 +192,9 @@ function showCreateNewCategoryHTML() {
         </div>
         <div class="color-points">
             ${getCategoriesHtml()}
-        </div>`;
+        </div>
+        <span id="reqCatTitleAndColor">Please fill out name and select color!</span>
+        `;
 };
 
 function getCategoriesHtml() {
