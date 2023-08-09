@@ -111,13 +111,17 @@ async function addNewCategory() {
         document.getElementById('reqCatTitleAndColor').style.color = 'red';
         document.getElementById('reqCatTitleAndColor').style.display = 'block';
     } else {
-        categories.push([selectedCategory[0], selectedCategory[1]]);
-        await setItem('categories', JSON.stringify(categories));
-        showNewCreatedCategoryHtml();
-        setCategory(selectedCategory[0], selectedCategory[1]);
-        menuOpen = false;
+        saveAndDisplayNewCategory();
     }
-};
+}
+
+async function saveAndDisplayNewCategory() {
+    categories.push([selectedCategory[0], selectedCategory[1]]);
+    await setItem('categories', JSON.stringify(categories));
+    showNewCreatedCategoryHtml();
+    setCategory(selectedCategory[0], selectedCategory[1]);
+    menuOpen = false;
+}
 
 function setCategory(ctgry, clr) {
     toggleCategory();
