@@ -233,3 +233,7 @@ function getInitialsFromName(name) {
         return (nameParts[0].slice(0, 1) + nameParts[nameParts.length - 1].slice(0, 1)).toUpperCase();
     };
 }
+
+function getRandomColor() {
+    return Math.floor(Math.random()*360);
+}

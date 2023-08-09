@@ -18,7 +18,7 @@ function getDate() {
 
 function toggleCategory() {
     if (!menuOpen) {
-        openMenu('categories', 'dropDown')
+        openMenu('categories', 'dropDownCategory')
         renderCategories();
     } else {
         closeMenuCategories('categories');
@@ -28,7 +28,7 @@ function toggleCategory() {
 
 function toggleContacts() {
     if (!menuOpen) {
-        openMenu('contacts', 'dropDown')
+        openMenu('contacts', 'dropDownContacts')
         renderContacts();
     } else {
         closeMenuContacts('contacts');
@@ -64,16 +64,16 @@ function removeAnimationClass() {
 
 function closeCategories() {
     document.getElementById('categories').innerHTML = '';
-    document.getElementById('dropDown').style.borderBottom = `1px solid #D1D1D1`;
-    document.getElementById('dropDown').classList.remove('drop_down_open');
+    document.getElementById('dropDownCategory').style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById('dropDownCategory').classList.remove('drop_down_open');
     document.getElementById('categories').style.borderBottom = `0`;
     document.getElementById(`categories`).classList.remove('scale-down-ver-top');
 }
 
 function closeContacts() {
     document.getElementById('contacts').innerHTML = '';
-    document.getElementById('dropDown').style.borderBottom = `1px solid #D1D1D1`;
-    document.getElementById('dropDown').classList.remove('drop_down_open');
+    document.getElementById('dropDownContacts').style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById('dropDownContacts').classList.remove('drop_down_open');
     document.getElementById('contacts').style.borderBottom = `0`;
     document.getElementById(`contacts`).classList.remove('scale-down-ver-top');
 }
@@ -88,7 +88,6 @@ function renderCategories() {
 }
 
 function renderContacts() {
-    document.getElementById('contacts').innerHTML = `<div class="render_contacts" onclick="createNewCategory()">Test</div>`;
     for (let i = 0; i < users.length; i++) {
         let contact = users[i].name;
         let initials = getInitialsFromName(contact);
@@ -157,7 +156,7 @@ async function saveAndDisplayNewCategory() {
 
 function setCategory(ctgry, clr) {
     toggleCategory();
-    document.getElementById('dropDown').innerHTML = `
+    document.getElementById('dropDownCategory').innerHTML = `
         <div class="category-box">
             ${ctgry}
             <div  class="category-color" style="background-color: ${clr};"></div>
@@ -180,7 +179,7 @@ function renderContactsHTML(i, con, ini) {
     return document.getElementById('contacts').innerHTML += `
         <div class="render_contacts" id="cntcts${i}" onclick="toggleContact("cntcts${i}")">
             <div class="contact-box">
-                <div class="contact-initials">${ini}</div>
+                <div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${ini}</div>
                 <div class="contact-name"">${con}</div>
                 <div class="contact-checkbox""></div>
             </div>
@@ -215,7 +214,7 @@ function genHtmlInputDescription() {
 function genHtmlInputCategory() {
     return `<div id="categoryBox" class="task-category">
                 Category
-                <div class="drop_down" id="dropDown" onclick="toggleCategory()">
+                <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
                     Select task category
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
                 </div>
@@ -227,7 +226,7 @@ function genHtmlInputCategory() {
 function genHtmlInputAssign() {
     return `<div id="contactBox" class="task-category">
                 Assigned to
-                <div class="drop_down" id="dropDown" onclick="toggleContacts()">
+                <div class="drop_down" id="dropDownContacts" onclick="toggleContacts()">
                     Select contacts to assign
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
                 </div>
@@ -269,7 +268,7 @@ function getCategoriesHtml() {
 function showNewCreatedCategoryHtml() {
     document.getElementById('categoryBox').innerHTML = `
         Category
-        <div class="drop_down" id="dropDown" onclick="toggleCategory()">
+        <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
             Select task category
             <img class="down_image" src="./assets/img/drop-down-arrow.png">
         </div>
@@ -280,7 +279,7 @@ function showNewCreatedCategoryHtml() {
 function restoreCategoriesHtml() {
     return `
             Category
-            <div class="drop_down" id="dropDown" onclick="toggleCategory()">
+            <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
                 Select task category
                 <img class="down_image" src="./assets/img/drop-down-arrow.png">
             </div>

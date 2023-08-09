@@ -126,6 +126,39 @@
                 transition: 200ms;
             }
         }
+
+        .render_contacts {
+            position: relative;
+            border-top: 1px solid #D1D1D1;
+            padding: 8px 21px 8px 21px;
+            display: flex;
+            align-items: center;
+            animation: ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #AFAFAF;
+                transition: 200ms;
+            }
+        }
+    }
+
+    .contact-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .contact-initials {
+            border: 1px solid white;
+            border-radius: 100%;
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
     }
 
     .category-name-box {
