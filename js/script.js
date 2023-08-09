@@ -223,3 +223,13 @@ function guestLogin() {
     clearLoginData();
     goToSummary();
 }
+
+function getInitialsFromName(name) {
+    debugger;
+    let nameParts = name.split(" ");
+    if (nameParts.length == 1) {
+        return nameParts[0].slice(0, 2).toUpperCase();
+    } else {
+        return (nameParts[0].slice(0, 1) + nameParts[nameParts.length - 1].slice(0, 1)).toUpperCase();
+    };
+}

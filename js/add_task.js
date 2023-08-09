@@ -21,7 +21,17 @@ function toggleCategory() {
         openMenu('categories', 'dropDown')
         renderCategories();
     } else {
-        closeMenu('categories', 'dropDown');
+        closeMenuCategories('categories');
+    }
+    menuOpen = !menuOpen;
+}
+
+function toggleContacts() {
+    if (!menuOpen) {
+        openMenu('contacts', 'dropDown')
+        renderContacts();
+    } else {
+        closeMenuContacts('contacts');
     }
     menuOpen = !menuOpen;
 }
@@ -38,9 +48,14 @@ function removeBorder(id) {
     document.getElementById(id).style.borderBottom = `0`;
 }
 
-function closeMenu(id1, id2) {
+function closeMenuCategories(id1) {
     document.getElementById(id1).classList.add('scale-down-ver-top');
     setTimeout(closeCategories, 200);
+}
+
+function closeMenuContacts(id1) {
+    document.getElementById(id1).classList.add('scale-down-ver-top');
+    setTimeout(closeContacts, 200);
 }
 
 function removeAnimationClass() {
@@ -55,12 +70,29 @@ function closeCategories() {
     document.getElementById(`categories`).classList.remove('scale-down-ver-top');
 }
 
+function closeContacts() {
+    document.getElementById('contacts').innerHTML = '';
+    document.getElementById('dropDown').style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById('dropDown').classList.remove('drop_down_open');
+    document.getElementById('contacts').style.borderBottom = `0`;
+    document.getElementById(`contacts`).classList.remove('scale-down-ver-top');
+}
+
 function renderCategories() {
     document.getElementById('categories').innerHTML = `<div class="render_categories" onclick="createNewCategory()">New category</div>`;
     for (let i = 0; i < categories.length; i++) {
         let category = categories[i][0];
         let clr = categories[i][1];
         renderCategoriesHTML(i, category, clr);
+    }
+}
+
+function renderContacts() {
+    document.getElementById('contacts').innerHTML = `<div class="render_contacts" onclick="createNewCategory()">Test</div>`;
+    for (let i = 0; i < users.length; i++) {
+        let contact = users[i].name;
+        let initials = getInitialsFromName(contact);
+        renderContactsHTML(i, contact, initials);
     }
 }
 
@@ -138,7 +170,19 @@ function renderCategoriesHTML(i, cat, clr) {
         <div class="render_categories" id="ctgry${i}" onclick="setCategory('${cat}', '${clr}')">
             <div class="category-box">
                 ${cat}
-                <div  class="category-color" style="background-color: ${clr};"></div>
+                <div class="category-color" style="background-color: ${clr};"></div>
+            </div>
+        </div>`;
+    // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
+}
+
+function renderContactsHTML(i, con, ini) {
+    return document.getElementById('contacts').innerHTML += `
+        <div class="render_contacts" id="cntcts${i}" onclick="toggleContact("cntcts${i}")">
+            <div class="contact-box">
+                <div class="contact-initials">${ini}</div>
+                <div class="contact-name"">${con}</div>
+                <div class="contact-checkbox""></div>
             </div>
         </div>`;
     // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
@@ -148,6 +192,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputTitle();
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputDescription();
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputCategory();
+    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputAssign();
     document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
@@ -176,6 +221,18 @@ function genHtmlInputCategory() {
                 </div>
                 <div id="categories" class="render_categories_box"></div>
                 <span id="reqTaskDescription">This field is required</span>
+            </div>`;
+}
+
+function genHtmlInputAssign() {
+    return `<div id="contactBox" class="task-category">
+                Assigned to
+                <div class="drop_down" id="dropDown" onclick="toggleContacts()">
+                    Select contacts to assign
+                    <img class="down_image" src="./assets/img/drop-down-arrow.png">
+                </div>
+                <div id="contacts" class="render_categories_box"></div>
+                <span id="reqTaskAssign">This field is required</span>
             </div>`;
 }
 
