@@ -81,8 +81,28 @@ function removeSelectedColors() {
     });
 }
 
+/**
+ * This function handles the clearing functionality in creating a new category
+ * 
+ * @param {string} id This parameter is the id of the input value for the category name
+ */
 function clearInputField(id) {
-    document.getElementById(id).value = '';
+    if (noName()) {
+        restoreCategorySelection();
+    } else {
+        document.getElementById(id).value = '';
+    };
+}
+
+/**
+ * This function restores the category selection
+ */
+function restoreCategorySelection() {
+    document.getElementById('categoryBox').innerHTML = restoreCategoriesHtml();
+}
+
+function noName() {
+    return document.getElementById('categoryName').value == '';
 }
 
 async function addNewCategory() {
@@ -196,4 +216,15 @@ function showNewCreatedCategoryHtml() {
         </div>
         <div id="categories" class="render_categories_box"></div>
         <span id="reqTaskDescription">This field is required</span>`;
+}
+
+function restoreCategoriesHtml() {
+    return `
+            Category
+            <div class="drop_down" id="dropDown" onclick="toggleCategory()">
+                Select task category
+                <img class="down_image" src="./assets/img/drop-down-arrow.png">
+            </div>
+            <div id="categories" class="render_categories_box"></div>
+            <span id="reqTaskDescription">This field is required</span>`;
 }
