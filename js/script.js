@@ -225,7 +225,6 @@ function guestLogin() {
 }
 
 function getInitialsFromName(name) {
-    debugger;
     let nameParts = name.split(" ");
     if (nameParts.length == 1) {
         return nameParts[0].slice(0, 2).toUpperCase();

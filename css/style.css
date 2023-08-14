@@ -1481,7 +1481,7 @@ a {
   height: 0;
   width: 0;
 }
-.task-category .contact-checkbox inputchecked ~ .checkmark:after {
+.task-category .contact-checkbox inputchecked {
   display: block;
 }
 .task-category .contact-checkbox .checkmark {
@@ -1498,6 +1498,7 @@ a {
   content: "";
   position: absolute;
   display: none;
+  display: block;
 }
 .task-category .contact-checkbox .checkbox-container .checkmark:after {
   left: 9px;
