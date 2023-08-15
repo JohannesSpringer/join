@@ -9,6 +9,7 @@ let categoryColors = [
     '#0038FF'
 ];
 let selectedCategory = [];
+let selectedContacts = [];
 
 //displays the current date
 function getDate() {
@@ -112,6 +113,23 @@ function removeSelectedColors() {
     });
 }
 
+function toggleSetContact(id) {
+    let cntctBox = document.getElementById(id);
+    if (contactAlreadySelected(id)) {
+        cntctBox.classList.remove('background-darkblue');
+        cntctBox.querySelector('input').checked = false;
+        selectedContacts.splice(selectedContacts.indexOf(id), 1);
+    } else {
+        cntctBox.classList.add('background-darkblue');
+        cntctBox.querySelector('input').checked = true;
+        selectedContacts.push(id);
+    }
+}
+
+function contactAlreadySelected(id) {
+    return selectedContacts.includes(id);
+}
+
 /**
  * This function handles the clearing functionality in creating a new category
  * 
@@ -177,14 +195,14 @@ function renderCategoriesHTML(i, cat, clr) {
 
 function renderContactsHTML(i, con, ini) {
     return document.getElementById('contacts').innerHTML += `
-        <div class="render_contacts" id="cntcts${i}" onclick="toggleContact("cntcts${i}")">
+        <div class="render_contacts" id="cntcts${i}" onclick="toggleSetContact('cntcts${i}')">
             <div class="contact-box">
                 <div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${ini}</div>
                 <div class="contact-name"">${con}</div>
             </div>
             <label class="checkbox-container">
                 <input type="checkbox">
-                <span class="checkmark"></span>
+                <span class="checkmark" onclick="toggleSetContact('cntcts${i}')"></span>
             </label> 
         </div>`;
     // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
