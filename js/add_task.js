@@ -205,7 +205,6 @@ function renderContactsHTML(i, con, ini) {
                 <span class="checkmark" onclick="toggleSetContact('cntcts${i}')"></span>
             </label> 
         </div>`;
-    // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
 
 function renderAddTask() {
