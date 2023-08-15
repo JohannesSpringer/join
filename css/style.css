@@ -1431,12 +1431,52 @@ a {
   padding: 8px 21px 8px 21px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   animation: ease-in-out;
 }
 .task-category .render_categories_box .render_contacts:hover {
   cursor: pointer;
-  background-color: #AFAFAF;
+  background-color: #ececec;
   transition: 200ms;
+}
+.task-category .checkbox-container {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.task-category .checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.task-category .checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.task-category .checkbox-container .checkmark {
+  position: absolute;
+  right: 0;
+  top: -8px;
+  height: 16px;
+  width: 16px;
+  border: 1px solid #2A3647;
+  border-radius: 4px;
+}
+.task-category .checkbox-container .checkmark:after {
+  width: 16px;
+  height: 16px;
+  clip-path: polygon(11% 50%, 50% 90%, 111% -4%, 87% 10%, 50% 69%, 21% 38%);
+  background-color: #2A3647;
+}
+.task-category .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
 }
 .task-category .contact-box {
   display: flex;
@@ -1453,63 +1493,6 @@ a {
   justify-content: center;
   align-items: center;
   color: white;
-}
-.task-category .contact-checkbox {
-  position: absolute;
-  height: inherit;
-  width: 34px;
-  height: 34px;
-  right: 10px;
-  cursor: pointer;
-}
-.task-category .contact-checkbox .checkbox-container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.task-category .contact-checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-.task-category .contact-checkbox inputchecked {
-  display: block;
-}
-.task-category .contact-checkbox .checkmark {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 12px;
-  width: 12px;
-  background-color: white;
-  border: 0.2em solid #2A3647;
-  border-radius: 4px;
-}
-.task-category .contact-checkbox .checkmarkafter {
-  content: "";
-  position: absolute;
-  display: none;
-  display: block;
-}
-.task-category .contact-checkbox .checkbox-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 .task-category .category-name-box {
   position: relative;

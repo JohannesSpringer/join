@@ -182,12 +182,10 @@ function renderContactsHTML(i, con, ini) {
                 <div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${ini}</div>
                 <div class="contact-name"">${con}</div>
             </div>
-            <div class="contact-checkbox"">
-                <label class="checkbox-container">
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                </label>
-            </div>  
+            <label class="checkbox-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label> 
         </div>`;
     // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
