@@ -80,6 +80,16 @@
         &:hover {
             cursor: pointer;
         }
+
+        input {
+            border: none;
+            width: 95%;
+            height: 22px;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
     }
 
     .down_image {

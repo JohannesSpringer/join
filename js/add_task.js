@@ -31,10 +31,45 @@ function toggleContacts() {
     if (!menuOpen) {
         openMenu('contacts', 'dropDownContacts')
         renderContacts();
+        createFilterOption();
+        setFocus('findContact');
     } else {
         closeMenuContacts('contacts');
     }
     menuOpen = !menuOpen;
+}
+
+function createFilterOption() {
+    let filterDiv = document.getElementById('dropDownContacts');
+    filterDiv.innerHTML = filterDivHtml();
+}
+
+function setFocus(id) {
+    document.getElementById(id).focus();
+}
+
+function filterDivHtml() {
+    return `
+        <input type="text" id="findContact" placeholder="Search" onkeyup="filterContacts()" onclick="event.stopPropagation()">
+        <img class="down_image" src="./assets/img/drop-down-arrow.png" style="transform: rotate(180deg)">
+    `;
+}
+
+function filterContacts() {
+    let val = document.getElementById('findContact').value;
+    for (let i = 0; i < users.length; i++) {
+        const usr = users[i].name;
+        if (valInUserName(val, usr)) {
+            document.getElementById(`cntcts${i}`).style = 'display: flex';
+            console.log(val, ' + ', usr);
+        } else {
+            document.getElementById(`cntcts${i}`).style = 'display: none';
+        }
+    };
+}
+
+function valInUserName(val, name) {
+    return name.toLowerCase().includes(val.toLowerCase());
 }
 
 function openMenu(id1, id2) {
@@ -75,6 +110,9 @@ function closeContacts() {
     document.getElementById('contacts').innerHTML = '';
     document.getElementById('dropDownContacts').style.borderBottom = `1px solid #D1D1D1`;
     document.getElementById('dropDownContacts').classList.remove('drop_down_open');
+    document.getElementById('dropDownContacts').innerHTML = `
+        Select contacts to assign
+        <img class="down_image" src="./assets/img/drop-down-arrow.png">`;
     document.getElementById('contacts').style.borderBottom = `0`;
     document.getElementById(`contacts`).classList.remove('scale-down-ver-top');
 }

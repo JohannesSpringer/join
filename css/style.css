@@ -1385,6 +1385,14 @@ a {
 .task-category .drop_down:hover {
   cursor: pointer;
 }
+.task-category .drop_down input {
+  border: none;
+  width: 95%;
+  height: 22px;
+}
+.task-category .drop_down input:focus-visible {
+  outline: none;
+}
 .task-category .down_image {
   position: absolute;
   right: 16px;
