@@ -13,9 +13,8 @@ let selectedContacts = [];
 
 //displays the current date
 function getDate() {
-    // document.getElementById('date').valueAsDate = new Date();
-    // date = document.getElementById('date').value;
-    return new Date();
+    let today = new Date();
+    return today.toISOString().split('T')[0];
 }
 
 function toggleCategory() {
@@ -377,7 +376,7 @@ function restoreCategoriesHtml() {
 function genHtmlInputDueDate() {
     return `<div class="task-due-date">
                 Due date
-                <input type="date" id="taskDate" min="18-08-2023" required>
+                <input type="date" id="taskDate" name="date" min="${getDate()}" required>
                 <span id="reqTaskTitle">This field is required</span>
             </div>`;
 }
