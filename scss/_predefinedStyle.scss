@@ -52,6 +52,10 @@ $lightgray: #D1D1D1;
     border-radius: 8px;
     border: 1px solid $lightgray;
     background-color: $inputbackground;
+
+    &:focus-visible {
+        outline: 1px solid #29ABE2;
+    }
 }
 
 @mixin reqInputText() {

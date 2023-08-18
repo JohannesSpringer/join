@@ -13,8 +13,9 @@ let selectedContacts = [];
 
 //displays the current date
 function getDate() {
-    document.getElementById('date').valueAsDate = new Date();
-    date = document.getElementById('date').value;
+    // document.getElementById('date').valueAsDate = new Date();
+    // date = document.getElementById('date').value;
+    return new Date();
 }
 
 function toggleCategory() {
@@ -276,6 +277,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputDescription();
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputAssign();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputDueDate();
     document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
@@ -370,4 +372,12 @@ function restoreCategoriesHtml() {
             </div>
             <div id="categories" class="render_categories_box"></div>
             <span id="reqTaskDescription">This field is required</span>`;
+}
+
+function genHtmlInputDueDate() {
+    return `<div class="task-due-date">
+                Due date
+                <input type="date" id="taskDate" min="18-08-2023" required>
+                <span id="reqTaskTitle">This field is required</span>
+            </div>`;
 }
