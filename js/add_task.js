@@ -106,6 +106,7 @@ function closeMenuContacts(id1) {
 
 function removeAnimationClass() {
     document.getElementById(`categories`).classList.remove('scale-up-ver-top');
+    document.getElementById(`contacts`).classList.remove('scale-up-ver-top');
 }
 
 function closeCategories() {
