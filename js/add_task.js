@@ -60,7 +60,7 @@ function setFocus(id) {
 
 function filterDivHtml() {
     return `
-        <input type="text" id="findContact" placeholder="Search" onkeyup="filterContacts()" onclick="event.stopPropagation()">
+        <input type="text" id="findContact" placeholder="Search" autocomplete="off" onkeyup="filterContacts()" onclick="event.stopPropagation()">
         <img class="down_image" src="./assets/img/drop-down-arrow.png" style="transform: rotate(180deg)">
     `;
 }
