@@ -31,12 +31,22 @@ function toggleContacts() {
     if (!menuOpen) {
         openMenu('contacts', 'dropDownContacts')
         renderContacts();
+        markAlreadySelectedContacts();
         createFilterOption();
         setFocus('findContact');
+        document.getElementById('initials').style.display = 'none';
     } else {
         closeMenuContacts('contacts');
     }
     menuOpen = !menuOpen;
+}
+
+function markAlreadySelectedContacts() {
+    selectedContacts.forEach(cntct => {
+        let cntctBox = document.getElementById(cntct);
+        cntctBox.classList.add('background-darkblue');
+        cntctBox.querySelector('input').checked = true; 
+    });
 }
 
 function createFilterOption() {
@@ -115,6 +125,21 @@ function closeContacts() {
         <img class="down_image" src="./assets/img/drop-down-arrow.png">`;
     document.getElementById('contacts').style.borderBottom = `0`;
     document.getElementById(`contacts`).classList.remove('scale-down-ver-top');
+    showInitialsFromAssignedContacts();
+    document.getElementById('initials').style.display = 'flex';
+}
+
+function showInitialsFromAssignedContacts() {
+    let divInitials = document.getElementById('initials');
+    divInitials.innerHTML = '';
+    selectedContacts.forEach(cntct => {
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${getInitialsFromCntct(cntct)}</div>`;
+    });
+}
+
+function getInitialsFromCntct(cntct) {
+    let name = users[cntct.slice(-1)].name;
+    return getInitialsFromName(name);
 }
 
 function renderCategories() {
@@ -289,6 +314,7 @@ function genHtmlInputAssign() {
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
                 </div>
                 <div id="contacts" class="render_categories_box"></div>
+                <div id="initials" class="initialsAssignedContacts"></div>
                 <span id="reqTaskAssign">This field is required</span>
             </div>`;
 }

@@ -1499,7 +1499,7 @@ a {
   align-items: center;
   gap: 12px;
 }
-.task-category .contact-box .contact-initials {
+.task-category .contact-initials {
   border: 1px solid white;
   border-radius: 100%;
   width: 32px;
@@ -1562,6 +1562,13 @@ a {
 }
 .task-category .color-points .selected {
   box-shadow: 0px 4px 3px 1px rgba(0, 0, 0, 0.3);
+}
+.task-category .initialsAssignedContacts {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(-30px);
 }
 
 .scale-up-ver-top {
