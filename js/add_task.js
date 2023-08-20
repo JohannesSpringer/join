@@ -10,6 +10,7 @@ let categoryColors = [
 ];
 let selectedCategory = [];
 let selectedContacts = [];
+let currentPrio;
 
 //displays the current date
 function getDate() {
@@ -194,6 +195,33 @@ function contactAlreadySelected(id) {
     return selectedContacts.includes(id);
 }
 
+function setPrio(prio) {
+    document.getElementById('prio').style.borderColor = `#F6F7F8`;
+    if (prio == currentPrio) removePrio();
+    else {
+        removePrio();
+        if (prio == 'urgent') {
+            document.getElementById('prioUrgent').classList.add('prio_button_urgent');
+            currentPrio = 'urgent';
+        }
+        if (prio == 'medium') {
+            document.getElementById('prioMedium').classList.add('prio_button_medium');
+            currentPrio = 'medium';
+        }
+        if (prio == 'low') {
+            document.getElementById('prioLow').classList.add('prio_button_low');
+            currentPrio = 'low';
+        }
+    }
+};
+
+function removePrio() {
+    document.getElementById('prioUrgent').classList.remove('prio_button_urgent');
+    document.getElementById('prioMedium').classList.remove('prio_button_medium');
+    document.getElementById('prioLow').classList.remove('prio_button_low');
+    currentPrio = undefined;
+};
+
 /**
  * This function handles the clearing functionality in creating a new category
  * 
@@ -277,6 +305,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputAssign();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputDueDate();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputPrio();
     document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
@@ -377,6 +406,27 @@ function genHtmlInputDueDate() {
     return `<div class="task-due-date">
                 Due date
                 <input type="date" id="taskDate" name="date" min="${getDate()}" required>
+                <span id="reqTaskTitle">This field is required</span>
+            </div>`;
+}
+
+function genHtmlInputPrio() {
+    return `<div class="task-prio">
+                Prio
+                <div class="prio" id="prio">
+                    <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">
+                        Urgent
+                        <img src="assets/img/prioUrgent.png">
+                    </div>
+                    <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">
+                        Medium
+                        <img src="assets/img/prioMedium.png">
+                    </div>
+                    <div class="prio_button" id="prioLow" onclick="setPrio('low')">
+                        Low 
+                        <img src="assets/img/prioLow.png">
+                    </div>
+                </div>
                 <span id="reqTaskTitle">This field is required</span>
             </div>`;
 }

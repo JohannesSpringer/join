@@ -318,6 +318,77 @@
     }
 }
 
+.task-prio {
+    display: flex;
+    flex-direction: column;
+    // width: 45%;
+    gap: 4px;
+    @include reqInputText();
+
+    input {
+        @include inputTask();
+    }
+
+    .prio {
+        border-radius: 10px;
+        border: 1px solid #F6F7F8;
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+    }
+
+    .prio_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        gap: 8px;
+        width: 88px;
+        background-color: white;
+        border: 1px solid #D1D1D1;
+        border-radius: 10px;
+        transition: 200ms;
+
+        &:hover {
+            transition: 200ms;
+            cursor: pointer;
+            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.41)
+        }
+    }
+
+    .prio_button img {
+        width: 20px;
+        height: 12.5px;
+    }
+
+    .prio_button_urgent {
+        color: white;
+        background-color: #FF3D00;
+    }
+    
+    .prio_button_urgent img {
+        filter: brightness(0) invert(1);
+    }
+    
+    .prio_button_medium {
+        color: white;
+        background-color: #FFA800;
+    }
+    
+    .prio_button_medium img {
+        filter: brightness(0) invert(1);
+    }
+    
+    .prio_button_low {
+        color: white;
+        background-color: #7AE229;
+    }
+    
+    .prio_button_low img {
+        filter: brightness(0) invert(1);
+    }
+}
+
 // ------------- Animation Classes ------------------
 .scale-up-ver-top {
     -webkit-animation: scale-up-ver-top 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
