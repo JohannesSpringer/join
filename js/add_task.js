@@ -12,6 +12,20 @@ let selectedCategory = [];
 let selectedContacts = [];
 let currentPrio;
 
+/**
+ * This function calls the render functions for adding a task
+ */
+function renderAddTask() {
+    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputTitle();
+    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputDescription();
+    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputAssign();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputDueDate();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputPrio();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputCategory();
+    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
+    document.getElementById('reqTaskTitle').style.color = 'red';
+}
+
 //displays the current date
 function getDate() {
     let today = new Date();
@@ -46,7 +60,7 @@ function markAlreadySelectedContacts() {
     selectedContacts.forEach(cntct => {
         let cntctBox = document.getElementById(cntct);
         cntctBox.classList.add('background-darkblue');
-        cntctBox.querySelector('input').checked = true; 
+        cntctBox.querySelector('input').checked = true;
     });
 }
 
@@ -199,19 +213,7 @@ function setPrio(prio) {
     document.getElementById('prio').style.borderColor = `#F6F7F8`;
     if (prio == currentPrio) removePrio();
     else {
-        removePrio();
-        if (prio == 'urgent') {
-            document.getElementById('prioUrgent').classList.add('prio_button_urgent');
-            currentPrio = 'urgent';
-        }
-        if (prio == 'medium') {
-            document.getElementById('prioMedium').classList.add('prio_button_medium');
-            currentPrio = 'medium';
-        }
-        if (prio == 'low') {
-            document.getElementById('prioLow').classList.add('prio_button_low');
-            currentPrio = 'low';
-        }
+        changePrio(prio);
     }
 };
 
@@ -221,6 +223,22 @@ function removePrio() {
     document.getElementById('prioLow').classList.remove('prio_button_low');
     currentPrio = undefined;
 };
+
+function changePrio(prio) {
+    removePrio();
+    if (prio == 'urgent') {
+        document.getElementById('prioUrgent').classList.add('prio_button_urgent');
+        currentPrio = 'urgent';
+    }
+    if (prio == 'medium') {
+        document.getElementById('prioMedium').classList.add('prio_button_medium');
+        currentPrio = 'medium';
+    }
+    if (prio == 'low') {
+        document.getElementById('prioLow').classList.add('prio_button_low');
+        currentPrio = 'low';
+    }
+}
 
 /**
  * This function handles the clearing functionality in creating a new category
@@ -297,16 +315,6 @@ function renderContactsHTML(i, con, ini) {
                 <span class="checkmark" onclick="toggleSetContact('cntcts${i}')"></span>
             </label> 
         </div>`;
-}
-
-function renderAddTask() {
-    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputTitle();
-    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputDescription();
-    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputCategory();
-    document.getElementById('addTaskInputsLeft').innerHTML += genHtmlInputAssign();
-    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputDueDate();
-    document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputPrio();
-    document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
 function genHtmlInputTitle() {
@@ -428,5 +436,12 @@ function genHtmlInputPrio() {
                     </div>
                 </div>
                 <span id="reqTaskTitle">This field is required</span>
+            </div>`;
+}
+
+function genHtmlInputSubtasks() {
+    return `<div class="task-subtask">
+                Subtasks
+                <input type="text" id="taskSubtask" placeholder="Add new subtask">
             </div>`;
 }

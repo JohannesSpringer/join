@@ -389,6 +389,18 @@
     }
 }
 
+.task-subtask {
+    display: flex;
+    flex-direction: column;
+    // width: 45%;
+    gap: 4px;
+    @include reqInputText();
+
+    input {
+        @include inputTask();
+    }
+}
+
 // ------------- Animation Classes ------------------
 .scale-up-ver-top {
     -webkit-animation: scale-up-ver-top 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

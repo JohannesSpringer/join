@@ -1681,6 +1681,25 @@ a {
   filter: brightness(0) invert(1);
 }
 
+.task-subtask {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.task-subtask span {
+  font-size: 12px;
+  color: #F6F7F8;
+}
+.task-subtask input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background-color: #FFFFFF;
+}
+.task-subtask input:focus-visible {
+  outline: 1px solid #29ABE2;
+}
+
 .scale-up-ver-top {
   animation: scale-up-ver-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
