@@ -118,9 +118,15 @@
     .down_image {
         position: absolute;
         right: 16px;
-        top: 14px;
+        top: 13px;
         width: 12px;
         height: 12px;
+        border-radius: 100%;
+        padding: 2px;
+
+        &:hover {
+            background-color: #D1D1D1;
+        }
     }
 
     .drop_down_open {
@@ -318,6 +324,21 @@
     }
 }
 
+.add-subtask-img {
+    position: absolute;
+    right: 16px;
+    top: 37px;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    padding: 2px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #D1D1D1;
+    }
+}
+
 .task-prio {
     display: flex;
     flex-direction: column;
@@ -365,25 +386,25 @@
         color: white;
         background-color: #FF3D00;
     }
-    
+
     .prio_button_urgent img {
         filter: brightness(0) invert(1);
     }
-    
+
     .prio_button_medium {
         color: white;
         background-color: #FFA800;
     }
-    
+
     .prio_button_medium img {
         filter: brightness(0) invert(1);
     }
-    
+
     .prio_button_low {
         color: white;
         background-color: #7AE229;
     }
-    
+
     .prio_button_low img {
         filter: brightness(0) invert(1);
     }
@@ -394,10 +415,61 @@
     flex-direction: column;
     // width: 45%;
     gap: 4px;
+    position: relative;
     @include reqInputText();
 
     input {
         @include inputTask();
+    }
+
+    .subtasks {
+        margin: 0;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .subtask {
+        position: relative;
+        padding: 2px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        
+        &:hover {
+            background-color: #ececec;
+        }
+
+        span {
+            padding-left: 12px;
+            padding-right: 4px;
+            font-size: 4px;
+        }
+    }
+
+    .change-subtask {
+        position: absolute;
+        right: 0;
+        top: 4px;
+        display: flex;
+        height: 12px;
+        padding-right: 8px;
+
+        img {
+            height: 12px;
+            width: 12px;
+            cursor: pointer;
+        }
+    }
+
+    .edit-subtask {
+        padding-right: 4px;
+        border-right: 1px solid #D1D1D1;
+    }
+
+    .delete-subtask {
+        padding-left: 4px;
     }
 }
 

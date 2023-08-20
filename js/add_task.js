@@ -11,6 +11,7 @@ let categoryColors = [
 let selectedCategory = [];
 let selectedContacts = [];
 let currentPrio;
+let subtasks = [];
 
 /**
  * This function calls the render functions for adding a task
@@ -240,6 +241,13 @@ function changePrio(prio) {
     }
 }
 
+function addSubtask() {
+    let inputSubtask = document.getElementById('taskSubtask');
+    subtasks.push(inputSubtask.value);
+    subtasks.value = '';
+    renderSubtasksInAddTask();
+}
+
 /**
  * This function handles the clearing functionality in creating a new category
  * 
@@ -333,6 +341,7 @@ function genHtmlInputDescription() {
             </div>`;
 }
 
+// todo: position absolute für dropdown, sodass andere Elemente nicht verschoben werden (ebene höher)
 function genHtmlInputCategory() {
     return `<div id="categoryBox" class="task-category">
                 Category
@@ -443,5 +452,34 @@ function genHtmlInputSubtasks() {
     return `<div class="task-subtask">
                 Subtasks
                 <input type="text" id="taskSubtask" placeholder="Add new subtask">
+                <img class="add-subtask-img" src="./assets/img/plus.svg" onclick="addSubtask()">
+                <div class="subtasks" id="subtasks"></div>
+            </div>`;
+}
+
+function renderSubtasksInAddTask() {
+    let divSubtasks = document.getElementById('subtasks');
+    divSubtasks.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const tsk = subtasks[i];
+        divSubtasks.innerHTML += renderHtmlSubtask(tsk, i);
+    }
+    // subtasks.forEach(tsk => {
+    //     divSubtasks.innerHTML += renderHtmlSubtask(tsk);
+    // });
+}
+
+function renderHtmlSubtask(tsk, i) {
+    return `<div class="subtask" id="subtask${i}">
+                <span>&#9899;</span>
+                <div>${tsk}</div>
+                <div class="change-subtask">
+                    <div class="edit-subtask" onclick="editSubtask()">
+                        <img src="./assets/img/edit.png">
+                    </div> 
+                    <div class="delete-subtask" onclick="deleteSubtask()">
+                        <img src="./assets/img/delete.png">
+                    </div>      
+                </div>
             </div>`;
 }
