@@ -243,9 +243,18 @@ function changePrio(prio) {
 
 function addSubtask() {
     let inputSubtask = document.getElementById('taskSubtask');
-    subtasks.push(inputSubtask.value);
-    subtasks.value = '';
-    renderSubtasksInAddTask();
+    let valueSubtask = inputSubtask.value;
+    if (valueSubtask) {
+        subtasks.push(inputSubtask.value);
+        renderSubtasksInAddTask();
+    }
+    inputSubtask.value = '';
+}
+
+function editSubtask(id, tsk) {
+    let divId = document.getElementById(id);
+    // divId.innerHTML = '';
+    divId.innerHTML = htmlEditSubtask(tsk, id.slice(-1));
 }
 
 /**
@@ -464,9 +473,6 @@ function renderSubtasksInAddTask() {
         const tsk = subtasks[i];
         divSubtasks.innerHTML += renderHtmlSubtask(tsk, i);
     }
-    // subtasks.forEach(tsk => {
-    //     divSubtasks.innerHTML += renderHtmlSubtask(tsk);
-    // });
 }
 
 function renderHtmlSubtask(tsk, i) {
@@ -474,12 +480,25 @@ function renderHtmlSubtask(tsk, i) {
                 <span>&#9899;</span>
                 <div>${tsk}</div>
                 <div class="change-subtask">
-                    <div class="edit-subtask" onclick="editSubtask()">
+                    <div class="edit-subtask" onclick="editSubtask('subtask${i}', '${tsk}')">
                         <img src="./assets/img/edit.png">
                     </div> 
-                    <div class="delete-subtask" onclick="deleteSubtask()">
+                    <div class="delete-subtask" onclick="deleteSubtask('subtask${i}')">
                         <img src="./assets/img/delete.png">
                     </div>      
                 </div>
             </div>`;
+}
+
+function htmlEditSubtask(tsk, i) {
+    return `<input class="edit-subtask-input" type="text" id="changedSubtaskValue${i}" value="${tsk}" required>
+            <div class="change-subtask" style="top: 7px">
+                <div class="edit-subtask" onclick="deleteSubtask('subtask${i}')">
+                    <img src="./assets/img/delete.png">
+                </div> 
+                <div class="delete-subtask" onclick="saveSubtask('changedSubtaskValue${i}')">
+                    <img src="./assets/img/checkmark.svg">
+                </div>      
+            </div>
+    `;
 }

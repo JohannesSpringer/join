@@ -54,7 +54,7 @@ $lightgray: #D1D1D1;
     background-color: $inputbackground;
 
     &:focus-visible {
-        outline: 1px solid #29ABE2;
+        outline: 1px solid $lightblue;
     }
 }
 

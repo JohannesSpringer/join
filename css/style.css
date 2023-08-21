@@ -238,9 +238,6 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-.log-in .form-class .log-in-form ::-moz-placeholder {
-  opacity: 0.5;
-}
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -477,8 +474,7 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .add-task-plus-icon {
@@ -561,7 +557,6 @@ body {
 .board-content .board-tasks .tasks .single-task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -618,8 +613,7 @@ body {
   display: flex;
 }
 .board-content .board-tasks .tasks .single-task .task-prio img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .board-detail-view {
@@ -660,7 +654,6 @@ body {
 .board-detail-view .content .task-details .category {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -693,8 +686,7 @@ body {
   color: white;
 }
 .board-detail-view .content .task-details .priority .prio-icon img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: brightness(0) invert(1);
 }
 .board-detail-view .content .task-details .edit-status {
@@ -1210,6 +1202,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -1241,6 +1234,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -1267,6 +1261,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 .todo_done_sub:hover img {
@@ -1505,6 +1500,7 @@ a {
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .task-category .checkbox-container input {
@@ -1529,8 +1525,7 @@ a {
 .task-category .checkbox-container .checkmark:after {
   width: 16px;
   height: 16px;
-  -webkit-clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
-          clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
+  clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
   background-color: white;
 }
 .task-category .checkmark:after {
@@ -1761,12 +1756,24 @@ a {
 .task-subtask .delete-subtask {
   padding-left: 4px;
 }
+.task-subtask .edit-subtask-input {
+  border-radius: unset;
+  padding: 4px 10px;
+  border: unset;
+  border-bottom: 1px solid #29ABE2;
+  width: 100%;
+}
+.task-subtask .edit-subtask-input:focus-visible {
+  outline: none;
+}
 
 .scale-up-ver-top {
+  -webkit-animation: scale-up-ver-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: scale-up-ver-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 .scale-down-ver-top {
+  -webkit-animation: scale-down-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: scale-down-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -1781,13 +1788,31 @@ a {
  * animation scale-up-ver-top
  * ----------------------------------------
  */
-@keyframes scale-up-ver-top {
+@-webkit-keyframes scale-up-ver-top {
   0% {
+    -webkit-transform: scaleY(0.01);
     transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
   100% {
+    -webkit-transform: scaleY(1);
     transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+@keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.01);
+    transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
 }
@@ -1796,13 +1821,31 @@ a {
  * animation scale-down-ver-top
  * ----------------------------------------
  */
-@keyframes scale-down-ver-top {
+@-webkit-keyframes scale-down-ver-top {
   0% {
+    -webkit-transform: scaleY(1);
     transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
   100% {
+    -webkit-transform: scaleY(0.01);
     transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+@keyframes scale-down-ver-top {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(0.01);
+    transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
 }

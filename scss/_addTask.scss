@@ -471,6 +471,18 @@
     .delete-subtask {
         padding-left: 4px;
     }
+
+    .edit-subtask-input {
+        border-radius: unset;
+        padding: 4px 10px;
+        border: unset;
+        border-bottom: 1px solid $lightblue;
+        width: 100%;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
 }
 
 // ------------- Animation Classes ------------------
