@@ -12,6 +12,7 @@ let selectedCategory = [];
 let selectedContacts = [];
 let currentPrio;
 let subtasks = [];
+let formIsFilled = false;
 
 /**
  * This function calls the render functions for adding a task
@@ -26,6 +27,10 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
     document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
     document.getElementById('reqTaskTitle').style.color = 'red';
+}
+
+function checkFormFilled() {
+    console.log('test');
 }
 
 //displays the current date
@@ -524,7 +529,13 @@ function htmlEditSubtask(tsk, i) {
 
 function genHtmlInputSubmit() {
     return `<div class="submit-buttons">
-                <button>Clear</button>
-                <input type="submit" value="Submit">
+                <button>
+                    Clear
+                    <img src="./assets/img/x.svg"> 
+                </button>
+                <button id="submitButton" type="button" disabled>
+                    <input id="submitForm" type="submit" value="Create Task" disabled>
+                    <img src="./assets/img/checkmark.svg"> 
+                </button>
             </div>`;
 }

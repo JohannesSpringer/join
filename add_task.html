@@ -24,7 +24,7 @@
             <h1>Add Task</h1>
         </div>
 
-        <form id="addTaskInputs" class="add-task-inputs" onsubmit="addTask(); return false">
+        <form id="addTaskInputs" class="add-task-inputs" onchange="checkFormFilled()" onsubmit="addTask(); return false">
             <div class="add-task-inputs-fields">
                 <div id="addTaskInputsLeft" class="add-task-inputs-left"></div>
                 <div id="addTaskInputsRight" class="add-task-inputs-right"></div>

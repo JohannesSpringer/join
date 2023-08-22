@@ -298,6 +298,9 @@
   color: #29ABE2;
   border: 1px solid #29ABE2;
 }
+.log-in .form-class .log-in-form .guest-log-in-button:hover img {
+  filter: invert(70%) sepia(25%) saturate(6641%) hue-rotate(165deg) brightness(93%) contrast(89%);
+}
 .log-in .login-popup {
   color: white;
   background-color: #2A3647;
@@ -1349,7 +1352,15 @@ a {
   margin-top: 48px;
   height: 48px;
 }
-.add-task-content .add-task-inputs .add-task-inputs-submit button {
+.add-task-content .add-task-inputs .add-task-inputs-submit .submit-buttons {
+  display: flex;
+  gap: 16px;
+}
+.add-task-content .add-task-inputs .add-task-inputs-submit .submit-buttons img {
+  width: 20px;
+  height: 20px;
+}
+.add-task-content .add-task-inputs .add-task-inputs-submit button:first-child {
   color: #2A3647;
   background-color: white;
   cursor: pointer;
@@ -1358,12 +1369,18 @@ a {
   font-weight: 700;
   border: 1px solid #2A3647;
   height: inherit;
+  padding: 12px;
+  display: flex;
+  align-items: center;
 }
-.add-task-content .add-task-inputs .add-task-inputs-submit button:hover {
+.add-task-content .add-task-inputs .add-task-inputs-submit button:first-child:hover {
   color: #29ABE2;
   border: 1px solid #29ABE2;
 }
-.add-task-content .add-task-inputs .add-task-inputs-submit input {
+.add-task-content .add-task-inputs .add-task-inputs-submit button:first-child:hover img {
+  filter: invert(70%) sepia(25%) saturate(6641%) hue-rotate(165deg) brightness(93%) contrast(89%);
+}
+.add-task-content .add-task-inputs .add-task-inputs-submit button:nth-child(2) {
   background-color: #2A3647;
   color: white;
   padding: 10px 32px;
@@ -1372,9 +1389,23 @@ a {
   border-radius: 8px;
   border: none;
   height: inherit;
+  padding: 12px;
+  display: flex;
+  align-items: center;
 }
-.add-task-content .add-task-inputs .add-task-inputs-submit input:hover {
+.add-task-content .add-task-inputs .add-task-inputs-submit button:nth-child(2):hover {
   background-color: #29ABE2;
+}
+.add-task-content .add-task-inputs .add-task-inputs-submit button:nth-child(2) img {
+  filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(290deg) brightness(104%) contrast(104%);
+}
+.add-task-content .add-task-inputs .add-task-inputs-submit input {
+  font-size: large;
+  font-weight: bold;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .task-title {

@@ -58,14 +58,43 @@
             margin-top: 48px;
             height: 48px;
 
-            button {
+            .submit-buttons {
+                display: flex;
+                gap: 16px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            button:first-child {
                 @include button-White;
-                height: inherit
+                height: inherit;
+                padding: 12px;
+                display: flex;
+                align-items: center;
+            }
+
+            button:nth-child(2) {
+                @include button-darkblue;
+                height: inherit;
+                padding: 12px;
+                display: flex;
+                align-items: center;
+
+                img {
+                    filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(290deg) brightness(104%) contrast(104%);
+                }
             }
 
             input {
-                @include button-darkblue;
-                height: inherit
+                font-size: large;
+                font-weight: bold;
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
             }
         }
     }
