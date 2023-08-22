@@ -24,6 +24,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputPrio();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
+    document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
     document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
@@ -70,8 +71,17 @@ function createFilterOption() {
     filterDiv.innerHTML = filterDivHtml();
 }
 
+/**
+ * This functions focuses on an input element with id=id after the last character
+ * 
+ * @param {string} id 
+ */
 function setFocus(id) {
-    document.getElementById(id).focus();
+    let elem = document.getElementById(id);
+    let elemLen = elem.value.length;
+    elem.selectionStart = elemLen;
+    elem.selectionEnd = elemLen;
+    elem.focus();
 }
 
 function filterDivHtml() {
@@ -253,8 +263,18 @@ function addSubtask() {
 
 function editSubtask(id, tsk) {
     let divId = document.getElementById(id);
-    // divId.innerHTML = '';
     divId.innerHTML = htmlEditSubtask(tsk, id.slice(-1));
+    setFocus(`changedSubtaskValue${id.slice(-1)}`);
+}
+
+function saveSubtask(id) {
+    subtasks[id.slice(-1)] = document.getElementById(id).value;
+    renderSubtasksInAddTask();
+}
+
+function deleteSubtask(id) {
+    subtasks.splice(id.slice(-1), 1);
+    renderSubtasksInAddTask();
 }
 
 /**
@@ -336,7 +356,7 @@ function renderContactsHTML(i, con, ini) {
 
 function genHtmlInputTitle() {
     return `<div class="task-title">
-                Title
+                <label>Title</label>
                 <input type="text" id="taskTitle" placeholder="Enter a title" required>
                 <span id="reqTaskTitle">This field is required</span>
             </div>`;
@@ -344,7 +364,7 @@ function genHtmlInputTitle() {
 
 function genHtmlInputDescription() {
     return `<div class="task-description">
-                Description
+                <label>Description</label>
                 <textarea id="taskDescription" placeholder="Enter a Description" rows="4" required></textarea>
                 <span id="reqTaskDescription">This field is required</span>
             </div>`;
@@ -353,7 +373,7 @@ function genHtmlInputDescription() {
 // todo: position absolute für dropdown, sodass andere Elemente nicht verschoben werden (ebene höher)
 function genHtmlInputCategory() {
     return `<div id="categoryBox" class="task-category">
-                Category
+                <label>Category</label>
                 <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
                     Select task category
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
@@ -365,7 +385,7 @@ function genHtmlInputCategory() {
 
 function genHtmlInputAssign() {
     return `<div id="contactBox" class="task-category">
-                Assigned to
+                <label>Assigned to</label>
                 <div class="drop_down" id="dropDownContacts" onclick="toggleContacts()">
                     Select contacts to assign
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
@@ -378,7 +398,7 @@ function genHtmlInputAssign() {
 
 function showCreateNewCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-        Category
+        <label>Category</label>
         <div class="category-name-box">  
             <input type="text" placeholder="New category name" id="categoryName" required maxlength="29">
             <div class="confirm-category">
@@ -408,7 +428,7 @@ function getCategoriesHtml() {
 
 function showNewCreatedCategoryHtml() {
     document.getElementById('categoryBox').innerHTML = `
-        Category
+        <label>Category</label>
         <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
             Select task category
             <img class="down_image" src="./assets/img/drop-down-arrow.png">
@@ -418,8 +438,7 @@ function showNewCreatedCategoryHtml() {
 }
 
 function restoreCategoriesHtml() {
-    return `
-            Category
+    return `<label>Category</label>
             <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
                 Select task category
                 <img class="down_image" src="./assets/img/drop-down-arrow.png">
@@ -430,7 +449,7 @@ function restoreCategoriesHtml() {
 
 function genHtmlInputDueDate() {
     return `<div class="task-due-date">
-                Due date
+                <label>Due date</label>
                 <input type="date" id="taskDate" name="date" min="${getDate()}" required>
                 <span id="reqTaskTitle">This field is required</span>
             </div>`;
@@ -438,7 +457,7 @@ function genHtmlInputDueDate() {
 
 function genHtmlInputPrio() {
     return `<div class="task-prio">
-                Prio
+                <label>Prio</label>
                 <div class="prio" id="prio">
                     <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">
                         Urgent
@@ -459,7 +478,7 @@ function genHtmlInputPrio() {
 
 function genHtmlInputSubtasks() {
     return `<div class="task-subtask">
-                Subtasks
+                <label>Subtasks</label>
                 <input type="text" id="taskSubtask" placeholder="Add new subtask">
                 <img class="add-subtask-img" src="./assets/img/plus.svg" onclick="addSubtask()">
                 <div class="subtasks" id="subtasks"></div>
@@ -501,4 +520,11 @@ function htmlEditSubtask(tsk, i) {
                 </div>      
             </div>
     `;
+}
+
+function genHtmlInputSubmit() {
+    return `<div class="submit-buttons">
+                <button>Clear</button>
+                <input type="submit" value="Submit">
+            </div>`;
 }
