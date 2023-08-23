@@ -1,4 +1,5 @@
-let menuOpen;
+let menuOpenContacts;
+let menuOpenCategory;
 let categories = [];
 let categoryColors = [
     '#8AA4FF',
@@ -13,6 +14,11 @@ let selectedContacts = [];
 let currentPrio;
 let subtasks = [];
 let formIsFilled = false;
+let inputIds = [
+    'taskTitle',
+    'taskDescription',
+    'taskDate'
+];
 
 /**
  * This function calls the render functions for adding a task
@@ -30,7 +36,16 @@ function renderAddTask() {
 }
 
 function checkFormFilled() {
-    console.log('test');
+    formIsFilled = true;
+    inputIds.forEach(id => {
+        let elem = document.getElementById(id);
+        console.log('Elem value von ID: ', id, ' = ', elem.value)
+        if (elem.value == '') formIsFilled = false;
+    });
+    if ( (selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
+            formIsFilled = false;
+        }
+    console.log('Form villed = ', formIsFilled);
 }
 
 //displays the current date
@@ -40,17 +55,17 @@ function getDate() {
 }
 
 function toggleCategory() {
-    if (!menuOpen) {
+    if (!menuOpenCategory) {
         openMenu('categories', 'dropDownCategory')
         renderCategories();
     } else {
         closeMenuCategories('categories');
     }
-    menuOpen = !menuOpen;
+    menuOpenCategory = !menuOpenCategory;
 }
 
 function toggleContacts() {
-    if (!menuOpen) {
+    if (!menuOpenContacts) {
         openMenu('contacts', 'dropDownContacts')
         renderContacts();
         markAlreadySelectedContacts();
@@ -60,7 +75,7 @@ function toggleContacts() {
     } else {
         closeMenuContacts('contacts');
     }
-    menuOpen = !menuOpen;
+    menuOpenContacts = !menuOpenContacts;
 }
 
 function markAlreadySelectedContacts() {
@@ -192,8 +207,10 @@ function renderContacts() {
 }
 
 function createNewCategory() {
-    selectedCategory[1] = '';
+    // selectedCategory[1] = '';
+    selectedCategory = [];
     showCreateNewCategoryHTML();
+    checkFormFilled();
 }
 
 function setColor(clr) {
@@ -214,10 +231,12 @@ function toggleSetContact(id) {
         cntctBox.classList.remove('background-darkblue');
         cntctBox.querySelector('input').checked = false;
         selectedContacts.splice(selectedContacts.indexOf(id), 1);
+        checkFormFilled();
     } else {
         cntctBox.classList.add('background-darkblue');
         cntctBox.querySelector('input').checked = true;
         selectedContacts.push(id);
+        checkFormFilled();
     }
 }
 
@@ -231,6 +250,7 @@ function setPrio(prio) {
     else {
         changePrio(prio);
     }
+    checkFormFilled();
 };
 
 function removePrio() {
@@ -293,6 +313,8 @@ function clearInputField(id) {
     } else {
         document.getElementById(id).value = '';
     };
+    selectedCategory = [];
+    checkFormFilled();
 }
 
 /**
@@ -312,20 +334,24 @@ async function addNewCategory() {
         document.getElementById('reqCatTitleAndColor').style.color = 'red';
         document.getElementById('reqCatTitleAndColor').style.display = 'block';
     } else {
-        saveAndDisplayNewCategory();
+        await saveAndDisplayNewCategory();
     }
 }
 
 async function saveAndDisplayNewCategory() {
     categories.push([selectedCategory[0], selectedCategory[1]]);
+    checkFormFilled();
     await setItem('categories', JSON.stringify(categories));
     showNewCreatedCategoryHtml();
     setCategory(selectedCategory[0], selectedCategory[1]);
-    menuOpen = false;
+    menuOpenCategory = false;
 }
 
 function setCategory(ctgry, clr) {
+    // debugger;
     toggleCategory();
+    checkFormFilled();
+    selectedCategory = [ctgry, clr];
     document.getElementById('dropDownCategory').innerHTML = `
         <div class="category-box">
             ${ctgry}
