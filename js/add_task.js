@@ -340,17 +340,16 @@ async function addNewCategory() {
 
 async function saveAndDisplayNewCategory() {
     categories.push([selectedCategory[0], selectedCategory[1]]);
-    checkFormFilled();
     await setItem('categories', JSON.stringify(categories));
     showNewCreatedCategoryHtml();
     setCategory(selectedCategory[0], selectedCategory[1]);
     menuOpenCategory = false;
+    checkFormFilled();
 }
 
 function setCategory(ctgry, clr) {
     // debugger;
     toggleCategory();
-    checkFormFilled();
     selectedCategory = [ctgry, clr];
     document.getElementById('dropDownCategory').innerHTML = `
         <div class="category-box">
@@ -358,6 +357,7 @@ function setCategory(ctgry, clr) {
             <div  class="category-color" style="background-color: ${clr};"></div>
             <img class="down_image" src="assets/img/drop-down-arrow.png">
         </div>`;
+    checkFormFilled();
 }
 
 function renderCategoriesHTML(i, cat, clr) {
@@ -481,7 +481,7 @@ function restoreCategoriesHtml() {
 function genHtmlInputDueDate() {
     return `<div class="task-due-date">
                 <label>Due date</label>
-                <input type="date" id="taskDate" name="date" min="${getDate()}" required>
+                <input type="date" id="taskDate" onchange="checkFormFilled()" name="date" min="${getDate()}" required>
                 <span id="reqTaskTitle">This field is required</span>
             </div>`;
 }
