@@ -1,6 +1,6 @@
 let menuOpenContacts;
 let menuOpenCategory;
-let categories = [];
+// let categories = [];
 let categoryColors = [
     '#8AA4FF',
     '#FF0000',
@@ -39,14 +39,12 @@ function checkFormFilled() {
     formIsFilled = true;
     inputIds.forEach(id => {
         let elem = document.getElementById(id);
-        console.log('Elem value von ID: ', id, ' = ', elem.value)
         if (elem.value == '') formIsFilled = false;
     });
     if ( (selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
             formIsFilled = false;
         }
     toggleSubmitButton();
-    console.log('Form villed = ', formIsFilled);
 }
 
 /**
@@ -76,11 +74,40 @@ function getNewTaskData() {
         'title': document.getElementById('taskTitle').value,
         'description': document.getElementById('taskDescription').value,
         'contacts': selectedContacts,
-        'due-date': document.getElementById('taskDate').value,
+        'date': document.getElementById('taskDate').value,
         'prio': currentPrio,
         'category': selectedCategory,
-        'subtasks': subtasks
+        'subtasks': subtasks,
+        'done': getStatiOfSubtasks(),
+        'task-id': findUnusedTaskIndex(), 
+        'status': 'todo'
     };
+}
+
+function getStatiOfSubtasks() {
+    let statiSubtask = [];
+    subtasks.forEach(subt => {
+        statiSubtask.push(false);
+    });
+    return statiSubtask;
+}
+
+/**
+ * This function reads all used indexes and returns an unused index
+ * 
+ * @returns unused index for task to be identified with
+ */
+function findUnusedTaskIndex() {
+    let indexes = [];
+    tasks.forEach(task => {
+        indexes.push(task['task-id']);
+    });
+    indexes.sort(function(a, b){return a-b});
+    if (indexes.length == 0) return 0;
+    else {
+        for (let i = 0; i < indexes.length; i++) if (!indexes.includes(i)) return i;
+        return indexes.length;
+    }
 }
 
 //displays the current date

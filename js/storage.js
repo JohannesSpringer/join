@@ -3,6 +3,7 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 let users = [];
 let tasks = [];
+let categories = [];
 
 /**
  * This function saves an item to the backend database
