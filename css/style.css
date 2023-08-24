@@ -1360,6 +1360,9 @@ a {
   width: 20px;
   height: 20px;
 }
+.add-task-content .add-task-inputs .add-task-inputs-submit .submit-buttons button:disabled {
+  background-color: #a8a8a8;
+}
 .add-task-content .add-task-inputs .add-task-inputs-submit button:first-child {
   color: #2A3647;
   background-color: white;

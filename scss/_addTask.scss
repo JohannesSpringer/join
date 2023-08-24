@@ -66,6 +66,10 @@
                     width: 20px;
                     height: 20px;
                 }
+
+                button:disabled {
+                    background-color: $gray;
+                }
             }
 
             button:first-child {

@@ -45,7 +45,42 @@ function checkFormFilled() {
     if ( (selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
             formIsFilled = false;
         }
+    toggleSubmitButton();
     console.log('Form villed = ', formIsFilled);
+}
+
+/**
+ * This function handles the dis-/enabling of the submit button in add task
+ */
+function toggleSubmitButton() {
+    let btnSubmit = document.getElementById('submitButton');
+    let inpSubmit = btnSubmit.querySelector('input');
+    if (formIsFilled) {
+        btnSubmit.disabled = false;
+        inpSubmit.disabled = false;
+    } else {
+        btnSubmit.disabled = true;
+        inpSubmit.disabled = true;
+    }
+}
+
+async function addTask() {
+    let newTask = getNewTaskData();
+    tasks.push(newTask);
+    await setItem('tasks', JSON.stringify(tasks));
+    goToBoard();
+}
+
+function getNewTaskData() {
+    return {
+        'title': document.getElementById('taskTitle').value,
+        'description': document.getElementById('taskDescription').value,
+        'contacts': selectedContacts,
+        'due-date': document.getElementById('taskDate').value,
+        'prio': currentPrio,
+        'category': selectedCategory,
+        'subtasks': subtasks
+    };
 }
 
 //displays the current date

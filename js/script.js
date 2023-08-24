@@ -31,6 +31,14 @@ function goToAddTask() {
 }
 
 /**
+ * This function changes the current shown webpage to board.html
+ */
+function goToBoard() {
+    window.location.href = "board.html";
+    localStorage.setItem('selectedMenuItem', 'addTask');
+}
+
+/**
  * This functions loads all users from backend and checks if the current user
  * with the correct credentials.
  */
