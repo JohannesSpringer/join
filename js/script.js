@@ -35,8 +35,17 @@ function goToAddTask() {
  */
 function goToBoard() {
     window.location.href = "board.html";
-    localStorage.setItem('selectedMenuItem', 'addTask');
+    localStorage.setItem('selectedMenuItem', 'board');
 }
+
+/**
+ * This function changes the current shown webpage to contacts.html
+ */
+function goToContacts() {
+    window.location.href = "contacts.html";
+    localStorage.setItem('selectedMenuItem', 'contacts');
+}
+
 
 /**
  * This functions loads all users from backend and checks if the current user

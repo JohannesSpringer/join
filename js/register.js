@@ -81,6 +81,8 @@ async function addUserToLocalArray() {
     users.push({
         name: registerName.value,
         email: registerEmail.value,
-        password: hashedPassword.toString()
+        password: hashedPassword.toString(),
+        color: getRandomColor(),
+        contacts: []
     });
 }
