@@ -250,6 +250,24 @@ function getInitialsFromName(name) {
     };
 }
 
+/**
+ * Return a random Color-Hexcode 
+ * @returns random color hexcode (#7D735F)
+ */
 function getRandomColor() {
-    return Math.floor(Math.random()*360);
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+    // return Math.floor(Math.random()*360);
+}
+
+/**
+ * add/remove class d-none to your Object
+ * @param {string} id - need the id from your Object
+ */
+function toggleDNone(id) {
+    document.getElementById(`${id}`).classList.toggle('d-none');
 }

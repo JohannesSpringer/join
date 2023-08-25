@@ -781,6 +781,7 @@
   align-items: center;
   gap: 8px;
   margin: 16px 0;
+  width: 80%;
   background-color: #2A3647;
   color: white;
   padding: 10px 32px;
@@ -876,6 +877,26 @@
   font-size: 14px !important;
   box-sizing: unset !important;
 }
+#overlayContent .overlay-right .name-input {
+  margin-bottom: 25px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url("../assets/img/person-icon.png") right no-repeat;
+  background-position: 94% 55%;
+  font-size: 14px !important;
+  box-sizing: unset !important;
+}
+#overlayContent .overlay-right .email-input {
+  margin-bottom: 25px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url("../assets/img/letter-icon.png") right no-repeat;
+  background-position: 94% 55%;
+  font-size: 14px !important;
+  box-sizing: unset !important;
+}
 #overlayContent .overlay-right form {
   display: flex;
   flex-direction: column;
@@ -895,6 +916,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 12px 32px 12px 12px;
+  font-size: large;
+  background: url("./../assets/img/x.svg") right no-repeat;
+  background-position: 94% 48%;
+  background-size: 20px 20px;
 }
 #overlayContent .overlay-right form .cancel-contact-btn:hover {
   color: #29ABE2;
@@ -903,8 +929,10 @@
 #overlayContent .overlay-right form .cancel-contact-btn:hover img {
   filter: invert(70%) sepia(25%) saturate(6641%) hue-rotate(165deg) brightness(93%) contrast(89%);
 }
-#overlayContent .overlay-right form .cancel-contact-btn:hover img {
-  filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
+#overlayContent .overlay-right form .cancel-contact-btn:hover {
+  background: url("./../assets/img/x-lightblue.svg") right no-repeat;
+  background-size: 20px 20px;
+  background-position: 94% 48%;
 }
 #overlayContent .overlay-right form .add-contact-btn {
   background-color: #2A3647;
@@ -917,8 +945,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 8px;
+  padding: 12px 32px 12px 12px;
   font-weight: 700;
+  font-size: large;
+  background: #2A3647 url("./../assets/img/checkmark-white.svg") right no-repeat;
+  background-position: 94% 48%;
+  background-size: 16px 16px;
 }
 #overlayContent .overlay-right form .add-contact-btn:hover {
   background-color: #29ABE2;

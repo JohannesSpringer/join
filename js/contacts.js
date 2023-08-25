@@ -15,7 +15,7 @@ let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], 
 async function init() {
     // await downloadFromServer();
     // contacts = JSON.parse(backend.getItem('contacts')) || [];
-    await getAllUsers();
+    await loadUsers();
     // insertContactsToContactList();
     // showContact(0);
     document.body.classList.add('overflow');
@@ -79,20 +79,6 @@ function orderContacts() {
     }
 }
 
-
-/**
- * Retrunt a random Color-Hexcode 
- * @returns random color hexcode (#7D735F)
- */
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
 /**
  * The function returns the first letter of the first name and last name.
  * If the last name does not exist, then only the first letter of the first name is output
@@ -139,7 +125,7 @@ async function showContact(id) {
 
 async function getAllUsers() {
     // allUsersDB = await JSON.parse(backend.getItem('users')) || [];
-    allUsersDB = await loadUsers() || [];
+    await loadUsers();
     getCurrentUserData();
 }
 
@@ -162,12 +148,12 @@ function addContact() {
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
     // Verify that the user entered a name, email address, and phone number.
-    if (!name || !email || !phone) {
-        alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
-        return;
-    }
+    // if (!name || !email || !phone) {
+    //     alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
+    //     return;
+    // }
 
-    let initials = getInitial(name);
+    let initials = getInitialsFromName(name);
     let color = getRandomColor();
     let singelContact = {
         name: name,
@@ -190,7 +176,7 @@ function editContact(id) {
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
-    let initials = getInitial(name);
+    let initials = getInitialsFromName(name);
     contactsA[id].name = name;
     contactsA[id].mail = email;
     contactsA[id].phone = phone;
@@ -328,27 +314,27 @@ function showCreateContact() {
     </div><div class="overlay-left">        
     <img src="./assets/img/menu-logo.png" alt="" id="logo">
     <p class="overlay-title">Add contact</p>
-    <p>Task are better with a team!</p>
+    <p>Tasks are better with a team!</p>
     <div class="overlay-sep"></div>
-</div>
-<!-- createContact -->
-<div class="overlay-right">
-    <img src="./assets/img/contacts-icons/userIcon.png" alt="" class="user-icon">
-    <form action="#" onsubmit="addContact(); return false">
-        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
-        <input class="email-input" id="email-input" placeholder="Email" type="email" required>
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required>
-        <div class="buttons">
-            <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel </button>
-            <button type="submit" class="add-contact-btn" >
-                Create contact
-            </button>
-        </div>
-    </form>
-    <div class="close">
-        <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
     </div>
-</div>`
+    <!-- createContact -->
+    <div class="overlay-right">
+        <img src="./assets/img/contacts-icons/userIcon.png" alt="" class="user-icon">
+        <form action="#" onsubmit="addContact(); return false">
+            <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
+            <input class="email-input" id="email-input" placeholder="Email" type="email" required>
+            <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required>
+            <div class="buttons">
+                <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel </button>
+                <button type="submit" class="add-contact-btn" >
+                    Create contact
+                </button>
+            </div>
+        </form>
+        <div class="close">
+            <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
+        </div>
+    </div>`
 }
 
 function showEditContact(id) {

@@ -428,6 +428,7 @@
         align-items: center;
         gap: 8px;
         margin: 16px 0;
+        width: 80%;
         @include button-darkblue;
         box-sizing: border-box;
     }
@@ -522,6 +523,20 @@
             box-sizing: unset !important;
         }
 
+        .name-input {
+            margin-bottom: 25px;
+            @include inputForm('../assets/img/person-icon.png', 94%, 55%);
+            font-size: 14px !important;
+            box-sizing: unset !important;
+        }
+
+        .email-input {
+            margin-bottom: 25px;
+            @include inputForm('../assets/img/letter-icon.png', 94%, 55%);
+            font-size: 14px !important;
+            box-sizing: unset !important;
+        }
+
         form {
             display: flex;
             flex-direction: column;
@@ -536,11 +551,16 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: 12px 32px 12px 12px;
+                font-size: large;
+                background: url('./../assets/img/x.svg') right no-repeat;
+                background-position: 94% 48%;
+                background-size: 20px 20px;
 
                 &:hover {
-                    img {
-                        filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
-                    }
+                    background: url('./../assets/img/x-lightblue.svg') right no-repeat;
+                    background-size: 20px 20px;
+                    background-position: 94% 48%;
                 }
             }
 
@@ -549,8 +569,12 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 10px 8px;
+                padding: 12px 32px 12px 12px;
                 font-weight: 700;
+                font-size: large;
+                background: $darkblue url('./../assets/img/checkmark-white.svg') right no-repeat;
+                background-position: 94% 48%;
+                background-size: 16px 16px;
             }
         }
 
