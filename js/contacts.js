@@ -149,7 +149,6 @@ function delContact(userId) {
 }
 
 function addContact() {
-    debugger;
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
