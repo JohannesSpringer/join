@@ -297,9 +297,9 @@
                 border-radius: 100%;
             }
 
-            // .list-contact-info {
-            //     min-width: 150px;
-            // }
+            .list-contact-info {
+                overflow: hidden;
+            }
 
             img {
                 height: 42px;
@@ -359,7 +359,7 @@
         }
 
         .contact-details {
-            margin-left: 24px;
+            // margin-left: 24px;
 
             .contact-details-head {
                 display: flex;

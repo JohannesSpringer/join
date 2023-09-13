@@ -693,6 +693,9 @@
   color: #FFFFFF;
   border-radius: 100%;
 }
+#contacts-container .contacts-list .list-contact .list-contact-info {
+  overflow: hidden;
+}
 #contacts-container .contacts-list .list-contact img {
   height: 42px;
   width: 42px;
@@ -735,9 +738,6 @@
 }
 #contacts-container .contact-info .contact-headline p {
   font-size: 27px;
-}
-#contacts-container .contact-info .contact-details {
-  margin-left: 24px;
 }
 #contacts-container .contact-info .contact-details .contact-details-head {
   display: flex;
