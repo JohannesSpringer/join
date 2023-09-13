@@ -211,6 +211,7 @@ function clearLoginData() {
  */
 function setCurrentUser(user) {
     localStorage.setItem("currentUser", user.name);
+    localStorage.setItem("loginEmail", user.email);
 }
 
 /**

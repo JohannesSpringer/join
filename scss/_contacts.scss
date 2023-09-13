@@ -210,13 +210,13 @@
     margin-left: 200px;
     display: flex;
 
-    .contacts-list {
+    .contacts {
         height: calc(100vh - 75px);
+        width: 30vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         background-color: white;
-        width: 30vw;
         overflow-y: scroll;
         overflow-x: hidden;
 
@@ -230,9 +230,39 @@
             background: #A8A8A8;
         }
 
+        .add-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            position: sticky;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+    .new-contact {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin: 16px 0;
+        width: 80%;
+        @include button-darkblue;
+        box-sizing: border-box;
+        position: sticky;
+        top: 16px;
+    }
+
+    .contacts-list {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        width: 80%;
+
         .list-header {
-            text-align: center;
-            width: 80%;
+            // padding-left: 40px;
+            // width: 100%;
             padding-top: 8px;
             padding-bottom: 16px;
             font-size: 21px;
@@ -244,17 +274,14 @@
         .list-contact {
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
-            justify-content: center;
+            align-items: center;
+            justify-content: flex-start;
             height: fit-content;
-            padding: 15px 25px;
-            margin-left: 48px;
-            margin-right: 48px;
+            padding: 16px;
             gap: 35px;
             width: 100%;
             box-sizing: border-box;
             border-radius: 10px;
-            width: fit-content;
             font-size: 16px;
             cursor: pointer;
 
@@ -270,9 +297,9 @@
                 border-radius: 100%;
             }
 
-            .list-contact-info {
-                min-width: 150px;
-            }
+            // .list-contact-info {
+            //     min-width: 150px;
+            // }
 
             img {
                 height: 42px;
@@ -421,17 +448,6 @@
         }
 
     }
-
-    .new-contact {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin: 16px 0;
-        width: 80%;
-        @include button-darkblue;
-        box-sizing: border-box;
-    }
 }
 
 #overlayContent {
@@ -487,8 +503,8 @@
     }
 
     .close {
-        height: 100%;
-        margin-top: 35px;
+        top: 20px;
+        right: 20px;
 
         img {
             height: 23px;
@@ -502,6 +518,7 @@
     }
 
     .overlay-right {
+        position: relative;
         border-top-right-radius: 32px;
         border-bottom-right-radius: 32px;
         height: 50vh;

@@ -1,7 +1,7 @@
 let contactsA = [];
 let contact = {};
-let allUsersDB;
-let regUser = localStorage.getItem('currentUser');
+// let allUsersDB;
+let regUserMail = localStorage.getItem('loginEmail');
 let userData;
 let userArryId;
 
@@ -15,8 +15,9 @@ let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], 
 async function init() {
     // await downloadFromServer();
     // contacts = JSON.parse(backend.getItem('contacts')) || [];
-    await loadUsers();
-    // insertContactsToContactList();
+    // await loadUsers();
+    await getAllUsers();
+    await insertContactsToContactList();
     // showContact(0);
     document.body.classList.add('overflow');
 };
@@ -45,7 +46,7 @@ async function insertContactsToContactList() {
             container.innerHTML += genContactsHeader(i);
             for (let j = 0; j < orderedContacts[i].length; j++) {
                 const contact = orderedContacts[i][j];
-                container.innerHTML += genContactHtml(orderedContacts[i][j]);
+                container.innerHTML += genContactHtml(contact);
             }
         }
     }
@@ -126,15 +127,19 @@ async function showContact(id) {
 async function getAllUsers() {
     // allUsersDB = await JSON.parse(backend.getItem('users')) || [];
     await loadUsers();
-    getCurrentUserData();
+    console.log(users);
+    await getCurrentUserData();
+    console.log('get cur user done?');
 }
 
 async function getCurrentUserData() {
-    await allUsersDB.forEach(function users(value, index) {
-        if (value.name === regUser) {
+    console.log('start get cur user');
+    await users.forEach(function users(value, index) {
+        if (value.email === regUserMail) {
             userData = value;
             userArryId = index;
             contactsA = value.contacts || [];
+            console.log('UserData: ', userData);
         }
     })
 }
@@ -144,6 +149,7 @@ function delContact(userId) {
 }
 
 function addContact() {
+    debugger;
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
@@ -155,15 +161,15 @@ function addContact() {
 
     let initials = getInitialsFromName(name);
     let color = getRandomColor();
-    let singelContact = {
+    let singleContact = {
         name: name,
-        mail: email,
+        email: email,
         phone: phone,
         initials: initials,
         color: color
     }
 
-    contactsA.push(singelContact);
+    contactsA.push(singleContact);
     animationAndPushToServer();
     showAlert();
 }
@@ -192,13 +198,14 @@ function animationAndPushToServer() {
 }
 
 async function pushToServer() {
-    await backend.setItem('users', JSON.stringify(allUsersDB))
+    // await backend.setItem('users', JSON.stringify(allUsersDB));
+    await setItem('users', JSON.stringify(users));
 }
 
 function addContactsToUser() {
-    userData = { ...userData, users: contactsA };
-    allUsersDB.splice(userArryId, 1);
-    allUsersDB.push(userData);
+    userData = { ...userData, contacts: contactsA };
+    users.splice(userArryId, 1);
+    users.push(userData);
     pushToServer();
 }
 
@@ -242,7 +249,7 @@ function genContactHtml(contact) {
             <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
-                <p>${contact.mail}</p>
+                <p>${contact.email}</p>
             </div>
         </div>   
     
