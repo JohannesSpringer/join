@@ -1,5 +1,6 @@
 let contactsA = [];
 let contact = {};
+let activeContact;
 // let allUsersDB;
 let regUserMail = localStorage.getItem('loginEmail');
 let userData;
@@ -125,21 +126,16 @@ async function showContact(id) {
 }
 
 async function getAllUsers() {
-    // allUsersDB = await JSON.parse(backend.getItem('users')) || [];
     await loadUsers();
-    console.log(users);
     await getCurrentUserData();
-    console.log('get cur user done?');
 }
 
 async function getCurrentUserData() {
-    console.log('start get cur user');
     await users.forEach(function users(value, index) {
         if (value.email === regUserMail) {
             userData = value;
             userArryId = index;
             contactsA = value.contacts || [];
-            console.log('UserData: ', userData);
         }
     })
 }
@@ -170,7 +166,10 @@ function addContact() {
 
     contactsA.push(singleContact);
     animationAndPushToServer();
-    showAlert();
+    // showAlert();
+    showContact(contactsA.findIndex((elem) => {
+        return elem == singleContact;
+    }));
 }
 
 /**
@@ -244,7 +243,7 @@ function addScroll() {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact" onclick="showDetails(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
+    <div class="list-contact" onclick="showContact(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
             <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
