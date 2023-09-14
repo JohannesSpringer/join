@@ -277,7 +277,7 @@ function showDetails(id) {
         <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
         <div class="contactInfo">
             <span class="contact-name">${contactsA[id].name}</span>
-            <div class="add-task" onclick="addScroll()"> + Add Task</div>
+            <div class="contact-add-task" onclick="addScroll()"> + Add Task</div>
         </div>
         </div>
         <div class="contact-info-head">
@@ -290,11 +290,11 @@ function showDetails(id) {
         <div class="contact-info-container">
             <div class="contact-info-segment">
                 <span class="contact-info-title">Email</span>
-                <a href="mailto:mail@egal.de">${contactsA[id].mail}</a>
+                <a href="mailto:${contactsA[id].email}">${contactsA[id].email}</a>
             </div>
             <div class="contact-info-segment">
                 <span class="contact-info-title">Phone</span>
-                <a href="tel:+4915166456">${contactsA[id].phone}</a>
+                <a href="tel:${contactsA[id].phone}">${contactsA[id].phone}</a>
             </div>
         </div>
         <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`;

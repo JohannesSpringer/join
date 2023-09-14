@@ -725,6 +725,16 @@
 }
 #contacts-container .contact-info {
   padding-left: 32px;
+  height: calc(100vh - 75px);
+  overflow-y: scroll;
+}
+#contacts-container .contact-info::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+#contacts-container .contact-info::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #A8A8A8;
 }
 #contacts-container .contact-info .contact-headline {
   display: flex;
@@ -765,7 +775,7 @@
   font-size: 47px;
   margin-bottom: 16px;
 }
-#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .add-task {
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-add-task {
   margin-top: 18px;
   cursor: pointer;
   font-size: 16px;
