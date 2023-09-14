@@ -142,7 +142,9 @@ async function getCurrentUserData() {
 
 function delContact(userId) {
     contactsA.splice(userId, 1);
-    animationAndPushToServer();
+    animationAndPushToServer();  
+    document.getElementById('contactDetails').innerHTML = '';
+    toggleDNone('overlayContent');
 }
 
 function addContact() {
@@ -196,7 +198,6 @@ function animationAndPushToServer() {
     addContactsToUser();
     toggleDNone('overlayContent');
     insertContactsToContactList();
-    // showContact(0);
 }
 
 async function pushToServer() {
