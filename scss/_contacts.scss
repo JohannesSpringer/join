@@ -399,11 +399,25 @@
                         margin-bottom: 16px;
                     }
 
-                    .contact-add-task {
-                        margin-top: 18px;
-                        cursor: pointer;
-                        font-size: 16px;
-                        color: $lightblue;
+                    .contact-changes {
+                        display: flex;
+                        gap: 16px;
+
+                        .contact-edit {
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                            cursor: pointer;
+        
+                            img {
+                                width: 16px;
+                                height: 16px;
+                            }
+        
+                            &:hover {
+                                filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
+                            }
+                        }
                     }
                 }
             }
@@ -416,22 +430,6 @@
 
                 &>p {
                     font-size: 21px;
-                }
-
-                .contact-edit {
-                    display: flex;
-                    gap: 10px;
-                    align-items: center;
-                    cursor: pointer;
-
-                    img {
-                        width: 21px;
-                        height: 30px;
-                    }
-
-                    &:hover {
-                        filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
-                    }
                 }
             }
         }

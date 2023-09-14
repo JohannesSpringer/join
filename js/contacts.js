@@ -139,6 +139,7 @@ async function getCurrentUserData() {
         }
     })
 }
+
 function delContact(userId) {
     contactsA.splice(userId, 1);
     animationAndPushToServer();
@@ -182,10 +183,11 @@ function editContact(id) {
     let phone = document.getElementById('phone-input').value;
     let initials = getInitialsFromName(name);
     contactsA[id].name = name;
-    contactsA[id].mail = email;
+    contactsA[id].email = email;
     contactsA[id].phone = phone;
     contactsA[id].initials = initials;
     animationAndPushToServer();
+    showContact(id);
 }
 
 function animationAndPushToServer() {
@@ -276,15 +278,20 @@ function showDetails(id) {
         <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
         <div class="contactInfo">
             <span class="contact-name">${contactsA[id].name}</span>
-            <div class="contact-add-task" onclick="addScroll()"> + Add Task</div>
+            <div class="contact-changes">
+                <div class="contact-edit">
+                    <img src="./assets/img/edit.png" alt="">
+                    <p onclick="editShowContact(${editname})">Edit</p>
+                </div>
+                <div class="contact-edit">
+                    <img src="./assets/img/delete.png" alt="">
+                    <p onclick="delContact(${editname})">Delete</p>
+                </div>
+            </div>
         </div>
         </div>
         <div class="contact-info-head">
             <p>Contact Information</p>
-            <div class="contact-edit">
-                <img src="./assets/img/contacts-icons/pen.png" alt="">
-                <p onclick="editShowContact(${editname})">Edit Contact</p>
-            </div>
         </div>
         <div class="contact-info-container">
             <div class="contact-info-segment">
@@ -356,8 +363,8 @@ function showEditContact(id) {
     <img src="./assets/img/contacts-icons/userIcon.png" alt="">    
     <form action="#" onsubmit="editContact(${userId}); return false">
         <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contactsA[id].name}">
-        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contactsA[id].mail}">
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
+        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contactsA[id].email}">
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
         <div class="buttons">
             <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
             <button type="submit" class="add-contact-btn" >

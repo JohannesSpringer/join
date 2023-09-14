@@ -775,11 +775,22 @@
   font-size: 47px;
   margin-bottom: 16px;
 }
-#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-add-task {
-  margin-top: 18px;
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-changes {
+  display: flex;
+  gap: 16px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-changes .contact-edit {
+  display: flex;
+  gap: 10px;
+  align-items: center;
   cursor: pointer;
-  font-size: 16px;
-  color: #29ABE2;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-changes .contact-edit img {
+  width: 16px;
+  height: 16px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-changes .contact-edit:hover {
+  filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
 }
 #contacts-container .contact-info .contact-details .contact-info-head {
   margin-top: 24px;
@@ -789,19 +800,6 @@
 }
 #contacts-container .contact-info .contact-details .contact-info-head > p {
   font-size: 21px;
-}
-#contacts-container .contact-info .contact-details .contact-info-head .contact-edit {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  cursor: pointer;
-}
-#contacts-container .contact-info .contact-details .contact-info-head .contact-edit img {
-  width: 21px;
-  height: 30px;
-}
-#contacts-container .contact-info .contact-details .contact-info-head .contact-edit:hover {
-  filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
 }
 #contacts-container .contact-info .contact-info-container .contact-info-segment {
   display: flex;
