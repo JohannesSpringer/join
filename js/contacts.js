@@ -187,7 +187,9 @@ function editContact(id) {
     contactsA[id].phone = phone;
     contactsA[id].initials = initials;
     animationAndPushToServer();
-    showContact(id);
+    showContact(contactsA.findIndex((elem) => {
+        return elem.email == email;
+    }));
 }
 
 function animationAndPushToServer() {
