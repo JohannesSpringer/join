@@ -262,7 +262,6 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-    // return Math.floor(Math.random()*360);
 }
 
 /**

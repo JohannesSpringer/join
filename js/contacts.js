@@ -1,25 +1,20 @@
 let contactsA = [];
 let contact = {};
 let activeContact;
-// let allUsersDB;
 let regUserMail = localStorage.getItem('loginEmail');
 let userData;
 let userArryId;
 
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
-// setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+
 
 /**
  * Load Data from server
  * 
  */
 async function init() {
-    // await downloadFromServer();
-    // contacts = JSON.parse(backend.getItem('contacts')) || [];
-    // await loadUsers();
     await getAllUsers();
     await insertContactsToContactList();
-    // showContact(0);
     document.body.classList.add('overflow');
 };
 
@@ -30,7 +25,6 @@ function showAlert() {
     }, 2500);
 }
 async function addContacts() {
-    // await backend.setItem('contacts', JSON.stringify(contactsA));
     await setItem('users', JSON.stringify(contactsA));
 }
 
@@ -118,7 +112,7 @@ function changeActiv() {
 async function showContact(id) {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
-    let contactId = id;// || btns[0].id;
+    let contactId = id;
     let contactElement = document.getElementById(contactId);
     Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
     contactElement.className += " list-contact-activ";
@@ -144,20 +138,16 @@ function delContact(userId) {
     contactsA.splice(userId, 1);
     animationAndPushToServer();  
     document.getElementById('contactDetails').innerHTML = '';
-    toggleDNone('overlayContent'); // toggle because it is toggled in animationAndPushToServer() function
-    // - toggle is not needed
+    let overlay = document.getElementById('overlayContent');
+    if (!overlay.classList.contains('d-none')) {
+        toggleDNone('overlayContent'); // only toggle if overlay is shown
+    }
 }
 
 function addContact() {
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
-    // Verify that the user entered a name, email address, and phone number.
-    // if (!name || !email || !phone) {
-    //     alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
-    //     return;
-    // }
-
     let initials = getInitialsFromName(name);
     let color = getRandomColor();
     let singleContact = {
@@ -202,7 +192,6 @@ function animationAndPushToServer() {
 }
 
 async function pushToServer() {
-    // await backend.setItem('users', JSON.stringify(allUsersDB));
     await setItem('users', JSON.stringify(users));
 }
 
