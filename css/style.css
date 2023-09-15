@@ -1033,25 +1033,6 @@
 }
 /**
  * ----------------------------------------
- * animation slide-top
- * ----------------------------------------
- */
-@keyframes slide-top {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(-200px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-}
-/**
- * ----------------------------------------
  * animation slide-in-blurred-right
  * ----------------------------------------
  */
