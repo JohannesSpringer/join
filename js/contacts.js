@@ -144,7 +144,8 @@ function delContact(userId) {
     contactsA.splice(userId, 1);
     animationAndPushToServer();  
     document.getElementById('contactDetails').innerHTML = '';
-    toggleDNone('overlayContent');
+    toggleDNone('overlayContent'); // toggle because it is toggled in animationAndPushToServer() function
+    // - toggle is not needed
 }
 
 function addContact() {
@@ -169,7 +170,7 @@ function addContact() {
 
     contactsA.push(singleContact);
     animationAndPushToServer();
-    // showAlert();
+    showAlert();
     showContact(contactsA.findIndex((elem) => {
         return elem == singleContact;
     }));

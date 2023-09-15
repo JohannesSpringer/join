@@ -727,6 +727,7 @@
   padding-left: 32px;
   height: calc(100vh - 75px);
   overflow-y: scroll;
+  position: relative;
 }
 #contacts-container .contact-info::-webkit-scrollbar {
   width: 5px;
@@ -987,13 +988,10 @@
 .alert {
   display: flex;
   position: absolute;
-  bottom: -50px;
+  bottom: 50px;
   align-items: center;
   justify-content: center;
-  width: 100%;
   opacity: 0;
-}
-.alert .alert-content {
   background-color: #2A3647;
   color: white;
   padding: 10px 32px;
@@ -1002,14 +1000,37 @@
   border-radius: 8px;
   border: none;
 }
-.alert .alert-content:hover {
+.alert:hover {
   background-color: #29ABE2;
 }
 
 .animate {
-  animation: slide-top 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slide-left 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
+/**
+ * ----------------------------------------
+ * animation slide-left
+ * ----------------------------------------
+ */
+@keyframes slide-left {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
 /**
  * ----------------------------------------
  * animation slide-top
