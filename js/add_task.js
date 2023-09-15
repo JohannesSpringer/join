@@ -242,12 +242,12 @@ function showInitialsFromAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
     selectedContacts.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${getInitialsFromCntct(cntct)}</div>`;
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${users[userArrayId].contacts[cntct.slice(-1)].color}">${getInitialsFromCntct(cntct)}</div>`;
     });
 }
 
 function getInitialsFromCntct(cntct) {
-    let name = users[cntct.slice(-1)].name;
+    let name = users[userArrayId].contacts[cntct.slice(-1)].name;
     return getInitialsFromName(name);
 }
 
@@ -261,9 +261,9 @@ function renderCategories() {
 }
 
 function renderContacts() {
-    for (let i = 0; i < users.length; i++) {
-        let contact = users[i].name;
-        let initials = getInitialsFromName(contact);
+    for (let i = 0; i < users[userArrayId].contacts.length; i++) {
+        let contact = users[userArrayId].contacts[i];
+        let initials = getInitialsFromName(contact.name);
         renderContactsHTML(i, contact, initials);
     }
 }
@@ -437,8 +437,8 @@ function renderContactsHTML(i, con, ini) {
     return document.getElementById('contacts').innerHTML += `
         <div class="render_contacts" id="cntcts${i}" onclick="toggleSetContact('cntcts${i}')">
             <div class="contact-box">
-                <div class="contact-initials" style="background-color: hsl(${getRandomColor()}, 50%, 50%)">${ini}</div>
-                <div class="contact-name"">${con}</div>
+                <div class="contact-initials" style="background-color: ${con.color}">${ini}</div>
+                <div class="contact-name"">${con.name}</div>
             </div>
             <label class="checkbox-container">
                 <input type="checkbox">

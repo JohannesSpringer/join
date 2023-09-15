@@ -3,7 +3,7 @@ let contact = {};
 let activeContact;
 let regUserMail = localStorage.getItem('loginEmail');
 let userData;
-let userArryId;
+let userArrayId;
 
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
 
@@ -128,7 +128,7 @@ async function getCurrentUserData() {
     await users.forEach(function users(value, index) {
         if (value.email === regUserMail) {
             userData = value;
-            userArryId = index;
+            userArrayId = index;
             contactsA = value.contacts || [];
         }
     })
@@ -197,7 +197,7 @@ async function pushToServer() {
 
 function addContactsToUser() {
     userData = { ...userData, contacts: contactsA };
-    users.splice(userArryId, 1);
+    users.splice(userArrayId, 1);
     users.push(userData);
     pushToServer();
 }

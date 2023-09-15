@@ -19,7 +19,7 @@ async function registerUser() {
     await setItem('users', JSON.stringify(users));
     registerUserSuccess();
     resetForm();
-    setTimeout(goToIndex, 2000);
+    setTimeout(goToIndex, 1000);
 }
 
 /**

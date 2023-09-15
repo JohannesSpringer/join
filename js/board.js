@@ -7,6 +7,7 @@ let editContacts = [];
 
 async function initBoard() {
     await loadData();
+
     // await loadDataTask();
     renderTasks(tasks);
 }
@@ -23,6 +24,7 @@ function getDateOverlay() {
 async function loadData() {
     await loadTasks();
     await loadCategories();
+    await getAllUsers();
     // tasks_board = JSON.parse(backend.getItem('tasks')) || [];
     // categorys_board = JSON.parse(backend.getItem('categorys')) || [];
 }
@@ -142,8 +144,8 @@ function htmlTaskEditors(task) {
 }
 
 function htmlTaskSingleEditor(editor) {
-    return `<div class="contact-frame" style="background-color: ${editor['color']}">
-                ${editor['initials']}
+    return `<div class="contact-frame" style="background-color: ${users[userArrayId].contacts[editor.slice(-1)].color}">
+                ${users[userArrayId].contacts[editor.slice(-1)].initials}
             </div>`;
 }
 
@@ -204,10 +206,12 @@ function htmlTaskDetailView(task) {
             </div>
             <div id="icons" class="icons">
                 <div class="delete-button" onclick="deleteTask(${tasks.indexOf(task)})">
-                    <img src="./assets/img/board-icons/delete.png">
+                    <img src="./assets/img/delete.png">
+                    Delete
                 </div>
                 <div class="edit-button" onclick="editTask(${tasks.indexOf(task)})">
-                    <img src="./assets/img/board-icons/edit.png">
+                    <img src="./assets/img/edit.png">
+                    Edit
                 </div>
             </div>
         </div>
