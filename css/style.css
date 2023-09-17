@@ -238,9 +238,6 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-.log-in .form-class .log-in-form ::-moz-placeholder {
-  opacity: 0.5;
-}
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -671,7 +668,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 16px;
   gap: 35px;
@@ -686,7 +682,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -761,7 +756,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -1015,18 +1009,22 @@
  */
 @keyframes slide-left {
   0% {
+    -webkit-transform: translateX(200%);
     transform: translateX(200%);
     opacity: 0;
   }
   10% {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
   }
   90% {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
   }
   100% {
+    -webkit-transform: translateX(200%);
     transform: translateX(200%);
     opacity: 0;
   }
@@ -1090,8 +1088,7 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .add-task-plus-icon {
@@ -1174,7 +1171,6 @@ body {
 .board-content .board-tasks .tasks .single-task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -1231,8 +1227,7 @@ body {
   display: flex;
 }
 .board-content .board-tasks .tasks .single-task .task-prio img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .board-detail-view {
@@ -1273,7 +1268,6 @@ body {
 .board-detail-view .content .task-details .category {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -1306,8 +1300,7 @@ body {
   color: white;
 }
 .board-detail-view .content .task-details .priority .prio-icon img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: brightness(0) invert(1);
 }
 .board-detail-view .content .task-details .edit-status {
@@ -1822,6 +1815,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -1853,6 +1847,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -1879,6 +1874,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 .todo_done_sub:hover img {
@@ -2086,6 +2082,7 @@ a {
 .task-category {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .task-category span {
   font-size: 12px;
@@ -2152,6 +2149,10 @@ a {
   border-bottom-right-radius: 10px;
   border-right: 1px solid #D1D1D1;
   border-left: 1px solid #D1D1D1;
+  position: absolute;
+  top: 65px;
+  width: -webkit-fill-available;
+  z-index: 10;
 }
 .task-category .render_categories_box .render_categories {
   position: relative;
@@ -2186,6 +2187,7 @@ a {
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .task-category .checkbox-container input {
@@ -2210,8 +2212,7 @@ a {
 .task-category .checkbox-container .checkmark:after {
   width: 16px;
   height: 16px;
-  -webkit-clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
-          clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
+  clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
   background-color: white;
 }
 .task-category .checkmark:after {
@@ -2454,10 +2455,12 @@ a {
 }
 
 .scale-up-ver-top {
+  -webkit-animation: scale-up-ver-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: scale-up-ver-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 .scale-down-ver-top {
+  -webkit-animation: scale-down-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: scale-down-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -2472,13 +2475,31 @@ a {
  * animation scale-up-ver-top
  * ----------------------------------------
  */
-@keyframes scale-up-ver-top {
+@-webkit-keyframes scale-up-ver-top {
   0% {
+    -webkit-transform: scaleY(0.01);
     transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
   100% {
+    -webkit-transform: scaleY(1);
     transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+@keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.01);
+    transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
 }
@@ -2487,13 +2508,31 @@ a {
  * animation scale-down-ver-top
  * ----------------------------------------
  */
-@keyframes scale-down-ver-top {
+@-webkit-keyframes scale-down-ver-top {
   0% {
+    -webkit-transform: scaleY(1);
     transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
   100% {
+    -webkit-transform: scaleY(0.01);
     transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+@keyframes scale-down-ver-top {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(0.01);
+    transform: scaleY(0.01);
+    -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
   }
 }

@@ -143,6 +143,7 @@
 .task-category {
     display: flex;
     flex-direction: column;
+    position: relative;
     @include reqInputText();
 
     .drop_down {
@@ -215,6 +216,10 @@
         border-bottom-right-radius: 10px;
         border-right: 1px solid #D1D1D1;
         border-left: 1px solid #D1D1D1;
+        position: absolute;
+        top: 65px;
+        width: -webkit-fill-available;
+        z-index: 10;
 
         .render_categories {
             position: relative;
