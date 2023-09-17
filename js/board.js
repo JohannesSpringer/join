@@ -4,6 +4,7 @@ let editors;
 let filteredTasks;
 let currentPrioEditTask;
 let editContacts = [];
+let selectedSubtasks = [];
 
 async function initBoard() {
     await loadData();
@@ -185,7 +186,7 @@ function htmlTaskDetailView(task) {
                 <img src="./assets/img/close.png" onclick="closeDetailView()">
             </div>
             <div id="content" class="task-details">
-                <div class="category" style="background-color: ${task['category_color']}">${task['category']}</div>
+                <div class="category" style="background-color: ${task['category'][1]}">${task['category'][0]}</div>
                 <div class="title">${task['title']}</div>
                 <div>${task['description']}</div>
                 <div class="date">
@@ -202,6 +203,10 @@ function htmlTaskDetailView(task) {
                 <div class="editors">
                     <b>Assigned To:</b>
                     ${htmlAllEditors(task)}
+                </div>
+                <div class="subtasks">
+                    <b>Subtasks</b>
+                    ${htmlSubtasks(task)}
                 </div>
             </div>
             <div id="icons" class="icons">
@@ -356,7 +361,8 @@ function htmlAllEditors(task) {
     let htmlCodeTemp = '';
     editors = task['contacts'];
     for (let i = 0; i < editors.length; i++) {
-        const editor = editors[i];
+        const id = editors[i];
+        const editor = users[userArrayId].contacts[id.slice(-1)];
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
     }
@@ -558,3 +564,39 @@ function editTaskSetContacts(i) {
         renderEditorsInitials();
     }
 };
+
+function htmlSubtasks(task) {
+    let htmlAllSubtasks = '';
+    for (let i = 0; i < task['subtasks'].length; i++) {
+        const subtask = task['subtasks'][i];
+        htmlAllSubtasks += htmlSingleSubtaskDetail(subtask, i);
+    }
+    return htmlAllSubtasks;
+}
+
+function htmlSingleSubtaskDetail(text, i) {
+    return `
+        <div class="single-subtask" id="subtask${i}" onclick="toggleSetSubtask('subtask${i}')">
+            <label class="checkbox-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <div>${text}</div>
+        </div>
+    `;
+}
+
+function toggleSetSubtask(id) {
+    let tempSubtask = document.getElementById(id);
+    if (subtaskAlreadySelected(id)) {
+        tempSubtask.querySelector('input').checked = false;
+        selectedSubtasks.splice(selectedSubtasks.indexOf(id), 1);
+    } else {
+        tempSubtask.querySelector('input').checked = true;
+        selectedSubtasks.push(id);
+    }
+}
+
+function subtaskAlreadySelected(id) {
+    return selectedSubtasks.includes(id);
+}

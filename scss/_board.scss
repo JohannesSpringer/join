@@ -313,6 +313,65 @@ body {
                         width: 24px;
                         padding: 8px;
                         font-size: 16px;
+                        color: white;
+                    }
+                }
+            }
+
+            .subtasks {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 24px;
+
+                .single-subtask {
+                    padding-left: 56px;
+                    padding-right: 16px;
+                    width: fit-content;
+                    font-size: small;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $lightgray;
+                    }
+                }
+            }
+
+            .checkbox-container {
+                position: relative;
+                display: block;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+
+                input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+
+                    &:checked~.checkmark:after {
+                        display: block;
+                    }
+                }
+
+                .checkmark {
+                    position: absolute;
+                    left: -40px;
+                    top: 2px;
+                    height: 12px;
+                    width: 12px;
+                    border: 1px solid $darkblue;
+                    border-radius: 4px;
+
+                    &:after {
+                        width: 12px;
+                        height: 12px;
+                        clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
+                        background-color: black;
                     }
                 }
             }

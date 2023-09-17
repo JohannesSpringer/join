@@ -261,19 +261,19 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-
+    
         input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
             height: 0;
             width: 0;
-
+    
             &:checked~.checkmark:after {
                 display: block;
             }
         }
-
+    
         .checkmark {
             position: absolute;
             right: 0;
@@ -282,7 +282,7 @@
             width: 16px;
             border: 1px solid $darkblue;
             border-radius: 4px;
-
+    
             &:after {
                 width: 16px;
                 height: 16px;

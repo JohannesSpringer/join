@@ -1336,6 +1336,57 @@ body {
   width: 24px;
   padding: 8px;
   font-size: 16px;
+  color: white;
+}
+.board-detail-view .content .task-details .subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.board-detail-view .content .task-details .subtasks .single-subtask {
+  padding-left: 56px;
+  padding-right: 16px;
+  width: fit-content;
+  font-size: small;
+  cursor: pointer;
+}
+.board-detail-view .content .task-details .subtasks .single-subtask:hover {
+  background-color: #D1D1D1;
+}
+.board-detail-view .content .task-details .checkbox-container {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.board-detail-view .content .task-details .checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.board-detail-view .content .task-details .checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.board-detail-view .content .task-details .checkbox-container .checkmark {
+  position: absolute;
+  left: -40px;
+  top: 2px;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #2A3647;
+  border-radius: 4px;
+}
+.board-detail-view .content .task-details .checkbox-container .checkmark:after {
+  width: 12px;
+  height: 12px;
+  clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
+  background-color: black;
 }
 .board-detail-view .content .edit-task {
   font-size: 20px;
