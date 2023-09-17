@@ -1215,6 +1215,7 @@ body {
   height: 42px;
   color: #FFFFFF;
   border-radius: 100%;
+  border: 2px solid white;
   background-color: #2A3647;
 }
 .board-content .board-tasks .tasks .single-task .task-bottom .editors .contact-frame:nth-child(2) {
@@ -1225,6 +1226,7 @@ body {
 }
 .board-content .board-tasks .tasks .single-task .task-prio {
   display: flex;
+  justify-content: center;
 }
 .board-content .board-tasks .tasks .single-task .task-prio img {
   object-fit: contain;

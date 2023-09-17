@@ -29,11 +29,11 @@ async function loadData() {
     // categorys_board = JSON.parse(backend.getItem('categorys')) || [];
 }
 
-// save data to backend
-async function saveData(key, array) {
-    console.log('todo store data');
-    // await backend.setItem(key, JSON.stringify(array));
-};
+// // save data to backend
+// async function saveData(key, array) {
+//     console.log('todo store data');
+//     // await backend.setItem(key, JSON.stringify(array));
+// };
 
 
 function renderTasks(inputArray) {
@@ -54,7 +54,7 @@ function renderTasks(inputArray) {
 function renderSingleTask(task) {
     let destination = document.getElementById(`${checkTaskStatus(task)}`);//${task['category']}`);
     destination.innerHTML += `
-        <div draggable="true" onclick="openTaskDetailView(${task['task_id']})" ondragstart="startDragging(${task['task_id']})" class="single-task" id="task${task['task_id']}">
+        <div draggable="true" onclick="openTaskDetailView(${task['task-id']})" ondragstart="startDragging(${task['task-id']})" class="single-task" id="task${task['task-id']}">
             ${htmlTaskTopic(task)}
             ${htmlTaskTitle(task)}
             ${htmlTaskDescription(task)}
@@ -167,7 +167,7 @@ function htmlTaskPrio(task) {
 
 function openTaskDetailView(id) {
     editContacts.length = 0
-    let task = tasks.find((e => e['task_id'] == id));
+    let task = tasks.find((e => e['task-id'] == id));
     renderTaskDetailView(task);
     document.body.classList.add('overflow-hidden');
 }
@@ -329,7 +329,7 @@ function htmlCheckIcon(index) {
 
 async function saveTask(idx) {
     saveChangedDataLocal(idx);
-    await saveData('tasks', tasks);
+    await setItem('tasks', JSON.stringify(tasks));
     document.getElementById('taskDetailView').classList.add('display-none');
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
@@ -348,7 +348,7 @@ function saveChangedDataLocal(idx) {
 async function deleteTask(index) {
     tasks.splice(index, 1);
     document.getElementById('taskDetailView').classList.add('display-none');
-    await saveData('tasks', tasks);
+    await setItem('tasks', JSON.stringify(tasks));
     await initBoard();
 }
 
@@ -400,13 +400,13 @@ function allowDrop(ev) {
 /**
  * 
  * @param {String} status assign column in board - todo, progress, feedback, done
- * task_id != currentDraggedElement, therefore find Index of task in task with task_id
+ * task-id != currentDraggedElement, therefore find Index of task in task with task-id
  */
-function moveTo(status) {
-    let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
+async function moveTo(status) {
+    let taskIndex = tasks.findIndex((task) => task['task-id'] == currentDraggedElement);
     tasks[taskIndex]['status'] = status;
     markDraggableArea(``);
-    saveData('tasks', tasks);
+    await setItem('tasks', JSON.stringify(tasks));
     renderTasks(tasks);
 }
 

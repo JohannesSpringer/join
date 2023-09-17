@@ -173,6 +173,7 @@ body {
                             height: 42px;
                             color: #FFFFFF;
                             border-radius: 100%;
+                            border: 2px solid white;
                             background-color: $darkblue;
                         }
 
@@ -188,6 +189,7 @@ body {
 
                 .task-prio {
                     display: flex;
+                    justify-content: center;
 
                     img {
                         object-fit: contain;
