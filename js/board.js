@@ -214,6 +214,7 @@ function htmlTaskDetailView(task) {
                     <img src="./assets/img/delete.png">
                     Delete
                 </div>
+                <div class="vertical-line"></div>
                 <div class="edit-button" onclick="editTask(${tasks.indexOf(task)})">
                     <img src="./assets/img/edit.png">
                     Edit
