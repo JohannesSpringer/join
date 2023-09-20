@@ -579,7 +579,7 @@ function htmlSingleSubtaskDetail(text, i) {
         <div class="single-subtask" id="subtask${i}" onclick="toggleSetSubtask('subtask${i}')">
             <label class="checkbox-container">
                 <input type="checkbox">
-                <span class="checkmark"></span>
+                <span class="checkmark" onclick="toggleSetSubtask('subtask${i}')"></span>
             </label>
             <div>${text}</div>
         </div>

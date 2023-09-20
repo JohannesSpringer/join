@@ -353,7 +353,7 @@ body {
                     height: 0;
                     width: 0;
 
-                    &:checked~.checkmark:after {
+                    &:checked ~ .checkmark:after {
                         display: block;
                     }
                 }
@@ -374,6 +374,12 @@ body {
                         background-color: black;
                     }
                 }
+            }
+
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
             }
         }
 
