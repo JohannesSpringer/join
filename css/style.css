@@ -1345,11 +1345,13 @@ body {
   margin-top: 24px;
 }
 .board-detail-view .content .task-details .subtasks .single-subtask {
+  padding: 4px;
   padding-left: 56px;
   padding-right: 16px;
   width: fit-content;
   font-size: small;
   cursor: pointer;
+  border-radius: 8px;
 }
 .board-detail-view .content .task-details .subtasks .single-subtask:hover {
   background-color: #D1D1D1;

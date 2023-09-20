@@ -325,11 +325,13 @@ body {
                 margin-top: 24px;
 
                 .single-subtask {
+                    padding: 4px;
                     padding-left: 56px;
                     padding-right: 16px;
                     width: fit-content;
                     font-size: small;
                     cursor: pointer;
+                    border-radius: 8px;
 
                     &:hover {
                         background-color: $lightgray;
