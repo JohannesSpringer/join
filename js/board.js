@@ -5,6 +5,7 @@ let filteredTasks;
 let currentPrioEditTask;
 let editContacts = [];
 let selectedSubtasks = [];
+let menuContactsOpen;
 
 async function initBoard() {
     await loadData();
@@ -235,10 +236,10 @@ async function editTask(index) {
     content.innerHTML = htmlEditTask(tasks[index]);
     setPrioInEditTask(tasks[index]);
     renderEditorsInitials();
-    pushEditorstoContacts();
+    pushEditorsToContacts();
 };
 
-function pushEditorstoContacts() {
+function pushEditorsToContacts() {
     let edit_colors = [];
     editors.forEach(element => {
         if (element.name == current_user) element.name = 'You';
@@ -329,7 +330,7 @@ function htmlCheckIcon(index) {
     return `
         <div class="check-button" onclick="saveTask(${index})">
             OK
-            <img src="./assets/img/board-icons/check.png">
+            <img src="./assets/img/check.svg">
         </div>`;
 }
 

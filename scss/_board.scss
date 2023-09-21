@@ -329,7 +329,7 @@ body {
                     padding-left: 56px;
                     padding-right: 16px;
                     width: fit-content;
-                    font-size: small;
+                    font-size: 14px;
                     cursor: pointer;
                     border-radius: 8px;
 
@@ -355,7 +355,7 @@ body {
                     height: 0;
                     width: 0;
 
-                    &:checked ~ .checkmark:after {
+                    &:checked~.checkmark:after {
                         display: block;
                     }
                 }
@@ -363,7 +363,7 @@ body {
                 .checkmark {
                     position: absolute;
                     left: -40px;
-                    top: 2px;
+                    top: 3px;
                     height: 12px;
                     width: 12px;
                     border: 1px solid $darkblue;
@@ -389,6 +389,9 @@ body {
             font-size: 20px;
             font-weight: normal;
             padding: 48px 150px 48px 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
 
             .title {
                 display: flex;
@@ -525,6 +528,14 @@ body {
 
                 &:hover {
                     background-color: $lightblue;
+                }
+
+                img {
+                    width: 28px;
+
+                    &:hover {
+                        background-color: $lightblue;
+                    }
                 }
             }
         }

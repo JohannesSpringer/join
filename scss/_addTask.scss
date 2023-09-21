@@ -140,51 +140,91 @@
     }
 }
 
+.drop_down {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    margin-top: 4px;
+    padding: 8px 21px 8px 21px;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    input {
+        border: none;
+        width: 95%;
+        height: 22px;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
+
+.down_image {
+    position: absolute;
+    right: 16px;
+    top: 13px;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    padding: 2px;
+
+    &:hover {
+        background-color: #D1D1D1;
+    }
+}
+
 .task-category {
     display: flex;
     flex-direction: column;
     position: relative;
     @include reqInputText();
 
-    .drop_down {
-        display: flex;
-        align-items: center;
-        position: relative;
-        background-color: white;
-        margin-top: 4px;
-        padding: 8px 21px 8px 21px;
-        box-sizing: border-box;
-        border: 1px solid #D1D1D1;
-        border-radius: 10px;
+    // .drop_down {
+    //     display: flex;
+    //     align-items: center;
+    //     position: relative;
+    //     background-color: white;
+    //     margin-top: 4px;
+    //     padding: 8px 21px 8px 21px;
+    //     box-sizing: border-box;
+    //     border: 1px solid #D1D1D1;
+    //     border-radius: 10px;
 
-        &:hover {
-            cursor: pointer;
-        }
+    //     &:hover {
+    //         cursor: pointer;
+    //     }
 
-        input {
-            border: none;
-            width: 95%;
-            height: 22px;
+    //     input {
+    //         border: none;
+    //         width: 95%;
+    //         height: 22px;
 
-            &:focus-visible {
-                outline: none;
-            }
-        }
-    }
+    //         &:focus-visible {
+    //             outline: none;
+    //         }
+    //     }
+    // }
 
-    .down_image {
-        position: absolute;
-        right: 16px;
-        top: 13px;
-        width: 12px;
-        height: 12px;
-        border-radius: 100%;
-        padding: 2px;
+    // .down_image {
+    //     position: absolute;
+    //     right: 16px;
+    //     top: 13px;
+    //     width: 12px;
+    //     height: 12px;
+    //     border-radius: 100%;
+    //     padding: 2px;
 
-        &:hover {
-            background-color: #D1D1D1;
-        }
-    }
+    //     &:hover {
+    //         background-color: #D1D1D1;
+    //     }
+    // }
 
     .drop_down_open {
         margin-bottom: 0;
@@ -261,19 +301,19 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    
+
         input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
             height: 0;
             width: 0;
-    
+
             &:checked~.checkmark:after {
                 display: block;
             }
         }
-    
+
         .checkmark {
             position: absolute;
             right: 0;
@@ -282,7 +322,7 @@
             width: 16px;
             border: 1px solid $darkblue;
             border-radius: 4px;
-    
+
             &:after {
                 width: 16px;
                 height: 16px;
@@ -418,57 +458,57 @@
         justify-content: space-between;
         gap: 4px;
     }
+}
 
-    .prio_button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        gap: 8px;
-        width: 88px;
-        background-color: white;
-        border: 1px solid #D1D1D1;
-        border-radius: 10px;
+.prio_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 8px;
+    width: 88px;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    transition: 200ms;
+
+    &:hover {
         transition: 200ms;
-
-        &:hover {
-            transition: 200ms;
-            cursor: pointer;
-            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.41)
-        }
+        cursor: pointer;
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.41)
     }
+}
 
-    .prio_button img {
-        width: 20px;
-        height: 12.5px;
-    }
+.prio_button img {
+    width: 20px;
+    height: 12.5px;
+}
 
-    .prio_button_urgent {
-        color: white;
-        background-color: #FF3D00;
-    }
+.prio_button_urgent {
+    color: white;
+    background-color: #FF3D00;
+}
 
-    .prio_button_urgent img {
-        filter: brightness(0) invert(1);
-    }
+.prio_button_urgent img {
+    filter: brightness(0) invert(1);
+}
 
-    .prio_button_medium {
-        color: white;
-        background-color: #FFA800;
-    }
+.prio_button_medium {
+    color: white;
+    background-color: #FFA800;
+}
 
-    .prio_button_medium img {
-        filter: brightness(0) invert(1);
-    }
+.prio_button_medium img {
+    filter: brightness(0) invert(1);
+}
 
-    .prio_button_low {
-        color: white;
-        background-color: #7AE229;
-    }
+.prio_button_low {
+    color: white;
+    background-color: #7AE229;
+}
 
-    .prio_button_low img {
-        filter: brightness(0) invert(1);
-    }
+.prio_button_low img {
+    filter: brightness(0) invert(1);
 }
 
 .task-subtask {
@@ -497,7 +537,7 @@
         border-radius: 4px;
         display: flex;
         align-items: center;
-        
+
         &:hover {
             background-color: #ececec;
         }

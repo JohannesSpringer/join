@@ -65,8 +65,9 @@ function sortContacts() {
 function orderContacts() {
     sortContacts();
     orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
+    // move contacts to array with beginning letter
     for (let i = 0; i < contactsA.length; i++) {
-        contactsA[i].id = i;
+        // contactsA[i].id = i;
         let letter = contactsA[i].name.toLowerCase().toString();
         letter = letter.replace(/\u00e4/g, "ae").replace(/\u00fc/g, "ue").replace(/\u00f6/g, "oe");
         letter = letter.slice(0, 1);
@@ -155,7 +156,8 @@ function addContact() {
         email: email,
         phone: phone,
         initials: initials,
-        color: color
+        color: color,
+        id: getUnusedContactsId()
     }
 
     contactsA.push(singleContact);
@@ -164,6 +166,17 @@ function addContact() {
     showContact(contactsA.findIndex((elem) => {
         return elem == singleContact;
     }));
+}
+
+function getUnusedContactsId() {
+    let contactsFromCurrentUser = users[userArrayId].contacts;
+    let alreadyUsedIds = [];
+    contactsFromCurrentUser.forEach(u => {
+        alreadyUsedIds.push(u.id);
+    });
+    for (let i = 0; i < alreadyUsedIds.length + 1; i++) {
+        if (!alreadyUsedIds.includes(i)) return i;
+    }
 }
 
 /**
