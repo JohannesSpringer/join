@@ -242,13 +242,13 @@ async function editTask(index) {
 function pushEditorsToContacts() {
     let edit_colors = [];
     editors.forEach(element => {
-        if (element.name == current_user) element.name = 'You';
-        editContacts.push(element)
-        edit_colors.push(element.color)
+        // if (element.name == current_user) element.name = 'You';
+        editContacts.push(element);
+        // edit_colors.push(element.color);
     });
-    contacts.forEach(element => {
-        if(edit_colors.includes(element.color) == false) editContacts.push(element)
-    });
+    // contacts.forEach(element => {
+    //     if(edit_colors.includes(element.color) == false) editContacts.push(element);
+    // });
 };
 
 function renderEditorsInitials() {
@@ -522,33 +522,48 @@ function showTasknotFull() {
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
-        openMenu('editContacts', 'dropDownEditContacts');
+        openAssignedToMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = true;
         renderEditContacts();
     } else {
         closeMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = false;
     }
-};
+}
+
+function openAssignedToMenu(id1, id2) {
+    removeBorder(id2)
+    document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById(id2).classList.add('drop_down_open');
+    document.getElementById(id1).classList.add('scale-up-ver-top');
+    setTimeout(removeAnimationClassInBoard(), 200);
+}
+
+function removeAnimationClassInBoard() {
+    // document.getElementById(`categories`).classList.remove('scale-up-ver-top');
+    document.getElementById(`editContacts`).classList.remove('scale-up-ver-top');
+}
 
 function renderEditContacts() {
     document.getElementById('editContacts').innerHTML = ``;
     document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact()">Invite new contact</div>`;
     for (let i = 0; i < editContacts.length; i++) {
-            let userName = editContacts[i]['name'];
-            renderEditTaskContactsHTML(i, userName);
-            if (editors.includes(editContacts[i])) {
-                document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-            }
+        let userId = editContacts[i];
+        renderEditTaskContactsHTML(userId);
+        if (editors.includes(editContacts[i])) {
+            document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
+    }
 };
 
-function renderEditTaskContactsHTML(i, userName) {
+function renderEditTaskContactsHTML(id) {
     document.getElementById('editContacts').innerHTML += `
-            <div class="render_categorys" onclick="editTaskSetContacts(${i})">
-                ${userName}  
+            <div class="render_categorys" onclick="editTaskSetContacts(${id})">
+                ${userData.contacts.find((e) => {
+                    e.id = id; // todo 
+                })}  
                 <div class="custom_checkBox">
-                    <div id="Checkbox${i}"></div>
+                    <div id="Checkbox${id}"></div>
                 </div>
             </div>`;
 };
