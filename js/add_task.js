@@ -264,7 +264,7 @@ function renderContacts() {
     for (let i = 0; i < users[userArrayId].contacts.length; i++) {
         let contact = users[userArrayId].contacts[i];
         let initials = getInitialsFromName(contact.name);
-        renderContactsHTML(i, contact, initials);
+        renderContactsHTML(contact, initials);
     }
 }
 
@@ -288,7 +288,7 @@ function removeSelectedColors() {
 }
 
 function toggleSetContact(id) {
-    let cntctBox = document.getElementById(id);
+    let cntctBox = document.getElementById(`cntcts${id}`);
     if (contactAlreadySelected(id)) {
         cntctBox.classList.remove('background-darkblue');
         cntctBox.querySelector('input').checked = false;
@@ -433,16 +433,16 @@ function renderCategoriesHTML(i, cat, clr) {
     // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
 
-function renderContactsHTML(i, con, ini) {
+function renderContactsHTML(con, ini) {
     return document.getElementById('contacts').innerHTML += `
-        <div class="render_contacts" id="cntcts${i}" onclick="toggleSetContact('cntcts${i}')">
+        <div class="render_contacts" id="cntcts${con.id}" onclick="toggleSetContact('${con.id}')">
             <div class="contact-box">
                 <div class="contact-initials" style="background-color: ${con.color}">${ini}</div>
                 <div class="contact-name"">${con.name}</div>
             </div>
             <label class="checkbox-container">
                 <input type="checkbox">
-                <span class="checkmark" onclick="toggleSetContact('cntcts${i}')"></span>
+                <span class="checkmark" onclick="toggleSetContact('${con.id}')"></span>
             </label> 
         </div>`;
 }
