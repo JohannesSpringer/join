@@ -36,15 +36,19 @@ function renderAddTask() {
 }
 
 function checkFormFilled() {
-    formIsFilled = true;
-    inputIds.forEach(id => {
-        let elem = document.getElementById(id);
-        if (elem.value == '') formIsFilled = false;
-    });
-    if ( (selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
+    try {
+        formIsFilled = true;
+        inputIds.forEach(id => {
+            let elem = document.getElementById(id);
+            if (elem.value == '') formIsFilled = false;
+        });
+        if ((selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
             formIsFilled = false;
         }
-    toggleSubmitButton();
+        toggleSubmitButton();
+    } catch (e) {
+        if (!e instanceof TypeError) throw e;
+    }
 }
 
 /**
@@ -79,7 +83,7 @@ function getNewTaskData() {
         'category': selectedCategory,
         'subtasks': subtasks,
         'done': getStatiOfSubtasks(),
-        'task-id': findUnusedTaskIndex(), 
+        'task-id': findUnusedTaskIndex(),
         'status': 'todo'
     };
 }
@@ -102,7 +106,7 @@ function findUnusedTaskIndex() {
     tasks.forEach(task => {
         indexes.push(task['task-id']);
     });
-    indexes.sort(function(a, b){return a-b});
+    indexes.sort(function (a, b) { return a - b });
     if (indexes.length == 0) return 0;
     else {
         for (let i = 0; i < indexes.length; i++) if (!indexes.includes(i)) return i;
@@ -287,6 +291,11 @@ function removeSelectedColors() {
     });
 }
 
+/**
+ * This functions marks or unmark a contact in the dropdown list
+ * 
+ * @param {String} id - This is the id of the contact which should be marked/unmarked
+ */
 function toggleSetContact(id) {
     let cntctBox = document.getElementById(`cntcts${id}`);
     if (contactAlreadySelected(id)) {

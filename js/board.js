@@ -522,7 +522,7 @@ function showTasknotFull() {
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
-        openMenu('editContacts', 'dropDownEditContacts');
+        openAssignedToMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = true;
         renderContacts('editContacts');
         markAssignedContacts();
@@ -541,13 +541,13 @@ function markAssignedContacts() {
     });
 }
 
-// function openAssignedToMenu(id1, id2) {
-//     removeBorder(id2);
-//     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
-//     document.getElementById(id2).classList.add('drop_down_open');
-//     document.getElementById(id1).classList.add('scale-up-ver-top');
-//     setTimeout(removeAnimationClassInBoard(), 200);
-// }
+function openAssignedToMenu(id1, id2) {
+    removeBorder(id2);
+    document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById(id2).classList.add('drop_down_open');
+    document.getElementById(id1).classList.add('scale-up-ver-top');
+    setTimeout(removeAnimationClassInBoard(), 200);
+}
 
 function removeAnimationClassInBoard() {
     // document.getElementById(`categories`).classList.remove('scale-up-ver-top');

@@ -1523,6 +1523,9 @@ body {
 .board-detail-view .content .icons .check-button img:hover {
   background-color: #29ABE2;
 }
+.board-detail-view .content #editContacts {
+  top: 48px;
+}
 
 .overlay-add-task {
   position: absolute;
