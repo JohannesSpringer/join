@@ -240,7 +240,7 @@ async function editTask(index) {
 };
 
 function pushEditorsToContacts() {
-    let edit_colors = [];
+    // let edit_colors = [];
     editors.forEach(element => {
         // if (element.name == current_user) element.name = 'You';
         editContacts.push(element);
@@ -314,12 +314,12 @@ function htmlEditTask(task) {
             </div>
             <div class="editors">
                 Assigned to
-                <div id="contactBox">
+                <div id="contactBox" class="task-category">
                     <div class="drop_down" id="dropDownEditContacts" onclick="openEditTaskContacts()">
                         Select contacts to assign
                         <img class="down_image" src="assets/img/drop-down-arrow.png">
                     </div>
-                    <div id="editContacts" class="render_categorys_box"></div>
+                    <div id="editContacts" class="render_categories_box"></div>
                 </div>
                 <div id="initials" class="initials_box"></div>
             </div>
@@ -522,22 +522,32 @@ function showTasknotFull() {
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
-        openAssignedToMenu('editContacts', 'dropDownEditContacts');
+        openMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = true;
-        renderEditContacts();
+        renderContacts('editContacts');
+        markAssignedContacts();
+        // renderEditContacts();
     } else {
         closeMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = false;
     }
 }
 
-function openAssignedToMenu(id1, id2) {
-    removeBorder(id2)
-    document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
-    document.getElementById(id2).classList.add('drop_down_open');
-    document.getElementById(id1).classList.add('scale-up-ver-top');
-    setTimeout(removeAnimationClassInBoard(), 200);
+function markAssignedContacts() {
+    editors.forEach(cntct => {
+        let cntctBox = document.getElementById(`cntcts${cntct}`);
+        cntctBox.classList.add('background-darkblue');
+        cntctBox.querySelector('input').checked = true;
+    });
 }
+
+// function openAssignedToMenu(id1, id2) {
+//     removeBorder(id2);
+//     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
+//     document.getElementById(id2).classList.add('drop_down_open');
+//     document.getElementById(id1).classList.add('scale-up-ver-top');
+//     setTimeout(removeAnimationClassInBoard(), 200);
+// }
 
 function removeAnimationClassInBoard() {
     // document.getElementById(`categories`).classList.remove('scale-up-ver-top');
@@ -560,8 +570,8 @@ function renderEditTaskContactsHTML(id) {
     document.getElementById('editContacts').innerHTML += `
             <div class="render_categorys" onclick="editTaskSetContacts(${id})">
                 ${userData.contacts.find((e) => {
-                    e.id = id; // todo 
-                })}  
+                    return e.id == id; // todo  
+                }).name}  
                 <div class="custom_checkBox">
                     <div id="Checkbox${id}"></div>
                 </div>

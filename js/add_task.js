@@ -129,7 +129,7 @@ function toggleCategory() {
 function toggleContacts() {
     if (!menuOpenContacts) {
         openMenu('contacts', 'dropDownContacts')
-        renderContacts();
+        renderContacts('contacts');
         markAlreadySelectedContacts();
         createFilterOption();
         setFocus('findContact');
@@ -260,11 +260,11 @@ function renderCategories() {
     }
 }
 
-function renderContacts() {
+function renderContacts(id) {
     for (let i = 0; i < users[userArrayId].contacts.length; i++) {
         let contact = users[userArrayId].contacts[i];
         let initials = getInitialsFromName(contact.name);
-        renderContactsHTML(contact, initials);
+        renderContactsHTML(contact, initials, id);
     }
 }
 
@@ -433,8 +433,8 @@ function renderCategoriesHTML(i, cat, clr) {
     // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
 
-function renderContactsHTML(con, ini) {
-    return document.getElementById('contacts').innerHTML += `
+function renderContactsHTML(con, ini, id) {
+    return document.getElementById(id).innerHTML += `
         <div class="render_contacts" id="cntcts${con.id}" onclick="toggleSetContact('${con.id}')">
             <div class="contact-box">
                 <div class="contact-initials" style="background-color: ${con.color}">${ini}</div>
