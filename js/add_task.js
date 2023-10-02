@@ -35,6 +35,11 @@ function renderAddTask() {
     document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
+/**
+ * This functions checks all needed input fields to be filled in in a new task
+ * Error handling is set to avoid errors, when this function is called from another
+ * instance, where the input fields are not available
+ */
 function checkFormFilled() {
     try {
         formIsFilled = true;
