@@ -353,6 +353,7 @@ function changePrio(prio) {
 }
 
 function addSubtask() {
+    debugger;
     let inputSubtask = document.getElementById('taskSubtask');
     let valueSubtask = inputSubtask.value;
     if (valueSubtask) {

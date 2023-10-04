@@ -279,15 +279,15 @@ function editPrio(prio) {
 
 function htmlEditTask(task) {
     return `
-            <div class="title">
+            <div class="task-title">
                 Title
                 <input type="text" id="editTaskTitle" value="${task['title']}">
             </div>
-            <div class="description">
+            <div class="task-description">
                 Description
-                <textarea id="editTaskDescription" rows="5" required>${task['description']}</textarea>
+                <textarea id="taskDescription" rows="5" required>${task['description']}</textarea>
             </div>
-            <div class="date">
+            <div class="task-due-date">
                 Due date:
                 <input type="date" id="editTaskDueDate" value="${task['date']}">
             </div>
@@ -306,13 +306,6 @@ function htmlEditTask(task) {
                         Low
                         <img src="./assets/img/prioLow.png">
                     </div>
-                </div>
-            </div>
-            <div class="edit-status">
-                Status
-                <div class="status-checkbox">
-                    <input type="checkbox" id="setTodo">
-                    <label for="setTodo">Todo</label>
                 </div>
             </div>
             <div class="editors">
@@ -334,7 +327,7 @@ function htmlCheckIcon(index) {
     return `
         <div class="check-button" onclick="saveTask(${index})">
             OK
-            <img src="./assets/img/check.svg">
+            <img src="./assets/img/checkmark-white.svg">
         </div>`;
 }
 
@@ -349,7 +342,7 @@ async function saveTask(idx) {
 
 function saveChangedDataLocal(idx) {
     tasks[idx]['title'] = document.getElementById('editTaskTitle').value;
-    tasks[idx]['description'] = document.getElementById('editTaskDescription').value;
+    tasks[idx]['description'] = document.getElementById('taskDescription').value;
     tasks[idx]['date'] = document.getElementById('editTaskDueDate').value;
     tasks[idx]['prio'] = currentPrioEditTask;
     tasks[idx]['contacts'] = selectedContacts;
@@ -617,6 +610,7 @@ function editTaskSetContacts(i) {
 };
 
 function htmlSubtasks(task) {
+    subtasks = task.subtasks;
     let htmlAllSubtasks = '';
     for (let i = 0; i < task['subtasks'].length; i++) {
         const subtask = task['subtasks'][i];
