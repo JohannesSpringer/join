@@ -270,8 +270,8 @@ function renderCategories() {
 }
 
 function renderContacts(id) {
-    for (let i = 0; i < users[userArrayId].contacts.length; i++) {
-        let contact = users[userArrayId].contacts[i];
+    for (let i = 0; i < userData.contacts.length; i++) {
+        let contact = userData.contacts[i];
         let initials = getInitialsFromName(contact.name);
         renderContactsHTML(contact, initials, id);
     }

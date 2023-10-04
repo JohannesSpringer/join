@@ -131,12 +131,12 @@ function htmlTaskDivBottom(task) {
  */
 function htmlTaskEditors(task) {
     let htmlCodeTemp = '';
-    editors = task['contacts'];
-    for (let i = 0; i < editors.length; i++) {
-        const editor = editors[i];
+    selectedContacts = task['contacts'];
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const editor = selectedContacts[i];
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         if (moreThan2Editors(i)) {
-            htmlCodeTemp += htmlTaskLeftOverEditors(editors);
+            htmlCodeTemp += htmlTaskLeftOverEditors(selectedContacts);
             break;
         }
         htmlCodeTemp += htmlTaskSingleEditor(editor);
@@ -235,6 +235,7 @@ async function editTask(index) {
     content.innerHTML = htmlEditTask(tasks[index]);
     setPrioInEditTask(tasks[index]);
     renderEditorsInitials();
+    showInitialsOfAssignedContacts();
     // pushEditorsToContacts();
 };
 
@@ -253,12 +254,12 @@ function pushEditorsToContacts() {
 
 function renderEditorsInitials() {
     document.getElementById('initials').innerHTML = '';
-    for (let i = 0; i < editors.length; i++) {
-        let initial = editors[i]['initials'];
-        let bgrColor = editors[i]['color'];
+    for (let i = 0; i < selectedContacts.length; i++) {
+        let initial = userData.contacts.find((e) => {return e.id == selectedContacts[i]}).initials;
+        let bgrColor = userData.contacts.find((e) => {return e.id == selectedContacts[i]}).color;
         document.getElementById('initials').innerHTML += `
         <div class="initials" style="background-color: ${bgrColor};">
-        ${initial}
+            ${initial}
         </div>`;
     }
 }
@@ -348,7 +349,7 @@ function saveChangedDataLocal(idx) {
     tasks[idx]['description'] = document.getElementById('editTaskDescription').value;
     tasks[idx]['date'] = document.getElementById('editTaskDueDate').value;
     tasks[idx]['prio'] = currentPrioEditTask;
-    tasks[idx]['contacts'] = editors;
+    tasks[idx]['contacts'] = selectedContacts;
 }
 
 
@@ -361,9 +362,9 @@ async function deleteTask(index) {
 
 function htmlAllEditors(task) {
     let htmlCodeTemp = '';
-    editors = task['contacts'];
-    for (let i = 0; i < editors.length; i++) {
-        const id = editors[i];
+    selectedContacts = task['contacts'];
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const id = selectedContacts[i];
         const editor = users[userArrayId].contacts[id.slice(-1)];
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
@@ -500,7 +501,7 @@ async function addTask() {
     await fillTaskjJson();
     task = {};
     contacts = {};
-    editors = {};
+    selectedContacts = {};
     clearAll();
     closeOverlay();
     initBoard();
@@ -547,7 +548,7 @@ function closeMenu() {
 }
 
 function markAssignedContacts() {
-    editors.forEach(cntct => {
+    selectedContacts.forEach(cntct => {
         let cntctBox = document.getElementById(`cntcts${cntct}`);
         cntctBox.classList.add('background-darkblue');
         cntctBox.querySelector('input').checked = true;
@@ -555,16 +556,11 @@ function markAssignedContacts() {
 }
 
 function showInitialsOfAssignedContacts() {
-    updateEditors();
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
-    editors.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${users[userArrayId].contacts[cntct].color}">${getInitialsFromCntct(cntct)}</div>`;
+    selectedContacts.forEach(cntct => {
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${userData.contacts.find((e) => {return e.id == cntct}).color}">${userData.contacts.find((e) => {return e.id == cntct}).initials}</div>`;
     });
-}
-
-function updateEditors() {
-    
 }
 
 function openAssignedToMenu(id1, id2) {
@@ -586,7 +582,7 @@ function renderEditContacts() {
     for (let i = 0; i < editContacts.length; i++) {
         let userId = editContacts[i];
         renderEditTaskContactsHTML(userId);
-        if (editors.includes(editContacts[i])) {
+        if (selectedContacts.includes(editContacts[i])) {
             document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
     }
@@ -605,15 +601,15 @@ function renderEditTaskContactsHTML(id) {
 };
 
 function editTaskSetContacts(i) {
-    let index = editors.indexOf(editContacts[i]);
+    let index = selectedContacts.indexOf(editContacts[i]);
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         if (editContacts[i]['name'] == 'You') editContacts[i]['name'] = current_user;
-        editors.push(editContacts[i]);
+        selectedContacts.push(editContacts[i]);
         renderEditorsInitials();
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
-        editors.splice(index, 1);
+        selectedContacts.splice(index, 1);
         renderEditorsInitials();
     }
 };
