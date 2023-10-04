@@ -344,17 +344,17 @@
         gap: 12px;
     }
 
-    .contact-initials {
-        border: 1px solid white;
-        border-radius: 100%;
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-    }
+    // .contact-initials {
+    //     border: 1px solid white;
+    //     border-radius: 100%;
+    //     width: 32px;
+    //     height: 32px;
+    //     font-size: 12px;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     color: white;
+    // }
 
     .category-name-box {
         position: relative;
@@ -423,6 +423,23 @@
         gap: 8px;
         transform: translateY(-30px);
     }
+}
+
+.contact-initials {
+    border: 1px solid white;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.initials_box {
+    display: flex;
+    gap: 8px;
 }
 
 .add-subtask-img {

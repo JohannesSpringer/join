@@ -43,7 +43,6 @@ function renderTasks(inputArray) {
 
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
-        // editors = task['contacts'];
         renderSingleTask(task);
     }
 }
@@ -236,7 +235,7 @@ async function editTask(index) {
     content.innerHTML = htmlEditTask(tasks[index]);
     setPrioInEditTask(tasks[index]);
     renderEditorsInitials();
-    pushEditorsToContacts();
+    // pushEditorsToContacts();
 };
 
 function pushEditorsToContacts() {
@@ -533,12 +532,38 @@ function openEditTaskContacts() {
     }
 }
 
+function closeMenu() {
+    document.getElementById('editContacts').innerHTML = '';
+    document.getElementById('dropDownEditContacts').style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById('dropDownEditContacts').classList.remove('drop_down_open');
+    document.getElementById('dropDownEditContacts').innerHTML = `
+        Select contacts to assign
+        <img class="down_image" src="./assets/img/drop-down-arrow.png">`;
+    document.getElementById('editContacts').style.borderBottom = `0`;
+    document.getElementById(`editContacts`).classList.remove('scale-down-ver-top');
+    showInitialsOfAssignedContacts();
+    document.getElementById('initials').style.display = 'flex';
+}
+
 function markAssignedContacts() {
     editors.forEach(cntct => {
         let cntctBox = document.getElementById(`cntcts${cntct}`);
         cntctBox.classList.add('background-darkblue');
         cntctBox.querySelector('input').checked = true;
     });
+}
+
+function showInitialsOfAssignedContacts() {
+    updateEditors();
+    let divInitials = document.getElementById('initials');
+    divInitials.innerHTML = '';
+    editors.forEach(cntct => {
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${users[userArrayId].contacts[cntct].color}">${getInitialsFromCntct(cntct)}</div>`;
+    });
+}
+
+function updateEditors() {
+    
 }
 
 function openAssignedToMenu(id1, id2) {
