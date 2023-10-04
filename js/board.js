@@ -238,6 +238,7 @@ async function editTask(index) {
     // pushEditorsToContacts();
 };
 
+// todo delete function
 function pushEditorsToContacts() {
     // let edit_colors = [];
     editors.forEach(element => {
