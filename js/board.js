@@ -228,11 +228,13 @@ async function editTask(index) {
     edit_active = true;
     let content = document.getElementById('content');
     let icons = document.getElementById('icons');
+    // subtasks = task[index];
     content.innerHTML = '';
     content.classList.remove('task-details');
     content.classList.add('edit-task');
     icons.innerHTML = htmlCheckIcon(index);
     content.innerHTML = htmlEditTask(tasks[index]);
+    renderSubtasksInAddTask();
     setPrioInEditTask(tasks[index]);
     renderEditorsInitials();
     showInitialsOfAssignedContacts();
@@ -255,8 +257,8 @@ function pushEditorsToContacts() {
 function renderEditorsInitials() {
     document.getElementById('initials').innerHTML = '';
     for (let i = 0; i < selectedContacts.length; i++) {
-        let initial = userData.contacts.find((e) => {return e.id == selectedContacts[i]}).initials;
-        let bgrColor = userData.contacts.find((e) => {return e.id == selectedContacts[i]}).color;
+        let initial = getIndexOfArray(userData.contacts, selectedContacts[i]).initials;
+        let bgrColor = getIndexOfArray(userData.contacts, selectedContacts[i]).color;
         document.getElementById('initials').innerHTML += `
         <div class="initials" style="background-color: ${bgrColor};">
             ${initial}
@@ -324,6 +326,7 @@ function htmlEditTask(task) {
                 </div>
                 <div id="initials" class="initials_box"></div>
             </div>
+            ${genHtmlInputSubtasks()}
     `;
 }
 
@@ -365,7 +368,8 @@ function htmlAllEditors(task) {
     selectedContacts = task['contacts'];
     for (let i = 0; i < selectedContacts.length; i++) {
         const id = selectedContacts[i];
-        const editor = users[userArrayId].contacts[id.slice(-1)];
+        // const editor = users[userArrayId].contacts[id.slice(-1)];
+        const editor = getIndexOfArray(userData.contacts, id);
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
     }
@@ -559,7 +563,7 @@ function showInitialsOfAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
     selectedContacts.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${userData.contacts.find((e) => {return e.id == cntct}).color}">${userData.contacts.find((e) => {return e.id == cntct}).initials}</div>`;
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getIndexOfArray(userData.contacts, cntct).initials}</div>`;
     });
 }
 
@@ -591,9 +595,7 @@ function renderEditContacts() {
 function renderEditTaskContactsHTML(id) {
     document.getElementById('editContacts').innerHTML += `
             <div class="render_categorys" onclick="editTaskSetContacts(${id})">
-                ${userData.contacts.find((e) => {
-                    return e.id == id; // todo  
-                }).name}  
+                ${getIndexOfArray(userData.contacts, id).name}  
                 <div class="custom_checkBox">
                     <div id="Checkbox${id}"></div>
                 </div>

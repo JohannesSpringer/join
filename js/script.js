@@ -271,3 +271,9 @@ function getRandomColor() {
 function toggleDNone(id) {
     document.getElementById(`${id}`).classList.toggle('d-none');
 }
+
+function getIndexOfArray(a, s) {
+    return a.find((e) => {
+        return e.id == s
+    });
+}
