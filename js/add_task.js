@@ -243,7 +243,11 @@ function showInitialsFromAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
     selectedContacts.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getInitialsFromCntct(cntct)}</div>`;
+        if (cntct == -1) {
+            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${userData.color}">${getInitialsFromName(userData.name)}</div>`;
+        } else {
+            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getInitialsFromCntct(cntct)}</div>`;
+        }
     });
 }
 
@@ -262,6 +266,9 @@ function renderCategories() {
 }
 
 function renderContacts(id) {
+    userData.id = -1;
+    userData.initials = getInitialsFromName(userData.name);
+    renderContactsHTML(userData, userData.initials, id);
     for (let i = 0; i < userData.contacts.length; i++) {
         let contact = userData.contacts[i];
         let initials = getInitialsFromName(contact.name);
@@ -443,13 +450,18 @@ function renderContactsHTML(con, ini, id) {
         <div class="render_contacts" id="cntcts${con.id}" onclick="toggleSetContact('${con.id}')">
             <div class="contact-box">
                 <div class="contact-initials" style="background-color: ${con.color}">${ini}</div>
-                <div class="contact-name"">${con.name}</div>
+                <div class="contact-name"">${con.name}${isLoggedInUser(con)}</div>
             </div>
             <label class="checkbox-container">
                 <input type="checkbox">
                 <span class="checkmark" onclick="toggleSetContact('${con.id}')"></span>
             </label> 
         </div>`;
+}
+
+function isLoggedInUser(usr) {
+    if (usr.id == -1) return ' (You)';
+    else return '';
 }
 
 function genHtmlInputTitle() {

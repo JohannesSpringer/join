@@ -44,6 +44,7 @@ function renderTasks(inputArray) {
 
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
+        console.log(task);
         renderSingleTask(task);
     }
 }
@@ -543,7 +544,7 @@ function markDoneSubtasks() {
         if (subTask) {
             let subtaskElem = document.getElementById(`subtask${i}`);
             subtaskElem.querySelector('input').checked = true;
-        }        
+        }
     }
 }
 
@@ -572,7 +573,11 @@ function showInitialsOfAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
     selectedContacts.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getIndexOfArray(userData.contacts, cntct).initials}</div>`;
+        if (cntct == -1) {
+            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${userData.color}">${getInitialsFromName(userData.name)}</div>`;
+        } else {
+            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getIndexOfArray(userData.contacts, cntct).initials}</div>`;
+        }
     });
 }
 

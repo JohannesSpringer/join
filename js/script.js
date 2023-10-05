@@ -61,7 +61,7 @@ async function userLogin() {
  * will be logged in
  */
 async function checkValidCredentials() {
-    if ( (curUser = await userIsExisting()) && await isPasswordValid(loginPassword.value, curUser.password) ) {
+    if ((curUser = await userIsExisting()) && await isPasswordValid(loginPassword.value, curUser.password)) {
         handleLoginSuccess(loginEmail.value, loginPassword.value, rememberCheckbox.checked, curUser);
     } else {
         handleLoginFailure();
@@ -161,7 +161,7 @@ function highlightSelectedMenuItem() {
     const bgAddTask = document.getElementById('bg-add-task');
     const bgContacts = document.getElementById('bg-contacts');
     const bgLegalNotice = document.getElementById('bg-legal-notice');
-    
+
     switch (selectedMenuItem) {
         case 'summary':
             bgSummary.classList.add('highlight-nav');
@@ -272,8 +272,20 @@ function toggleDNone(id) {
     document.getElementById(`${id}`).classList.toggle('d-none');
 }
 
+/**
+ * This function search the correct user in the contacts, this can be the 
+ * current user too.
+ * 
+ * @param {Array} a - Array with users
+ * @param {Integer} s - User ID or contact ID to find in array 
+ * @returns - User with the User ID / contact ID
+ */
 function getIndexOfArray(a, s) {
-    return a.find((e) => {
-        return e.id == s
-    });
+    if (s == -1) {
+        return userData;
+    } else {
+        return a.find((e) => {
+            return e.id == s;
+        });
+    }
 }
