@@ -668,6 +668,6 @@ async function saveDoneSubtasks() {
     selectedSubtasks.forEach(subT => {
         openedTask['done'][subT] = true;
     });
-    // calcProgress(openedTask);
+    await setItem('tasks', JSON.stringify(tasks));
     renderTasks(tasks);
 }
