@@ -136,7 +136,7 @@ async function getCurrentUserData() {
 }
 
 function delContact(userId) {
-    contactsA.splice(userId, 1);
+    contactsA.splice(contactsA.indexOf(getIndexOfArray(contactsA, userId)), 1);
     animationAndPushToServer();  
     document.getElementById('contactDetails').innerHTML = '';
     let overlay = document.getElementById('overlayContent');
@@ -281,9 +281,9 @@ function showDetails(id) {
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
         <div class="contact-details-head">
-        <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
+        <span class="list-contact-frame" style="background-color: ${getIndexOfArray(contactsA, id).color}">${getIndexOfArray(contactsA, id).initials}</span>
         <div class="contactInfo">
-            <span class="contact-name">${contactsA[id].name}</span>
+            <span class="contact-name">${getIndexOfArray(contactsA, id).name}</span>
             <div class="contact-changes">
                 <div class="contact-edit">
                     <img src="./assets/img/edit.png" alt="">
@@ -302,11 +302,11 @@ function showDetails(id) {
         <div class="contact-info-container">
             <div class="contact-info-segment">
                 <span class="contact-info-title">Email</span>
-                <a href="mailto:${contactsA[id].email}">${contactsA[id].email}</a>
+                <a href="mailto:${getIndexOfArray(contactsA, id).email}">${getIndexOfArray(contactsA, id).email}</a>
             </div>
             <div class="contact-info-segment">
                 <span class="contact-info-title">Phone</span>
-                <a href="tel:${contactsA[id].phone}">${contactsA[id].phone}</a>
+                <a href="tel:${getIndexOfArray(contactsA, id).phone}">${getIndexOfArray(contactsA, id).phone}</a>
             </div>
         </div>
         <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`;
@@ -368,9 +368,9 @@ function showEditContact(id) {
 <div class="overlay-right">
     <img src="./assets/img/contacts-icons/userIcon.png" alt="">    
     <form action="#" onsubmit="editContact(${userId}); return false">
-        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contactsA[id].name}">
-        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contactsA[id].email}">
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
+        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${getIndexOfArray(contactsA, id).name}">
+        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${getIndexOfArray(contactsA, id).email}">
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required value="${getIndexOfArray(contactsA, id).phone}">
         <div class="buttons">
             <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
             <button type="submit" class="add-contact-btn" >

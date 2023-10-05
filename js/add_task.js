@@ -32,7 +32,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
     document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
-    document.getElementById('reqTaskTitle').style.color = 'red';
+    // document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
 /**
@@ -87,18 +87,10 @@ function getNewTaskData() {
         'prio': currentPrio,
         'category': selectedCategory,
         'subtasks': subtasks,
-        'done': getStatiOfSubtasks(),
+        'done': new Array(subtasks.length).fill(false),
         'task-id': findUnusedTaskIndex(),
         'status': 'todo'
     };
-}
-
-function getStatiOfSubtasks() {
-    let statiSubtask = [];
-    subtasks.forEach(subt => {
-        statiSubtask.push(false);
-    });
-    return statiSubtask;
 }
 
 /**
@@ -251,12 +243,12 @@ function showInitialsFromAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
     selectedContacts.forEach(cntct => {
-        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${users[userArrayId].contacts[cntct.slice(-1)].color}">${getInitialsFromCntct(cntct)}</div>`;
+        divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getInitialsFromCntct(cntct)}</div>`;
     });
 }
 
 function getInitialsFromCntct(cntct) {
-    let name = users[userArrayId].contacts[cntct.slice(-1)].name;
+    let name = getIndexOfArray(userData.contacts, cntct).name;
     return getInitialsFromName(name);
 }
 
@@ -353,7 +345,6 @@ function changePrio(prio) {
 }
 
 function addSubtask() {
-    debugger;
     let inputSubtask = document.getElementById('taskSubtask');
     let valueSubtask = inputSubtask.value;
     if (valueSubtask) {
@@ -425,7 +416,6 @@ async function saveAndDisplayNewCategory() {
 }
 
 function setCategory(ctgry, clr) {
-    // debugger;
     toggleCategory();
     selectedCategory = [ctgry, clr];
     document.getElementById('dropDownCategory').innerHTML = `

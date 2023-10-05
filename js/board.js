@@ -3,6 +3,7 @@ let editors;
 // let categorys_board;
 let filteredTasks;
 let currentPrioEditTask;
+let openedTask;
 let editContacts = [];
 let selectedSubtasks = [];
 let menuContactsOpen;
@@ -145,8 +146,8 @@ function htmlTaskEditors(task) {
 }
 
 function htmlTaskSingleEditor(editor) {
-    return `<div class="contact-frame" style="background-color: ${users[userArrayId].contacts[editor.slice(-1)].color}">
-                ${users[userArrayId].contacts[editor.slice(-1)].initials}
+    return `<div class="contact-frame" style="background-color: ${getIndexOfArray(userData.contacts, editor).color}">
+                ${getIndexOfArray(userData.contacts, editor).initials}
             </div>`;
 }
 
@@ -169,8 +170,10 @@ function htmlTaskPrio(task) {
 function openTaskDetailView(id) {
     editContacts.length = 0
     let task = tasks.find((e => e['task-id'] == id));
+    openedTask = task;
     renderTaskDetailView(task);
     document.body.classList.add('overflow-hidden');
+    markDoneSubtasks();
 }
 
 function renderTaskDetailView(task) {
@@ -531,6 +534,19 @@ function openEditTaskContacts() {
     }
 }
 
+/**
+ * This function checks the already done subtasks
+ */
+function markDoneSubtasks() {
+    for (let i = 0; i < openedTask.done.length; i++) {
+        const subTask = openedTask.done[i];
+        if (subTask) {
+            let subtaskElem = document.getElementById(`subtask${i}`);
+            subtaskElem.querySelector('input').checked = true;
+        }        
+    }
+}
+
 function closeMenu() {
     document.getElementById('editContacts').innerHTML = '';
     document.getElementById('dropDownEditContacts').style.borderBottom = `1px solid #D1D1D1`;
@@ -635,13 +651,23 @@ function toggleSetSubtask(id) {
     let tempSubtask = document.getElementById(id);
     if (subtaskAlreadySelected(id)) {
         tempSubtask.querySelector('input').checked = false;
-        selectedSubtasks.splice(selectedSubtasks.indexOf(id), 1);
+        selectedSubtasks.splice(selectedSubtasks.indexOf(id.slice(-1)), 1);
     } else {
         tempSubtask.querySelector('input').checked = true;
-        selectedSubtasks.push(id);
+        selectedSubtasks.push(id.slice(-1));
     }
+    saveDoneSubtasks();
 }
 
 function subtaskAlreadySelected(id) {
-    return selectedSubtasks.includes(id);
+    return selectedSubtasks.includes(id.slice(-1));
+}
+
+async function saveDoneSubtasks() {
+    openedTask['done'].fill(false);
+    selectedSubtasks.forEach(subT => {
+        openedTask['done'][subT] = true;
+    });
+    // calcProgress(openedTask);
+    renderTasks(tasks);
 }
