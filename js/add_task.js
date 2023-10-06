@@ -13,6 +13,7 @@ let selectedCategory = [];
 let selectedContacts = [];
 let currentPrio;
 let subtasks = [];
+let subtaskStatus = [];
 let formIsFilled = false;
 let inputIds = [
     'taskTitle',
@@ -356,6 +357,7 @@ function addSubtask() {
     let valueSubtask = inputSubtask.value;
     if (valueSubtask) {
         subtasks.push(inputSubtask.value);
+        subtaskStatus.push(false);
         renderSubtasksInAddTask();
     }
     inputSubtask.value = '';
@@ -369,11 +371,13 @@ function editSubtask(id, tsk) {
 
 function saveSubtask(id) {
     subtasks[id.slice(-1)] = document.getElementById(id).value;
+    // subtaskStatus.splice(id.slice(-1), 1);
     renderSubtasksInAddTask();
 }
 
 function deleteSubtask(id) {
     subtasks.splice(id.slice(-1), 1);
+    subtaskStatus.splice(id.slice(-1), 1);
     renderSubtasksInAddTask();
 }
 

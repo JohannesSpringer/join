@@ -44,7 +44,6 @@ function renderTasks(inputArray) {
 
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
-        console.log(task);
         renderSingleTask(task);
     }
 }
@@ -172,9 +171,22 @@ function openTaskDetailView(id) {
     editContacts.length = 0
     let task = tasks.find((e => e['task-id'] == id));
     openedTask = task;
+    getTaskDataToLocal();
     renderTaskDetailView(task);
     document.body.classList.add('overflow-hidden');
     markDoneSubtasks();
+}
+
+/**
+ * This function stores the subtask stati to global variables
+ */
+function getTaskDataToLocal() {
+    subtaskStatus = openedTask.done;
+    selectedSubtasks = [];
+    for (let i = 0; i < openedTask.done.length; i++) {
+        const subTaskStat = openedTask.done[i];
+        if (subTaskStat) selectedSubtasks.push(`${i}`);
+    }
 }
 
 function renderTaskDetailView(task) {
@@ -471,6 +483,8 @@ function closeDetailView() {
     document.getElementById('taskDetailView').classList.add('display-none');
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
+    renderTasks(tasks);
+    console.log(selectedSubtasks);
 }
 
 function noClose(event) {
@@ -653,6 +667,7 @@ function htmlSingleSubtaskDetail(text, i) {
 }
 
 function toggleSetSubtask(id) {
+    // debugger;
     let tempSubtask = document.getElementById(id);
     if (subtaskAlreadySelected(id)) {
         tempSubtask.querySelector('input').checked = false;
@@ -662,6 +677,7 @@ function toggleSetSubtask(id) {
         selectedSubtasks.push(id.slice(-1));
     }
     saveDoneSubtasks();
+    console.log(selectedSubtasks);
 }
 
 function subtaskAlreadySelected(id) {
