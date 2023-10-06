@@ -46,6 +46,14 @@ function goToContacts() {
     localStorage.setItem('selectedMenuItem', 'contacts');
 }
 
+/**
+ * This function changes the current shown webpage to contacts.html
+ */
+function goToLegalNotice() {
+    window.location.href = "legal_notice.html";
+    localStorage.setItem('selectedMenuItem', 'legalNotice');
+}
+
 
 /**
  * This functions loads all users from backend and checks if the current user
