@@ -1,4 +1,26 @@
 let rememberMeChecked;
+let previousSelectedMenuItems = [];
+
+async function goBackToPrevious() {
+    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems = shortenArrayTo2Elements(previousSelectedMenuItems);
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
+    window.location.href = previousSelectedMenuItems[0];
+    localStorage.setItem('selectedMenuItem', 'summary');
+}
+
+/**
+ * This function shortens an array to his last 2 elements and returns this
+ * 
+ * @param {Array} arr 
+ * @returns Array with only the last 2 elements of the input array
+ */
+function shortenArrayTo2Elements(arr) {
+    while (arr.length > 2) {
+        arr.shift();
+    }
+    return arr;
+}
 
 /**
  * This function changes the current shown webpage to sign_up.html
@@ -18,6 +40,9 @@ function goToIndex() {
  * This function changes the current shown webpage to summary.html
  */
 function goToSummary() {
+    previousSelectedMenuItems = JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('summary.html');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "summary.html";
     localStorage.setItem('selectedMenuItem', 'summary');
 }
@@ -26,6 +51,9 @@ function goToSummary() {
  * This function changes the current shown webpage to summary.html
  */
 function goToAddTask() {
+    previousSelectedMenuItems = JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('add_task.html');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "add_task.html";
     localStorage.setItem('selectedMenuItem', 'addTask');
 }
@@ -34,6 +62,9 @@ function goToAddTask() {
  * This function changes the current shown webpage to board.html
  */
 function goToBoard() {
+    previousSelectedMenuItems = JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('board.html');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "board.html";
     localStorage.setItem('selectedMenuItem', 'board');
 }
@@ -42,6 +73,9 @@ function goToBoard() {
  * This function changes the current shown webpage to contacts.html
  */
 function goToContacts() {
+    previousSelectedMenuItems = JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('contacts.html');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "contacts.html";
     localStorage.setItem('selectedMenuItem', 'contacts');
 }
@@ -50,6 +84,9 @@ function goToContacts() {
  * This function changes the current shown webpage to contacts.html
  */
 function goToLegalNotice() {
+    previousSelectedMenuItems = JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('legal_notice.html');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "legal_notice.html";
     localStorage.setItem('selectedMenuItem', 'legalNotice');
 }
