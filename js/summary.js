@@ -126,7 +126,7 @@ function genHtmlToSite() {
             <div class="seperator" style="display: none;"></div>
         </div>
         <div class="task">
-            <a href="board.html" class="task_sub">
+            <a class="task_sub" onclick="goToBoard()">
                 <span class="count">
                     ${taskInBoard}
                 </span>
@@ -135,7 +135,7 @@ function genHtmlToSite() {
                     Board
                 </span>
             </a>
-            <a href="board.html" class="task_sub">
+            <a class="task_sub" onclick="goToBoard()">
                 <span class="count">
                     ${inProgessCount}
                 </span>
@@ -144,7 +144,7 @@ function genHtmlToSite() {
                     Progress
                 </span>
             </a>
-            <a href="board.html" class="task_sub">
+            <a class="task_sub" onclick="goToBoard()">
                 <span class="count">
                     ${awaitFeedbackCount}
                 </span>
@@ -154,7 +154,7 @@ function genHtmlToSite() {
                 </span>
             </a>
         </div>
-        <a href="board.html" class="prio_date">
+        <a class="prio_date" onclick="goToBoard()">
             <div class="prio_date_sub">
                 <img src="assets/img/urgent.svg" alt="">
                 <div class="todo">
@@ -177,7 +177,7 @@ function genHtmlToSite() {
             </div>
         </a>
         <div class="todo_done">
-            <a href="board.html" class="todo_done_sub">
+            <a class="todo_done_sub" onclick="goToBoard()">
                 <img src="assets/img/pencil.svg" alt="">
                 <div class="todo">
                     <span class="count">
@@ -188,7 +188,7 @@ function genHtmlToSite() {
                     </span>
                 </div>
             </a>
-            <a href="board.html" class="todo_done_sub">
+            <a class="todo_done_sub" onclick="goToBoard()">
                 <img src="assets/img/check.svg" alt="">
                 <div class="todo">
                     <span class="count">

@@ -1254,8 +1254,10 @@ body {
   overflow: auto;
 }
 .board-detail-view .content .close {
-  position: absolute;
-  right: 40px;
+  position: sticky;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
   top: 40px;
   cursor: pointer;
   z-index: 20;
@@ -1469,9 +1471,10 @@ body {
   right: 16px;
 }
 .board-detail-view .content .icons {
-  position: absolute;
+  position: sticky;
   display: flex;
-  right: 40px;
+  justify-content: flex-end;
+  padding-right: 40px;
   bottom: 40px;
   cursor: pointer;
   z-index: 20;
@@ -1525,6 +1528,20 @@ body {
 }
 .board-detail-view .content #editContacts {
   top: 48px;
+}
+.board-detail-view .content::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.board-detail-view .content::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #A8A8A8;
+}
+.board-detail-view .content::-webkit-scrollbar-track-piece:start {
+  margin-top: 32px;
+}
+.board-detail-view .content::-webkit-scrollbar-track-piece:end {
+  margin-bottom: 32px;
 }
 
 .overlay-add-task {

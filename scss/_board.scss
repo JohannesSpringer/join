@@ -222,8 +222,10 @@ body {
         overflow: auto;
 
         .close {
-            position: absolute;
-            right: 40px;
+            position: sticky;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 40px;
             top: 40px;
             cursor: pointer;
             z-index: 20;
@@ -475,9 +477,10 @@ body {
         }
 
         .icons {
-            position: absolute;
+            position: sticky;
             display: flex;
-            right: 40px;
+            justify-content: flex-end;
+            padding-right: 40px;
             bottom: 40px;
             cursor: pointer;
             z-index: 20;
@@ -542,6 +545,24 @@ body {
 
         #editContacts {
             top: 48px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 7px;
+            background: #A8A8A8;
+        }
+
+        &::-webkit-scrollbar-track-piece:start {
+            margin-top: 32px;
+        }
+
+        &::-webkit-scrollbar-track-piece:end {
+            margin-bottom: 32px;
         }
     }
 }
