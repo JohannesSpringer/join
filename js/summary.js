@@ -28,6 +28,8 @@ function greet() {
  */
 async function init() {
     await loadTasks();
+    await loadUsers();
+    getCurrentUserData();
     user_name = current_user['name'];
     if (tasks !== null) {
         console.log(tasks);
@@ -39,6 +41,7 @@ async function init() {
         dateDeadline(dates);
     }
     genHtmlToSite();
+    displayInitialsFromCurrentUser();
 }
 
 /**

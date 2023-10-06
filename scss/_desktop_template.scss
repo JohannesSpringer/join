@@ -98,6 +98,10 @@
             border-radius: 100px;
             margin-right: 16px;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: large;
 
             &:hover {
                 cursor: pointer;

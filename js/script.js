@@ -289,3 +289,9 @@ function getIndexOfArray(a, s) {
         });
     }
 }
+
+function displayInitialsFromCurrentUser() {
+    let divElem = document.getElementById('profil-icon');
+    divElem.innerHTML = userData.initials;
+    divElem.style.border = `2px solid ${userData.color}`;
+}

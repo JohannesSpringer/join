@@ -2729,6 +2729,10 @@ a {
   border-radius: 100px;
   margin-right: 16px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
 }
 .header .header-icons .profil-pic:hover {
   cursor: pointer;
