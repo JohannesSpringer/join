@@ -10,6 +10,7 @@ let menuContactsOpen;
 
 async function initBoard() {
     await loadData();
+    displayInitialsFromCurrentUser();
 
     // await loadDataTask();
     renderTasks(tasks);

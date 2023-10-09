@@ -359,3 +359,24 @@ function displayInitialsFromCurrentUser() {
     divElem.innerHTML = userData.initials;
     divElem.style.border = `2px solid ${userData.color}`;
 }
+
+/**
+ * show and hide Log out Button in desktop_template.html
+ */
+function openProfilIconMenu() {
+    let logOutField = document.getElementById('log-out-field');
+
+    if (logOutField.style.display === 'block') {
+        logOutField.style.display = 'none';
+    } else {
+        logOutField.style.display = 'block';
+    }
+}
+
+/**
+ * Logout 
+ */
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "index.html"
+}

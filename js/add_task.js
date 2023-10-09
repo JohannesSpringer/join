@@ -22,6 +22,18 @@ let inputIds = [
 ];
 
 /**
+ * This function initialize the addTask page
+ */
+function initAddTask() {
+    loadUsers();
+    loadTasks();
+    loadCategories();
+    renderAddTask();
+    getAllUsers();
+    displayInitialsFromCurrentUser();
+}
+
+/**
  * This function calls the render functions for adding a task
  */
 function renderAddTask() {

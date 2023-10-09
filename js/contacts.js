@@ -16,6 +16,7 @@ async function init() {
     await getAllUsers();
     await insertContactsToContactList();
     document.body.classList.add('overflow');
+    displayInitialsFromCurrentUser();
 };
 
 function showAlert() {
