@@ -597,7 +597,6 @@ body {
     }
 }
 
-// todo
 .overlay-closed {
     position: absolute;
     width: 100%;
@@ -652,11 +651,6 @@ body {
         box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
     }
 }
-
-// @keyframes slide-in-from-right {
-//     from {left: 100%;}
-//     to {left: 0%;}
-// }
 
 @keyframes slide-in-from-right {
     from {

@@ -2,7 +2,6 @@
 
     .contacts-list {
         width: 100vw !important;
-        // padding-top: 5rem !important;
         height: calc(100vh - 75px) !important;
         padding-top: 75px;
     }
@@ -256,12 +255,10 @@
     .contacts-list {
         display: flex;
         flex-direction: column;
-        // align-items: center;
         width: 80%;
 
         .list-header {
             padding-left: 28px;
-            // width: 100%;
             padding-top: 8px;
             padding-bottom: 16px;
             font-size: 21px;
@@ -371,7 +368,6 @@
         }
 
         .contact-details {
-            // margin-left: 24px;
 
             .contact-details-head {
                 display: flex;

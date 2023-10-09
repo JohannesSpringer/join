@@ -28,8 +28,6 @@
         margin-top: 20px;
         margin-left: 20px;
         position: relative;
-        // gap: 10%;
-        // width: 100%;
 
         .add-task-inputs-left {
             width: 45%;
@@ -107,7 +105,6 @@
 .task-title {
     display: flex;
     flex-direction: column;
-    // width: 45%;
     gap: 4px;
     @include reqInputText();
 
@@ -131,7 +128,6 @@
 .task-due-date {
     display: flex;
     flex-direction: column;
-    // width: 45%;
     gap: 4px;
     @include reqInputText();
 
@@ -185,46 +181,6 @@
     flex-direction: column;
     position: relative;
     @include reqInputText();
-
-    // .drop_down {
-    //     display: flex;
-    //     align-items: center;
-    //     position: relative;
-    //     background-color: white;
-    //     margin-top: 4px;
-    //     padding: 8px 21px 8px 21px;
-    //     box-sizing: border-box;
-    //     border: 1px solid #D1D1D1;
-    //     border-radius: 10px;
-
-    //     &:hover {
-    //         cursor: pointer;
-    //     }
-
-    //     input {
-    //         border: none;
-    //         width: 95%;
-    //         height: 22px;
-
-    //         &:focus-visible {
-    //             outline: none;
-    //         }
-    //     }
-    // }
-
-    // .down_image {
-    //     position: absolute;
-    //     right: 16px;
-    //     top: 13px;
-    //     width: 12px;
-    //     height: 12px;
-    //     border-radius: 100%;
-    //     padding: 2px;
-
-    //     &:hover {
-    //         background-color: #D1D1D1;
-    //     }
-    // }
 
     .drop_down_open {
         margin-bottom: 0;
@@ -344,18 +300,6 @@
         gap: 12px;
     }
 
-    // .contact-initials {
-    //     border: 1px solid white;
-    //     border-radius: 100%;
-    //     width: 32px;
-    //     height: 32px;
-    //     font-size: 12px;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     color: white;
-    // }
-
     .category-name-box {
         position: relative;
         display: flex;
@@ -421,7 +365,6 @@
         justify-content: flex-start;
         align-items: center;
         gap: 8px;
-        // transform: translateY(-30px);
         transform: translateY(8px);
     }
 }
@@ -461,7 +404,6 @@
 .task-prio {
     display: flex;
     flex-direction: column;
-    // width: 45%;
     gap: 4px;
     @include reqInputText();
 
@@ -532,7 +474,6 @@
 .task-subtask {
     display: flex;
     flex-direction: column;
-    // width: 45%;
     gap: 4px;
     position: relative;
     @include reqInputText();

@@ -1,6 +1,5 @@
 let currentDraggedElement;
 let editors;
-// let categorys_board;
 let filteredTasks;
 let currentPrioEditTask;
 let openedTask;
@@ -11,8 +10,6 @@ let menuContactsOpen;
 async function initBoard() {
     await loadData();
     displayInitialsFromCurrentUser();
-
-    // await loadDataTask();
     renderTasks(tasks);
 }
 
@@ -29,16 +26,7 @@ async function loadData() {
     await loadTasks();
     await loadCategories();
     await getAllUsers();
-    // tasks_board = JSON.parse(backend.getItem('tasks')) || [];
-    // categorys_board = JSON.parse(backend.getItem('categorys')) || [];
 }
-
-// // save data to backend
-// async function saveData(key, array) {
-//     console.log('todo store data');
-//     // await backend.setItem(key, JSON.stringify(array));
-// };
-
 
 function renderTasks(inputArray) {
     deleteTasksOnBoard();
@@ -55,7 +43,7 @@ function renderTasks(inputArray) {
  * @todo complete task
  */
 function renderSingleTask(task) {
-    let destination = document.getElementById(`${checkTaskStatus(task)}`);//${task['category']}`);
+    let destination = document.getElementById(`${checkTaskStatus(task)}`);
     destination.innerHTML += `
         <div draggable="true" onclick="openTaskDetailView(${task['task-id']})" ondragstart="startDragging(${task['task-id']})" class="single-task" id="task${task['task-id']}">
             ${htmlTaskTopic(task)}
@@ -73,11 +61,6 @@ function renderSingleTask(task) {
 function htmlTaskTopic(task) {
     return `<div class="task-topic" style="background-color: ${task['category'][1]}">${task['category'][0]}</div>`;
 }
-
-// function getCategorysColor(category) {
-//     let index = categories['category'].indexOf(category);
-//     return categories['color'][index];
-// }
 
 function htmlTaskTitle(task) {
     return `<h4>${task['title']}</h4>`;
@@ -245,7 +228,6 @@ async function editTask(index) {
     edit_active = true;
     let content = document.getElementById('content');
     let icons = document.getElementById('icons');
-    // subtasks = task[index];
     content.innerHTML = '';
     content.classList.remove('task-details');
     content.classList.add('edit-task');
@@ -255,20 +237,12 @@ async function editTask(index) {
     setPrioInEditTask(tasks[index]);
     renderEditorsInitials();
     showInitialsOfAssignedContacts();
-    // pushEditorsToContacts();
 };
 
-// todo delete function
 function pushEditorsToContacts() {
-    // let edit_colors = [];
     editors.forEach(element => {
-        // if (element.name == current_user) element.name = 'You';
         editContacts.push(element);
-        // edit_colors.push(element.color);
     });
-    // contacts.forEach(element => {
-    //     if(edit_colors.includes(element.color) == false) editContacts.push(element);
-    // });
 };
 
 function renderEditorsInitials() {
@@ -378,7 +352,6 @@ function htmlAllEditors(task) {
     selectedContacts = task['contacts'];
     for (let i = 0; i < selectedContacts.length; i++) {
         const id = selectedContacts[i];
-        // const editor = users[userArrayId].contacts[id.slice(-1)];
         const editor = getIndexOfArray(userData.contacts, id);
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
@@ -543,7 +516,6 @@ function openEditTaskContacts() {
         menuContactsOpen = true;
         renderContacts('editContacts');
         markAssignedContacts();
-        // renderEditContacts();
     } else {
         closeMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = false;
@@ -605,7 +577,6 @@ function openAssignedToMenu(id1, id2) {
 }
 
 function removeAnimationClassInBoard() {
-    // document.getElementById(`categories`).classList.remove('scale-up-ver-top');
     document.getElementById(`editContacts`).classList.remove('scale-up-ver-top');
 }
 
@@ -668,7 +639,6 @@ function htmlSingleSubtaskDetail(text, i) {
 }
 
 function toggleSetSubtask(id) {
-    // debugger;
     let tempSubtask = document.getElementById(id);
     if (subtaskAlreadySelected(id)) {
         tempSubtask.querySelector('input').checked = false;

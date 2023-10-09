@@ -1,6 +1,5 @@
 let menuOpenContacts;
 let menuOpenCategory;
-// let categories = [];
 let categoryColors = [
     '#8AA4FF',
     '#FF0000',
@@ -290,7 +289,6 @@ function renderContacts(id) {
 }
 
 function createNewCategory() {
-    // selectedCategory[1] = '';
     selectedCategory = [];
     showCreateNewCategoryHTML();
     checkFormFilled();
@@ -383,7 +381,6 @@ function editSubtask(id, tsk) {
 
 function saveSubtask(id) {
     subtasks[id.slice(-1)] = document.getElementById(id).value;
-    // subtaskStatus.splice(id.slice(-1), 1);
     renderSubtasksInAddTask();
 }
 
@@ -458,7 +455,6 @@ function renderCategoriesHTML(i, cat, clr) {
                 <div class="category-color" style="background-color: ${clr};"></div>
             </div>
         </div>`;
-    // <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
 }
 
 function renderContactsHTML(con, ini, id) {
@@ -496,7 +492,6 @@ function genHtmlInputDescription() {
             </div>`;
 }
 
-// todo: position absolute für dropdown, sodass andere Elemente nicht verschoben werden (ebene höher)
 function genHtmlInputCategory() {
     return `<div id="categoryBox" class="task-category">
                 <label>Category</label>

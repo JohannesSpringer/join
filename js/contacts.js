@@ -68,7 +68,6 @@ function orderContacts() {
     orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
     // move contacts to array with beginning letter
     for (let i = 0; i < contactsA.length; i++) {
-        // contactsA[i].id = i;
         let letter = contactsA[i].name.toLowerCase().toString();
         letter = letter.replace(/\u00e4/g, "ae").replace(/\u00fc/g, "ue").replace(/\u00f6/g, "oe");
         letter = letter.slice(0, 1);
@@ -314,7 +313,7 @@ function showDetails(id) {
 }
 
 function editShowContact(contact) {
-    document.getElementById('overlayContent').innerHTML = ''; //createContact
+    document.getElementById('overlayContent').innerHTML = '';
 
     if (typeof contact !== 'undefined') {
         showEditContact(contact);

@@ -68,7 +68,6 @@ function dateDeadline(array) {
 
     let nextDate = array
         .filter(function (datum) {
-            // Wieso <= today ? sollte due date nicht in Zukunft liegen?
             return new Date(datum) <= today;
         })
         .sort(function (a, b) {
