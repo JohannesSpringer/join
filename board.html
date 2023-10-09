@@ -82,7 +82,18 @@
             </div>
             
             <!-- ToDo: Render include/render AddTask -->
-            <div id="overlay" class="overlay"></div>
+            <!-- <div id="overlay" class="overlay"></div> -->
+
+            <div class="add-task-header">
+                <h1>Add Task</h1>
+            </div>
+            <form id="addTaskInputs" class="add-task-inputs" onkeyup="checkFormFilled()" onsubmit="addTask(); return false">
+                <div class="add-task-inputs-fields">
+                    <div id="addTaskInputsLeft" class="add-task-inputs-left"></div>
+                    <div id="addTaskInputsRight" class="add-task-inputs-right"></div>
+                </div>
+                <div id="addTaskInputsSubmit" class="add-task-inputs-submit"></div>
+            </form>
         </div>
     </div>
     <!-- ---------------------------------------------------------Animation Div's----------------------------------------------------------------------->

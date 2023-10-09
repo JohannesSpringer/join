@@ -438,9 +438,10 @@ function markDraggableArea(style) {
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
-    document.getElementById('mobileCreate').style.visibility = 'visible';
+    // document.getElementById('mobileCreate').style.visibility = 'visible';
     document.body.classList.add('overflow-hidden');
-    renderOverlayAddTask();
+    // renderOverlayAddTask();
+    renderAddTask();
     getDateOverlay();
 }
 

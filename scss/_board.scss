@@ -583,16 +583,27 @@ body {
 
     .add-task {
         position: relative;
-        width: 1116px;
-        height: 914px;
+        // width: 1116px;
+        // height: 914px;
+        width: 70%;
+        max-width: 1000px;
+        // min-width: ;
         background-color: $pagebackground;
         border-radius: 32px;
+        padding: 32px 52px 32px 32px;
 
         .close {
             display: flex;
             justify-content: flex-end;
             margin: 24px;
             cursor: pointer;
+            position: absolute;
+            right: 32px;
+        }
+
+        .add-task-header {
+            padding-left: 20px;
+            font-size: 24px;
         }
     }
 }
