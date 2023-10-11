@@ -16,8 +16,8 @@ async function initBoard() {
 
 //displays the current date
 function getDateOverlay() {
-    document.getElementById('dateOverlay').valueAsDate = new Date();
-    date = document.getElementById('dateOverlay').value;
+    document.getElementById('taskDate').valueAsDate = new Date();
+    date = document.getElementById('taskDate').value;
 };
 
 
@@ -449,8 +449,10 @@ function closeOverlay() {
     clearAll();
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
+    document.getElementById('addTaskInputsLeft').innerHTML = '';
+    document.getElementById('addTaskInputsRight').innerHTML = '';
     document.body.classList.remove('overflow-hidden');
-    document.getElementById('mobileCreate').style.visibility = 'hidden';
+    // document.getElementById('mobileCreate').style.visibility = 'hidden';
 }
 
 function closeDetailView() {
@@ -516,7 +518,7 @@ function openEditTaskContacts() {
         openAssignedToMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = true;
         renderContacts('editContacts');
-        markAssignedContacts();
+        markAlreadySelectedContacts();
     } else {
         closeMenu('editContacts', 'dropDownEditContacts');
         menuContactsOpen = false;
@@ -549,13 +551,13 @@ function closeMenu() {
     document.getElementById('initials').style.display = 'flex';
 }
 
-function markAssignedContacts() {
-    selectedContacts.forEach(cntct => {
-        let cntctBox = document.getElementById(`cntcts${cntct}`);
-        cntctBox.classList.add('background-darkblue');
-        cntctBox.querySelector('input').checked = true;
-    });
-}
+// function markAssignedContacts() {
+//     selectedContacts.forEach(cntct => {
+//         let cntctBox = document.getElementById(`cntcts${cntct}`);
+//         cntctBox.classList.add('background-darkblue');
+//         cntctBox.querySelector('input').checked = true;
+//     });
+// }
 
 function showInitialsOfAssignedContacts() {
     let divInitials = document.getElementById('initials');
@@ -664,3 +666,27 @@ async function saveDoneSubtasks() {
     await setItem('tasks', JSON.stringify(tasks));
     renderTasks(tasks);
 }
+
+function clearAll() {
+    document.getElementById('taskDescription').value = '';
+    document.getElementById('taskTitle').value = '';
+    document.getElementById('taskSubtask').innerHTML = '';
+    // color = undefined;
+    // taskCategory = undefined;
+    // subTasks.length = 0;
+    // task_contacts.length = 0;
+    // clearInputField();
+    removePrio();
+    clearContacts();
+};
+
+//deletes the selected contacts and closes the contacts menu if it's open
+function clearContacts() {
+    // initials['initials'].length = 0;
+    // initials['mail'].length = 0;
+    // initials['color'].length = 0;
+    // showInitials();
+    if (menuContactsOpen) {
+        closeMenu('contacts', 'dropDownContacts')
+    }
+};

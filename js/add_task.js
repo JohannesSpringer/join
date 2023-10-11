@@ -155,7 +155,7 @@ function toggleContacts() {
 
 function markAlreadySelectedContacts() {
     selectedContacts.forEach(cntct => {
-        let cntctBox = document.getElementById(cntct);
+        let cntctBox = document.getElementById(`cntcts${cntct}`);
         cntctBox.classList.add('background-darkblue');
         cntctBox.querySelector('input').checked = true;
     });
@@ -192,7 +192,6 @@ function filterContacts() {
         const usr = users[i].name;
         if (valInUserName(val, usr)) {
             document.getElementById(`cntcts${i}`).style = 'display: flex';
-            console.log(val, ' + ', usr);
         } else {
             document.getElementById(`cntcts${i}`).style = 'display: none';
         }
