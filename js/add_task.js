@@ -23,12 +23,12 @@ let inputIds = [
 /**
  * This function initialize the addTask page
  */
-function initAddTask() {
-    loadUsers();
-    loadTasks();
-    loadCategories();
+async function initAddTask() {
+    await loadUsers();
+    await loadTasks();
+    await loadCategories();
     renderAddTask();
-    getAllUsers();
+    await getAllUsers();
     displayInitialsFromCurrentUser();
 }
 

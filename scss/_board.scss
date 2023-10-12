@@ -718,7 +718,6 @@ body {
     }
 
     .add-task {
-        height: 100vh !important;
         width: 100% !important;
     }
 
@@ -815,5 +814,45 @@ body {
                 bottom: 32px;
             }
         }
+    }
+
+    .board-tasks {
+        margin-bottom: 64px;
+    }
+
+    .overlay-add-task {
+        top: 75px;
+        overflow: auto;
+        height: calc(100% - 150px);
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 7px;
+            background: #A8A8A8;
+        }
+    }
+
+    .add-task-inputs-fields {
+        flex-direction: column;
+
+        .add-task-inputs-left {
+            border: none !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        .add-task-inputs-right {
+            padding: 0 !important;
+            width: 100% !important;
+        }
+    }
+
+    .add-task {
+        margin-top: 120px;
+        border-radius: 0 !important;
     }
 }

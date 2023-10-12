@@ -343,6 +343,7 @@ function saveChangedDataLocal(idx) {
 async function deleteTask(index) {
     tasks.splice(index, 1);
     document.getElementById('taskDetailView').classList.add('display-none');
+    document.body.classList.remove('overflow-hidden');
     await setItem('tasks', JSON.stringify(tasks));
     await initBoard();
 }
@@ -436,11 +437,12 @@ function markDraggableArea(style) {
 }
 
 function overlayAddTask() {
+    selectedContacts = []
+    document.documentElement.scrollTop = 0;
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
     // document.getElementById('mobileCreate').style.visibility = 'visible';
     document.body.classList.add('overflow-hidden');
-    // renderOverlayAddTask();
     renderAddTask();
     getDateOverlay();
 }

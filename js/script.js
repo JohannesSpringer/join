@@ -380,3 +380,11 @@ function logout() {
     localStorage.removeItem("currentUser");
     window.location.href = "index.html"
 }
+
+/**
+ * This function loads the user data and display the initials of the current user
+ */
+async function initLegalNotice() {
+    await getAllUsers();
+    displayInitialsFromCurrentUser();
+}

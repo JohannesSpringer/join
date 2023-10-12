@@ -54,34 +54,45 @@ $bgr_color2: #2A3647;
             }
         }
     }
-
-    .todo_done_sub {
-        width: 203px !important;
-    }
 }
 
 
 @media (max-width: 690px) {
     .task {
-        gap: 7px !important;
+        gap: 0 !important;
+        justify-content: space-between;
+
         .task_sub {
-            width: 104px !important;
+            width: calc(33% - 8px) !important;
         }
     }
+
     .prio_date {
-        width: 328px !important;
+        width: 100% !important;
+
         .prio_date_sub {
             padding-right: 40px !important;
-            
+            padding-left: 8px;
         }
+
         .datum {
             padding-left: 12px !important;
         }
+
+        .todo {
+            padding-right: 8px;
+        }
     }
+
+    .todo_done {
+        justify-content: space-between;
+        gap: 16px !important;
+    }
+
     .todo_done_sub {
-        width: 142px !important;
         gap: 8px !important;
-        & > img {
+
+        &>img {
             width: 60px;
         }
     }
@@ -92,7 +103,9 @@ $bgr_color2: #2A3647;
         top: 0 !important;
         left: 0px !important;
         margin-top: 68px;
-        margin-left: 16px;
+        margin-left: 24px;
+        margin-right: 24px;
+        width: calc(100% - 48px);
     }
 }
 

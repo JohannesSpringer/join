@@ -403,6 +403,7 @@
   }
   .mobile-login-buttons {
     flex-direction: column;
+    gap: 0 !important;
   }
   .log-in-button {
     color: white !important;
@@ -1725,7 +1726,6 @@ body {
     z-index: 20;
   }
   .add-task {
-    height: 100vh !important;
     width: 100% !important;
   }
   .overlay {
@@ -1805,6 +1805,38 @@ body {
     right: 32px;
     bottom: 32px;
   }
+  .board-tasks {
+    margin-bottom: 64px;
+  }
+  .overlay-add-task {
+    top: 75px;
+    overflow: auto;
+    height: calc(100% - 150px);
+  }
+  .overlay-add-task::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .overlay-add-task::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background: #A8A8A8;
+  }
+  .add-task-inputs-fields {
+    flex-direction: column;
+  }
+  .add-task-inputs-fields .add-task-inputs-left {
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .add-task-inputs-fields .add-task-inputs-right {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .add-task {
+    margin-top: 120px;
+    border-radius: 0 !important;
+  }
 }
 @media (max-width: 1100px) {
   .greeting {
@@ -1846,28 +1878,33 @@ body {
   .prio_date .prio_date_sub img {
     width: 50px !important;
   }
-  .todo_done_sub {
-    width: 203px !important;
-  }
 }
 @media (max-width: 690px) {
   .task {
-    gap: 7px !important;
+    gap: 0 !important;
+    justify-content: space-between;
   }
   .task .task_sub {
-    width: 104px !important;
+    width: calc(33% - 8px) !important;
   }
   .prio_date {
-    width: 328px !important;
+    width: 100% !important;
   }
   .prio_date .prio_date_sub {
     padding-right: 40px !important;
+    padding-left: 8px;
   }
   .prio_date .datum {
     padding-left: 12px !important;
   }
+  .prio_date .todo {
+    padding-right: 8px;
+  }
+  .todo_done {
+    justify-content: space-between;
+    gap: 16px !important;
+  }
   .todo_done_sub {
-    width: 142px !important;
     gap: 8px !important;
   }
   .todo_done_sub > img {
@@ -1879,7 +1916,9 @@ body {
     top: 0 !important;
     left: 0px !important;
     margin-top: 68px;
-    margin-left: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+    width: calc(100% - 48px);
   }
 }
 a {
