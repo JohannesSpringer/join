@@ -1766,6 +1766,9 @@ body {
   }
 }
 @media (max-width: 600px) {
+  body {
+    overflow: auto !important;
+  }
   .mobile_create_overlay {
     z-index: 30;
   }
@@ -1774,6 +1777,7 @@ body {
   }
   .close {
     left: 80%;
+    top: 20px;
   }
   .board-content {
     margin: unset;
@@ -1809,9 +1813,8 @@ body {
     margin-bottom: 64px;
   }
   .overlay-add-task {
-    top: 75px;
-    overflow: auto;
     height: calc(100% - 150px);
+    position: unset;
   }
   .overlay-add-task::-webkit-scrollbar {
     width: 5px;
@@ -1834,8 +1837,16 @@ body {
     width: 100% !important;
   }
   .add-task {
-    margin-top: 120px;
     border-radius: 0 !important;
+  }
+  .add-task-header {
+    padding: 0 !important;
+  }
+  .add-task-header h1 {
+    margin-top: 0;
+  }
+  .board-content-mobile {
+    display: none;
   }
 }
 @media (max-width: 1100px) {
@@ -1920,6 +1931,9 @@ body {
     margin-right: 24px;
     width: calc(100% - 48px);
   }
+  .overview {
+    width: 100%;
+  }
 }
 a {
   text-decoration: none;
@@ -1997,7 +2011,7 @@ a {
 .task_sub:hover {
   background-color: #2A3647;
   cursor: pointer;
-  scale: 1.1;
+  scale: 1.05;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
@@ -2029,7 +2043,7 @@ a {
 .prio_date:hover {
   background-color: #2A3647;
   cursor: pointer;
-  scale: 1.1;
+  scale: 1.05;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
@@ -2056,7 +2070,7 @@ a {
 .todo_done_sub:hover {
   background-color: #2A3647;
   cursor: pointer;
-  scale: 1.1;
+  scale: 1.05;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
@@ -2735,6 +2749,18 @@ a {
     transform: scaleY(0.01);
     -webkit-transform-origin: 100% 0%;
     transform-origin: 100% 0%;
+  }
+}
+@media (max-width: 600px) {
+  .add-task-content {
+    margin: 0 0 0 0;
+    padding: 32px;
+  }
+  .add-task-inputs {
+    margin: 0;
+  }
+  .add-task-inputs-submit {
+    margin-bottom: 75px;
   }
 }
 .menu {

@@ -107,6 +107,10 @@ $bgr_color2: #2A3647;
         margin-right: 24px;
         width: calc(100% - 48px);
     }
+
+    .overview {
+        width: 100%;
+    }
 }
 
 @mixin flex_center() {
@@ -124,7 +128,7 @@ $bgr_color2: #2A3647;
 @mixin hover() {
     background-color: $bgr_color2;
     cursor: pointer;
-    scale: 1.1;
+    scale: 1.05;
     color: #fff;
     -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
     box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
@@ -197,7 +201,7 @@ a {
     transition: 300ms;
 
     &:hover {
-        @include hover()
+        @include hover();
     }
 }
 

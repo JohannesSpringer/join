@@ -173,7 +173,6 @@ body {
                             height: 42px;
                             color: #FFFFFF;
                             border-radius: 100%;
-                            border: 2px solid white;
                             background-color: $darkblue;
                         }
 
@@ -189,7 +188,6 @@ body {
 
                 .task-prio {
                     display: flex;
-                    justify-content: center;
 
                     img {
                         object-fit: contain;
@@ -222,10 +220,8 @@ body {
         overflow: auto;
 
         .close {
-            position: sticky;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 40px;
+            position: absolute;
+            right: 40px;
             top: 40px;
             cursor: pointer;
             z-index: 20;
@@ -315,75 +311,8 @@ body {
                         width: 24px;
                         padding: 8px;
                         font-size: 16px;
-                        color: white;
                     }
                 }
-            }
-
-            .subtasks {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                margin-top: 24px;
-
-                .single-subtask {
-                    padding: 4px;
-                    padding-left: 56px;
-                    padding-right: 16px;
-                    width: fit-content;
-                    font-size: 14px;
-                    cursor: pointer;
-                    border-radius: 8px;
-
-                    &:hover {
-                        background-color: $lightgray;
-                    }
-                }
-            }
-
-            .checkbox-container {
-                position: relative;
-                display: block;
-                cursor: pointer;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-
-                input {
-                    position: absolute;
-                    opacity: 0;
-                    cursor: pointer;
-                    height: 0;
-                    width: 0;
-
-                    &:checked~.checkmark:after {
-                        display: block;
-                    }
-                }
-
-                .checkmark {
-                    position: absolute;
-                    left: -40px;
-                    top: 3px;
-                    height: 12px;
-                    width: 12px;
-                    border: 1px solid $darkblue;
-                    border-radius: 4px;
-
-                    &:after {
-                        width: 12px;
-                        height: 12px;
-                        clip-path: polygon(13% 53%, 50% 90%, 90% 25%, 85% 10%, 50% 71%, 24% 48%);
-                        background-color: black;
-                    }
-                }
-            }
-
-            .checkmark:after {
-                content: "";
-                position: absolute;
-                display: none;
             }
         }
 
@@ -391,9 +320,6 @@ body {
             font-size: 20px;
             font-weight: normal;
             padding: 48px 150px 48px 48px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
 
             .title {
                 display: flex;
@@ -477,43 +403,40 @@ body {
         }
 
         .icons {
-            position: sticky;
+            position: absolute;
             display: flex;
-            justify-content: flex-end;
-            padding-right: 40px;
+            right: 40px;
             bottom: 40px;
             cursor: pointer;
             z-index: 20;
 
             .delete-button {
+                width: 50px;
+                height: 50px;
+                border: 1px solid $darkblue;
+                border-radius: 10px 0px 0px 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 12px;
-                margin-right: 12px;
 
                 &:hover {
                     filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
-                    font-weight: bold;
                 }
             }
 
             .edit-button {
+                width: 50px;
+                height: 50px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 12px;
-                margin-left: 12px;
+                border-radius: 0px 10px 10px 0px;
+                border: 1px solid transparent;
+                background-color: $darkblue;
 
                 &:hover {
-                    filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
-                    font-weight: bold;
+                    background-color: $lightblue;
                 }
-            }
-
-            .vertical-line {
-                border-left: 1px solid $lightgray;
-
             }
 
             .check-button {
@@ -532,37 +455,7 @@ body {
                 &:hover {
                     background-color: $lightblue;
                 }
-
-                img {
-                    width: 28px;
-
-                    &:hover {
-                        background-color: $lightblue;
-                    }
-                }
             }
-        }
-
-        #editContacts {
-            top: 48px;
-        }
-
-        &::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 7px;
-            background: #A8A8A8;
-        }
-
-        &::-webkit-scrollbar-track-piece:start {
-            margin-top: 32px;
-        }
-
-        &::-webkit-scrollbar-track-piece:end {
-            margin-bottom: 32px;
         }
     }
 }
@@ -583,31 +476,21 @@ body {
 
     .add-task {
         position: relative;
-        // width: 1116px;
-        // height: 914px;
-        width: 70%;
-        max-width: 1000px;
-        // min-width: ;
+        width: 1116px;
+        height: 914px;
         background-color: $pagebackground;
         border-radius: 32px;
-        padding: 32px 52px 32px 32px;
 
         .close {
             display: flex;
             justify-content: flex-end;
             margin: 24px;
             cursor: pointer;
-            position: absolute;
-            right: 32px;
-        }
-
-        .add-task-header {
-            padding-left: 20px;
-            font-size: 24px;
         }
     }
 }
 
+// todo
 .overlay-closed {
     position: absolute;
     width: 100%;
@@ -662,6 +545,11 @@ body {
         box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
     }
 }
+
+// @keyframes slide-in-from-right {
+//     from {left: 100%;}
+//     to {left: 0%;}
+// }
 
 @keyframes slide-in-from-right {
     from {
@@ -718,6 +606,7 @@ body {
     }
 
     .add-task {
+        height: 100vh !important;
         width: 100% !important;
     }
 
@@ -730,6 +619,7 @@ body {
     .close {
         position: absolute;
         top: 100px;
+        left: 90%;
     }
 }
 
@@ -767,10 +657,6 @@ body {
 }
 
 @media (max-width: 600px) {
-    body {
-        overflow: auto !important;
-    }
-
     .mobile_create_overlay {
         z-index: 30;
     }
@@ -781,7 +667,6 @@ body {
 
     .close {
         left: 80%;
-        top: 20px;
     }
 
     .board-content {
@@ -819,55 +704,5 @@ body {
                 bottom: 32px;
             }
         }
-    }
-
-    .board-tasks {
-        margin-bottom: 64px;
-    }
-
-    .overlay-add-task {
-        height: calc(100% - 150px);
-        position: unset;
-
-        &::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 7px;
-            background: #A8A8A8;
-        }
-    }
-
-    .add-task-inputs-fields {
-        flex-direction: column;
-
-        .add-task-inputs-left {
-            border: none !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
-
-        .add-task-inputs-right {
-            padding: 0 !important;
-            width: 100% !important;
-        }
-    }
-
-    .add-task {
-        border-radius: 0 !important;
-    }
-
-    .add-task-header {
-        padding: 0 !important;
-
-        h1 {
-            margin-top: 0;
-        }
-    }
-
-    .board-content-mobile {
-        display: none;
     }
 }

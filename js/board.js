@@ -439,6 +439,7 @@ function markDraggableArea(style) {
 function overlayAddTask() {
     selectedContacts = []
     document.documentElement.scrollTop = 0;
+    document.getElementById('boardContent').classList.add('board-content-mobile');
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
     // document.getElementById('mobileCreate').style.visibility = 'visible';
@@ -451,6 +452,7 @@ function closeOverlay() {
     clearAll();
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
+    document.getElementById('boardContent').classList.remove('board-content-mobile');
     document.getElementById('addTaskInputsLeft').innerHTML = '';
     document.getElementById('addTaskInputsRight').innerHTML = '';
     document.body.classList.remove('overflow-hidden');
