@@ -1768,6 +1768,7 @@ body {
 @media (max-width: 600px) {
   body {
     overflow: auto !important;
+    overflow-x: hidden !important;
   }
   .mobile_create_overlay {
     z-index: 30;
@@ -1847,6 +1848,9 @@ body {
   }
   .board-content-mobile {
     display: none;
+  }
+  .search-container {
+    width: calc(100% + 47px);
   }
 }
 @media (max-width: 1100px) {
