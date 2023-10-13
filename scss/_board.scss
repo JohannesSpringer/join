@@ -788,6 +788,10 @@ body {
     .board-content {
         margin: unset;
         padding: 32px;
+
+        .board-header {
+            overflow-x: hidden;
+        }
     }
 
     .tasks {
@@ -874,5 +878,9 @@ body {
 
     .search-container {
         width: calc(100% + 47px);
+
+        #search-input {
+            width: 100%;
+        }
     }
 }

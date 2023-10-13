@@ -130,9 +130,10 @@
         .close-top {
             display: block !important;
             height: auto !important;
-            position: absolute !important;
-            top: 118px !important;
+            position: relative !important;
+            // top: 118px !important;
             padding-left: 18rem !important;
+            transform: translateY(56px);
 
             .white {
                 display: block !important;
@@ -172,6 +173,10 @@
             form {
                 transform: translate(0px, -51px) !important;
                 // margin-top: 10rem;
+            }
+
+            [class*="-input"] {
+                width: unset !important;
             }
         }
     }

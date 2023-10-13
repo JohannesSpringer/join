@@ -102,10 +102,11 @@ $bgr_color2: #2A3647;
     .main_box {
         top: 0 !important;
         left: 0px !important;
-        margin-top: 68px;
+        margin-bottom: 91px;
         margin-left: 24px;
         margin-right: 24px;
         width: calc(100% - 48px);
+        position: unset !important;
     }
 
     .overview {
