@@ -610,6 +610,7 @@
     border-top-right-radius: 0px !important;
     justify-content: flex-start !important;
     height: unset !important;
+    margin-bottom: 23px;
   }
   #overlayContent .overlay-right .user-icon {
     transform: translate(0px, -67px) !important;
