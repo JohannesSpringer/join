@@ -137,7 +137,7 @@ async function getCurrentUserData() {
 
 function delContact(userId) {
     contactsA.splice(contactsA.indexOf(getIndexOfArray(contactsA, userId)), 1);
-    animationAndPushToServer();  
+    animationAndPushToServer();
     document.getElementById('contactDetails').innerHTML = '';
     let overlay = document.getElementById('overlayContent');
     if (!overlay.classList.contains('d-none')) {
@@ -163,9 +163,10 @@ function addContact() {
     contactsA.push(singleContact);
     animationAndPushToServer();
     showAlert();
-    showContact(contactsA.findIndex((elem) => {
-        return elem == singleContact;
-    }));
+    showContact(singleContact.id);
+    // showContact(contactsA.findIndex((elem) => {
+    //     return elem == singleContact;
+    // }));
 }
 
 function getUnusedContactsId() {
@@ -218,9 +219,11 @@ function addContactsToUser() {
 function showDetailsAtMobile() {
     let windowWidth = window.innerWidth;
     if (windowWidth < 1000) {
-        document.getElementById('contacts-list').classList.add('d-none')
-        document.getElementsByClassName('contact-info')[0].classList.remove('d-none-mobile')
-        document.getElementsByClassName('new-contact')[0].classList.add('d-none')
+        // document.getElementById('contacts-list').classList.add('d-none');
+        document.getElementsByClassName('contacts')[0].classList.add('d-none');
+        document.getElementsByClassName('contact-info')[0].classList.remove('d-none-mobile');
+        document.getElementsByClassName('new-contact')[0].classList.add('d-none');
+        document.getElementsByClassName('contact-changes')[0].classList.add('d-none');
         document.getElementById('mobile-menu').innerHTML = /*html */`
                 <div class="mobile-icon"><img src="./assets/img/contacts-icons/pen-white.png" alt=""></div>
         `;
@@ -228,9 +231,11 @@ function showDetailsAtMobile() {
 }
 
 function hideContactInfo() {
-    document.getElementById('contacts-list').classList.remove('d-none')
-    document.getElementsByClassName('contact-info')[0].classList.add('d-none-mobile')
-    document.getElementsByClassName('new-contact')[0].classList.remove('d-none')
+    document.getElementsByClassName('contacts')[0].classList.remove('d-none');
+    document.getElementById('contacts-list').classList.remove('d-none');
+    document.getElementsByClassName('contact-info')[0].classList.add('d-none-mobile');
+    document.getElementsByClassName('new-contact')[0].classList.remove('d-none');
+    document.getElementsByClassName('contact-changes')[0].classList.remove('d-none');
     document.getElementById('mobile-menu').innerHTML = '';
 }
 

@@ -504,8 +504,11 @@
   .d-none-mobile {
     display: none !important;
   }
+  #contacts-container {
+    background-color: white;
+  }
   #contacts-container .contact-info {
-    padding: 0px !important;
+    padding: 24px !important;
     width: 100vw !important;
   }
   #contacts-container .contact-info .arrowLeftMobile {
@@ -516,7 +519,6 @@
     cursor: pointer;
   }
   #contacts-container .contact-info .contact-headline {
-    padding-left: 24px !important;
     display: block !important;
   }
   #contacts-container .contact-info .contact-headline h3 {
@@ -541,8 +543,9 @@
     display: flex;
     flex: 1;
     justify-content: flex-end;
-    margin-right: 16px;
-    margin-top: 37px;
+    position: fixed;
+    bottom: 107px;
+    right: 24px;
   }
   #contacts-container .contact-info #mobile-menu .mobile-icon {
     background-color: #2A3647;
@@ -557,7 +560,8 @@
   }
   #contacts-container #contactDetails .contact-details-head {
     gap: 50px !important;
-    margin-left: 26px !important;
+    margin-left: 32px !important;
+    margin-top: 48px;
   }
   #contacts-container #contactDetails .contact-details-head .list-contact-frame {
     min-width: 31px !important;
@@ -639,6 +643,9 @@
     right: 16px;
     bottom: 107px;
     width: unset !important;
+  }
+  #contacts-container .contacts .contacts-list {
+    margin-bottom: 107px;
   }
   .new-contact {
     height: 60px !important;

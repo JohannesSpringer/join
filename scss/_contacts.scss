@@ -19,8 +19,10 @@
     }
 
     #contacts-container {
+        background-color: white;
+
         .contact-info {
-            padding: 0px !important;
+            padding: 24px !important;
             width: 100vw !important;
 
             .arrowLeftMobile {
@@ -32,7 +34,7 @@
             }
 
             .contact-headline {
-                padding-left: 24px !important;
+                // padding-left: 24px !important;
                 display: block !important;
 
                 h3 {
@@ -66,8 +68,11 @@
                 display: flex;
                 flex: 1;
                 justify-content: flex-end;
-                margin-right: 16px;
-                margin-top: 37px;
+                // margin-right: 16px;
+                // margin-top: 37px;
+                position: fixed;
+                bottom: 107px;
+                right: 24px;
 
                 .mobile-icon {
                     background-color: $darkblue;
@@ -86,9 +91,11 @@
         }
 
         #contactDetails {
+
             .contact-details-head {
                 gap: 50px !important;
-                margin-left: 26px !important;
+                margin-left: 32px !important;
+                margin-top: 48px;
 
                 .list-contact-frame {
                     min-width: 31px !important;
@@ -173,7 +180,6 @@
 
             form {
                 transform: translate(0px, -51px) !important;
-                // margin-top: 10rem;
             }
 
             [class*="-input"] {
@@ -200,6 +206,10 @@
                 right: 16px;
                 bottom: 107px;
                 width: unset !important;
+            }
+
+            .contacts-list {
+                margin-bottom: 107px;
             }
         }
     }
