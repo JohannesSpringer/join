@@ -493,9 +493,7 @@
 }
 @media (max-width: 1000px) {
   .contacts-list {
-    width: 100vw !important;
-    height: calc(100vh - 75px) !important;
-    padding-top: 75px;
+    width: 90% !important;
   }
   .new-contact {
     top: 24px !important;
@@ -593,7 +591,6 @@
     position: absolute !important;
     top: 118px !important;
     padding-left: 18rem !important;
-    height: 32px;
   }
   #overlayContent .close-top .white {
     display: block !important;
@@ -611,31 +608,41 @@
     padding: 0px 24px !important;
     width: 320px !important;
     border-top-right-radius: 0px !important;
-  }
-  #overlayContent .overlay-right > img {
-    position: absolute;
-    top: 19rem;
+    justify-content: flex-start !important;
+    height: unset !important;
   }
   #overlayContent .overlay-right .user-icon {
-    transform: translate(0px, -50px) !important;
+    transform: translate(0px, -67px) !important;
     top: 22rem !important;
   }
   #overlayContent .overlay-right form {
-    transform: translate(0px, -100px) !important;
-    margin-top: 10rem;
+    transform: translate(0px, -51px) !important;
   }
 }
 @media (max-width: 600px) {
   #contacts-container {
     margin-left: 1px !important;
     position: fixed !important;
+    width: 100%;
   }
-  #contacts-container .contacts-list {
-    height: calc(100vh - 220px) !important;
-    padding-top: 75px;
+  #contacts-container .contacts {
+    width: calc(100% - 48px) !important;
+    padding: 24px;
+  }
+  #contacts-container .contacts .add-contact {
+    top: unset !important;
+    position: fixed !important;
+    right: 16px;
+    bottom: 107px;
+    width: unset !important;
   }
   .new-contact {
     height: 60px !important;
+    font-size: 0;
+    width: 60px !important;
+    border-radius: 100% !important;
+    margin: 0 !important;
+    gap: 0 !important;
   }
 }
 .d-none {
@@ -932,9 +939,6 @@
   justify-content: center;
   gap: 40px;
   padding: 0px 48px;
-}
-#overlayContent .overlay-right > img {
-  padding-bottom: 80px;
 }
 #overlayContent .overlay-right .phone-input {
   margin-bottom: 25px;
