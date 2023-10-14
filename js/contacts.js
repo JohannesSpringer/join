@@ -136,6 +136,7 @@ async function getCurrentUserData() {
 }
 
 function delContact(userId) {
+    debugger;
     contactsA.splice(contactsA.indexOf(getIndexOfArray(contactsA, userId)), 1);
     animationAndPushToServer();
     document.getElementById('contactDetails').innerHTML = '';
@@ -225,7 +226,7 @@ function showDetailsAtMobile() {
         document.getElementsByClassName('new-contact')[0].classList.add('d-none');
         document.getElementsByClassName('contact-changes')[0].classList.add('d-none');
         document.getElementById('mobile-menu').innerHTML = /*html */`
-                <div class="mobile-icon"><img src="./assets/img/contacts-icons/pen-white.png" alt=""></div>
+                <div class="mobile-icon"><img src="./assets/img/contactsMobileMenu.png" alt=""></div>
         `;
     }
 }
@@ -314,7 +315,7 @@ function showDetails(id) {
                 <a href="tel:${getIndexOfArray(contactsA, id).phone}">${getIndexOfArray(contactsA, id).phone}</a>
             </div>
         </div>
-        <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`;
+        <div id="mobile-menu" onclick="showMobileMenuContact(${id})"></div>`;
 }
 
 function editShowContact(contact) {
@@ -326,6 +327,22 @@ function editShowContact(contact) {
         showCreateContact();
     }
     toggleDNone('overlayContent');
+}
+
+function showMobileMenuContact(id) {
+    let mobilemenu = document.getElementById('mobile-menu');
+    mobilemenu.innerHTML += `
+        <div class="mobile-menu-contact">
+            <div class="mobile-menu-edit" onclick="editShowContact(${id})">
+                <img src="./assets/img/edit.png">
+                <span>Edit</span>
+            </div>
+            <div class="mobile-menu-delete" onclick="delContact(${id})">
+                <img src="./assets/img/delete.png">
+                <span>Delete</span>
+            </div>
+        </div>
+        `;
 }
 
 
