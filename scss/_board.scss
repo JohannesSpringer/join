@@ -731,6 +731,10 @@ body {
         position: absolute;
         top: 100px;
     }
+
+    .overlay-add-task {
+        z-index: 30;
+    }
 }
 
 @media (max-width: 1130px) {
@@ -750,6 +754,29 @@ body {
 
     .search-container {
         margin-right: 16px !important;
+    }
+
+    .add-task-inputs-fields {
+        flex-direction: column;
+
+        .add-task-inputs-left {
+            border: none !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        .add-task-inputs-right {
+            padding: 0 !important;
+            width: 100% !important;
+        }
+    }
+
+    .overlay-add-task {
+        overflow: auto;
+    }
+
+    .add-task {
+        max-width: 600px !important;
     }
 }
 
@@ -846,20 +873,20 @@ body {
         }
     }
 
-    .add-task-inputs-fields {
-        flex-direction: column;
+    // .add-task-inputs-fields {
+    //     flex-direction: column;
 
-        .add-task-inputs-left {
-            border: none !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
+    //     .add-task-inputs-left {
+    //         border: none !important;
+    //         padding: 0 !important;
+    //         width: 100% !important;
+    //     }
 
-        .add-task-inputs-right {
-            padding: 0 !important;
-            width: 100% !important;
-        }
-    }
+    //     .add-task-inputs-right {
+    //         padding: 0 !important;
+    //         width: 100% !important;
+    //     }
+    // }
 
     .add-task {
         border-radius: 0 !important;
