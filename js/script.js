@@ -102,7 +102,18 @@ async function goToContacts() {
 }
 
 /**
- * This function changes the current shown webpage to contacts.html
+ * This function changes the current shown webpage to privacy_policy.html
+ */
+async function goToPrivacyPolicy() {
+    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    previousSelectedMenuItems.push('privacyPolicy');
+    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
+    window.location.href = "privacy_policy.html";
+    localStorage.setItem('selectedMenuItem', 'privacyPolicy');
+}
+
+/**
+ * This function changes the current shown webpage to legal_notice.html
  */
 async function goToLegalNotice() {
     previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
@@ -225,6 +236,7 @@ function highlightSelectedMenuItem() {
     const bgBoard = document.getElementById('bg-board');
     const bgAddTask = document.getElementById('bg-add-task');
     const bgContacts = document.getElementById('bg-contacts');
+    const bgPrivacyPolicy = document.getElementById('bg-privacy-policy');
     const bgLegalNotice = document.getElementById('bg-legal-notice');
 
     switch (selectedMenuItem) {
@@ -239,6 +251,9 @@ function highlightSelectedMenuItem() {
             break;
         case 'contacts':
             bgContacts.classList.add('highlight-nav');
+            break;
+        case 'privacyPolicy':
+            bgPrivacyPolicy.classList.add('highlight-nav');
             break;
         case 'legalNotice':
             bgLegalNotice.classList.add('highlight-nav');

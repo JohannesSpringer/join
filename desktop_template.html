@@ -34,6 +34,10 @@
                     <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
                     Contacts
                 </div>
+                <div id="bg-privacy-policy" onclick="goToPrivacyPolicy()" class="privacy-policy">
+                    <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
+                    Privacy Policy
+                </div>
                 <div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
                     <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
                     Legal notice
@@ -50,7 +54,7 @@
             <div onclick="openProfilIconMenu()" id="profil-icon" class="profil-pic"></div>
             <div id="profilIconMenu" class="profil-icon-menu" style="display: none;">
                 <div onclick="goToLegalNotice()" class="log-out-field">Legal Notice</div>
-                <div onclick="goToLegalNotice()" class="log-out-field">Privacy Policy</div>
+                <div onclick="goToPrivacyPolicy()" class="log-out-field">Privacy Policy</div>
                 <div id="log-out-field" onclick="logout()" class="log-out-field">Log out</div>
             </div>
         </div>

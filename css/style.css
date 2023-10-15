@@ -2890,9 +2890,21 @@ a {
   width: 200px;
   height: 50px;
   position: absolute;
-  top: 650px;
+  top: 716px;
 }
 .menu .menu-content .legal-notice:hover {
+  background-color: #091931;
+  cursor: pointer;
+}
+.menu .menu-content .privacy-policy {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  top: 650px;
+}
+.menu .menu-content .privacy-policy:hover {
   background-color: #091931;
   cursor: pointer;
 }
