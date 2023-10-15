@@ -2,10 +2,7 @@
 
     .contacts-list {
         width: 90% !important;
-        // height: calc(100vh - 75px) !important;
-        // padding-top: 75px;
     }
-
 
     .new-contact {
         top: 24px !important;
@@ -35,7 +32,6 @@
             }
 
             .contact-headline {
-                // padding-left: 24px !important;
                 display: block !important;
 
                 h3 {
@@ -141,7 +137,6 @@
             display: block !important;
             height: auto !important;
             position: relative !important;
-            // top: 118px !important;
             padding-left: 18rem !important;
             transform: translateY(56px);
 
@@ -171,11 +166,6 @@
             height: unset !important;
             margin-bottom: 23px;
 
-            // &>img {
-                // position: absolute;
-            //     top: 19rem;
-            // }
-
             .user-icon {
                 transform: translate(0px, -67px) !important;
                 top: 22rem !important;
@@ -183,6 +173,11 @@
 
             form {
                 transform: translate(0px, -51px) !important;
+                width: 100%;
+
+                .buttons {
+                    justify-content: center;
+                }
             }
 
             [class*="-input"] {
@@ -593,10 +588,6 @@
         justify-content: center;
         gap: 40px;
         padding: 0px 48px;
-
-        // &>img {
-        //     padding-bottom: 80px;
-        // }
 
         .phone-input {
             margin-bottom: 25px;

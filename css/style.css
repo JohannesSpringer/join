@@ -627,6 +627,10 @@
   }
   #overlayContent .overlay-right form {
     transform: translate(0px, -51px) !important;
+    width: 100%;
+  }
+  #overlayContent .overlay-right form .buttons {
+    justify-content: center;
   }
   #overlayContent .overlay-right [class*=-input] {
     width: unset !important;

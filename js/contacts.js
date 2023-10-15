@@ -136,13 +136,21 @@ async function getCurrentUserData() {
 }
 
 function delContact(userId) {
-    debugger;
     contactsA.splice(contactsA.indexOf(getIndexOfArray(contactsA, userId)), 1);
     animationAndPushToServer();
     document.getElementById('contactDetails').innerHTML = '';
     let overlay = document.getElementById('overlayContent');
     if (!overlay.classList.contains('d-none')) {
         toggleDNone('overlayContent'); // only toggle if overlay is shown
+    }
+    hideDetailsAtMobile();
+}
+
+function hideDetailsAtMobile() {
+    let windowWidth = window.innerWidth;
+    if (windowWidth < 1000) {
+        document.getElementById('contacts-container').getElementsByClassName('contact-info')[0].classList.add('d-none-mobile');
+        document.getElementById('contacts-container').getElementsByClassName('contacts')[0].classList.remove('d-none');
     }
 }
 
@@ -226,7 +234,7 @@ function showDetailsAtMobile() {
         document.getElementsByClassName('new-contact')[0].classList.add('d-none');
         document.getElementsByClassName('contact-changes')[0].classList.add('d-none');
         document.getElementById('mobile-menu').innerHTML = /*html */`
-                <div class="mobile-icon"><img src="./assets/img/contactsMobileMenu.png" alt=""></div>
+                <div class="mobile-icon"><img src="./assets/img/contactsMobileMenu.png"></div>
         `;
     }
 }
@@ -291,13 +299,13 @@ function showDetails(id) {
         <div class="contactInfo">
             <span class="contact-name">${getIndexOfArray(contactsA, id).name}</span>
             <div class="contact-changes">
-                <div class="contact-edit">
+                <div class="contact-edit" onclick="editShowContact(${editname})">
                     <img src="./assets/img/edit.png" alt="">
-                    <p onclick="editShowContact(${editname})">Edit</p>
+                    <p>Edit</p>
                 </div>
-                <div class="contact-edit">
+                <div class="contact-edit" onclick="delContact(${editname})">
                     <img src="./assets/img/delete.png" alt="">
-                    <p onclick="delContact(${editname})">Delete</p>
+                    <p>Delete</p>
                 </div>
             </div>
         </div>
@@ -331,8 +339,9 @@ function editShowContact(contact) {
 
 function showMobileMenuContact(id) {
     let mobilemenu = document.getElementById('mobile-menu');
+    mobilemenu.setAttribute('onclick', `hideMobileMenuContact(${id})`);
     mobilemenu.innerHTML += `
-        <div class="mobile-menu-contact">
+        <div class="mobile-menu-contact" onclick="noClose(event)">
             <div class="mobile-menu-edit" onclick="editShowContact(${id})">
                 <img src="./assets/img/edit.png">
                 <span>Edit</span>
@@ -345,17 +354,22 @@ function showMobileMenuContact(id) {
         `;
 }
 
-
+function hideMobileMenuContact(id) {
+    let mobilemenu = document.getElementById('mobile-menu');
+    mobilemenu.setAttribute('onclick', `showMobileMenuContact(${id})`);
+    mobilemenu.innerHTML = '<div class="mobile-icon"><img src="./assets/img/contactsMobileMenu.png"></div>';
+}
 
 function showCreateContact() {
     document.getElementById('overlayContent').innerHTML =  /*html */`
     <div class="close-top">
         <img src="./assets/img/contacts-icons/close-white.png" alt="" onclick="toggleDNone('overlayContent')" class="white">
-    </div><div class="overlay-left">        
-    <img src="./assets/img/menu-logo.png" alt="" id="logo">
-    <p class="overlay-title">Add contact</p>
-    <p>Tasks are better with a team!</p>
-    <div class="overlay-sep"></div>
+    </div>
+    <div class="overlay-left">        
+        <img src="./assets/img/menu-logo.png" alt="" id="logo">
+        <p class="overlay-title">Add contact</p>
+        <p>Tasks are better with a team!</p>
+        <div class="overlay-sep"></div>
     </div>
     <!-- createContact -->
     <div class="overlay-right">
@@ -366,9 +380,7 @@ function showCreateContact() {
             <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required>
             <div class="buttons">
                 <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel </button>
-                <button type="submit" class="add-contact-btn" >
-                    Create contact
-                </button>
+                <button type="submit" class="add-contact-btn" >Create contact</button>
             </div>
         </form>
         <div class="close">
@@ -379,29 +391,28 @@ function showCreateContact() {
 
 function showEditContact(id) {
     let userId = id;
-    document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
-        <div class="close-top">
+    document.getElementById('overlayContent').innerHTML =  /*html */
+    `<div class="close-top">
         <img src="./assets/img/contacts-icons/close-white.png" alt="" onclick="toggleDNone('overlayContent')" class="white">
     </div>
-    <img src="./assets/img/menu-logo.png" alt="" id="logo">
-    <p class="overlay-title">Edit contact</p>
-    <div class="overlay-sep"></div>
-</div>
-<div class="overlay-right">
-    <img src="./assets/img/contacts-icons/userIcon.png" alt="">    
-    <form action="#" onsubmit="editContact(${userId}); return false">
-        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${getIndexOfArray(contactsA, id).name}">
-        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${getIndexOfArray(contactsA, id).email}">
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required value="${getIndexOfArray(contactsA, id).phone}">
-        <div class="buttons">
-            <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
-            <button type="submit" class="add-contact-btn" >
-                Save
-            </button>
-        </div>        
-    </form>
-    <div class="close">
-        <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
+    <div class="overlay-left">
+        <img src="./assets/img/menu-logo.png" alt="" id="logo">
+        <p class="overlay-title">Edit contact</p>
+        <div class="overlay-sep"></div>
     </div>
-</div>`
+    <div class="overlay-right">
+        <img src="./assets/img/contacts-icons/userIcon.png" alt="" class="user-icon">    
+        <form action="#" onsubmit="editContact(${userId}); return false">
+            <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${getIndexOfArray(contactsA, id).name}">
+            <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${getIndexOfArray(contactsA, id).email}">
+            <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+ ]*" minlength="6" maxlength="30" required value="${getIndexOfArray(contactsA, id).phone}">
+            <div class="buttons">
+                <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
+                <button type="submit" class="add-contact-btn">Save</button>
+            </div>        
+        </form>
+        <div class="close">
+            <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
+        </div>
+    </div>`
 }
