@@ -327,6 +327,7 @@ async function saveTask(idx) {
     saveChangedDataLocal(idx);
     await setItem('tasks', JSON.stringify(tasks));
     document.getElementById('taskDetailView').classList.add('display-none');
+    document.getElementById('boardContent').classList.remove('board-content-mobile');
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
     await initBoard();

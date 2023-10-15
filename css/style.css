@@ -1910,6 +1910,14 @@ body {
   .task-details {
     margin: 24px !important;
   }
+  .task-subtask {
+    margin-bottom: 48px;
+  }
+}
+@media (max-width: 400px) {
+  .edit-prio-buttons {
+    font-size: small;
+  }
 }
 @media (max-width: 1100px) {
   .greeting {

@@ -61,6 +61,7 @@ function goToIndex() {
  */
 async function goToSummary() {
     previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
+    if (previousSelectedMenuItems == null) previousSelectedMenuItems = [];
     previousSelectedMenuItems.push('summary');
     localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
     window.location.href = "summary.html";
