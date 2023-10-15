@@ -152,6 +152,7 @@ function htmlTaskPrio(task) {
 }
 
 function openTaskDetailView(id) {
+    document.getElementById('boardContent').classList.add('board-content-mobile');
     editContacts.length = 0
     let task = tasks.find((e => e['task-id'] == id));
     openedTask = task;
@@ -461,6 +462,7 @@ function closeOverlay() {
 
 function closeDetailView() {
     editContacts = [];
+    document.getElementById('boardContent').classList.remove('board-content-mobile');
     document.getElementById('taskDetailView').classList.add('display-none');
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;

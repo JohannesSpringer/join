@@ -91,6 +91,7 @@
     .header-icons {
         display: flex;
         align-items: center;
+        position: relative;
 
         .profil-pic {
             height: 40px;
@@ -121,22 +122,27 @@
         }
     }
 
-    .log-out-field {
+    .profil-icon-menu {
         position: absolute;
-        top: 100%;
-        right: calc(3% + 20px);
-        transform: translate(0, -50%);
-        color: white;
+        top: 40px;
+        right: 52px;
+        width: 96px;
+        color: $lightgray;
         background-color: $darkblue;
-        cursor: pointer;
-        padding: 8px 8px;
+        padding: 12px;
         border-radius: 10px;
         border-top-right-radius: 0px;
-        font-weight: 700;
-        border: none;
+        font-weight: 400;
+        font-size: small;
 
-        &:hover {
-            background-color: $lightblue;
+        div {
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $lightblueHover;
+            }
         }
     }
 }
@@ -197,10 +203,6 @@
             display: none;
         }
 
-    }
-
-    .profil-pic {
-        margin-right: 25px !important;
     }
 }
 

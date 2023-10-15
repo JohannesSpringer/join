@@ -1857,8 +1857,9 @@ body {
     top: 20px;
   }
   .board-detail-view .content .icons {
-    right: 32px;
-    bottom: 32px;
+    position: fixed;
+    right: 0px;
+    bottom: 99px;
   }
   .board-tasks {
     margin-bottom: 64px;
@@ -1889,6 +1890,7 @@ body {
   }
   .add-task {
     border-radius: 0 !important;
+    padding: 16px !important;
   }
   .add-task-header {
     padding: 0 !important;
@@ -1904,6 +1906,9 @@ body {
   }
   .search-container #search-input {
     width: 100%;
+  }
+  .task-details {
+    margin: 24px !important;
   }
 }
 @media (max-width: 1100px) {
@@ -2902,6 +2907,7 @@ a {
 .header .header-icons {
   display: flex;
   align-items: center;
+  position: relative;
 }
 .header .header-icons .profil-pic {
   height: 40px;
@@ -2927,22 +2933,26 @@ a {
   cursor: pointer;
   transform: scale(1.05);
 }
-.header .log-out-field {
+.header .profil-icon-menu {
   position: absolute;
-  top: 100%;
-  right: calc(3% + 20px);
-  transform: translate(0, -50%);
-  color: white;
+  top: 40px;
+  right: 52px;
+  width: 96px;
+  color: #D1D1D1;
   background-color: #2A3647;
-  cursor: pointer;
-  padding: 8px 8px;
+  padding: 12px;
   border-radius: 10px;
   border-top-right-radius: 0px;
-  font-weight: 700;
-  border: none;
+  font-weight: 400;
+  font-size: small;
 }
-.header .log-out-field:hover {
-  background-color: #29ABE2;
+.header .profil-icon-menu div {
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.header .profil-icon-menu div:hover {
+  background-color: #1188bb;
 }
 
 /*** MEDIA QUERY ***/
@@ -2992,9 +3002,6 @@ a {
   }
   .header .question-icon {
     display: none;
-  }
-  .profil-pic {
-    margin-right: 25px !important;
   }
 }
 @media (max-width: 430px) {

@@ -364,12 +364,12 @@ function displayInitialsFromCurrentUser() {
  * show and hide Log out Button in desktop_template.html
  */
 function openProfilIconMenu() {
-    let logOutField = document.getElementById('log-out-field');
+    let profilIconMenu = document.getElementById('profilIconMenu');
 
-    if (logOutField.style.display === 'block') {
-        logOutField.style.display = 'none';
+    if (profilIconMenu.style.display === 'block') {
+        profilIconMenu.style.display = 'none';
     } else {
-        logOutField.style.display = 'block';
+        profilIconMenu.style.display = 'block';
     }
 }
 

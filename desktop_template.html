@@ -18,26 +18,26 @@
         <div class="menu-content">
             <img onclick="goToSummary()" class="menu-logo" src="assets/img/menu-logo.png">
             <div class="menu-nav">
-                    <div id="bg-summary" onclick="goToSummary()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/summary.png"></div>
-                        Summary
-                    </div>
-                    <div id="bg-board" onclick="goToBoard()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/board.png"></div>
-                        Board
-                    </div>
-                    <div id="bg-add-task" onclick="goToAddTask()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/add-task.png"></div>
-                        Add Task
-                    </div>
-                    <div id="bg-contacts" onclick="goToContacts()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
-                        Contacts
-                    </div>
-                    <div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
-                        <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
-                        Legal notice
-                    </div>
+                <div id="bg-summary" onclick="goToSummary()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/summary.png"></div>
+                    Summary
+                </div>
+                <div id="bg-board" onclick="goToBoard()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/board.png"></div>
+                    Board
+                </div>
+                <div id="bg-add-task" onclick="goToAddTask()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/add-task.png"></div>
+                    Add Task
+                </div>
+                <div id="bg-contacts" onclick="goToContacts()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
+                    Contacts
+                </div>
+                <div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
+                    <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
+                    Legal notice
+                </div>
             </div>
         </div>
     </div>
@@ -48,7 +48,11 @@
         <div class="header-icons">
             <img onclick="location.href='help.html';" class="question-icon" src="assets/img/question-icon.png">
             <div onclick="openProfilIconMenu()" id="profil-icon" class="profil-pic"></div>
-            <div id="log-out-field" style="display: none;" onclick="logout()" class="log-out-field">Log out</div>
+            <div id="profilIconMenu" class="profil-icon-menu" style="display: none;">
+                <div onclick="goToLegalNotice()" class="log-out-field">Legal Notice</div>
+                <div onclick="goToLegalNotice()" class="log-out-field">Privacy Policy</div>
+                <div id="log-out-field" onclick="logout()" class="log-out-field">Log out</div>
+            </div>
         </div>
     </div>
 </body>

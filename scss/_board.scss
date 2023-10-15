@@ -820,8 +820,9 @@ body {
             }
 
             .icons {
-                right: 32px;
-                bottom: 32px;
+                position: fixed;
+                right: 0px;
+                bottom: 99px;
             }
         }
     }
@@ -862,6 +863,7 @@ body {
 
     .add-task {
         border-radius: 0 !important;
+        padding: 16px !important;
     }
 
     .add-task-header {
@@ -882,5 +884,9 @@ body {
         #search-input {
             width: 100%;
         }
+    }
+
+    .task-details {
+        margin: 24px !important;
     }
 }
