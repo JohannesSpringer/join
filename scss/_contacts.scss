@@ -4,6 +4,10 @@
         width: 90% !important;
     }
 
+    .contacts {
+        width: 100% !important;
+    }
+
     .new-contact {
         top: 24px !important;
         right: 24px !important;
@@ -147,7 +151,7 @@
             }
         }
 
-        .close {
+        .close-contact {
 
             .dark {
                 display: none !important;
@@ -188,7 +192,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     #contacts-container {
         margin-left: 1px !important;
         position: fixed !important;
@@ -562,9 +566,10 @@
         display: none;
     }
 
-    .close {
-        top: 20px;
-        right: 20px;
+    .close-contact {
+        position: absolute;
+        top: 24px;
+        right: 24px;
 
         img {
             height: 23px;

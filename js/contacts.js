@@ -383,7 +383,7 @@ function showCreateContact() {
                 <button type="submit" class="add-contact-btn" >Create contact</button>
             </div>
         </form>
-        <div class="close">
+        <div class="close-contact">
             <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
         </div>
     </div>`
@@ -411,7 +411,7 @@ function showEditContact(id) {
                 <button type="submit" class="add-contact-btn">Save</button>
             </div>        
         </form>
-        <div class="close">
+        <div class="close-contact">
             <img src="./assets/img/contacts-icons/close.png" alt="" onclick="toggleDNone('overlayContent')" class="dark">
         </div>
     </div>`

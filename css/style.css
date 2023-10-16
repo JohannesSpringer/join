@@ -484,7 +484,7 @@
   filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .legal-notice-content {
     margin-left: 32px !important;
     margin-right: 16px;
@@ -494,6 +494,9 @@
 @media (max-width: 1000px) {
   .contacts-list {
     width: 90% !important;
+  }
+  .contacts {
+    width: 100% !important;
   }
   .new-contact {
     top: 24px !important;
@@ -606,7 +609,7 @@
     height: 23px;
     width: 23px;
   }
-  #overlayContent .close .dark {
+  #overlayContent .close-contact .dark {
     display: none !important;
   }
   #overlayContent .overlay-right {
@@ -636,7 +639,7 @@
     width: unset !important;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #contacts-container {
     margin-left: 1px !important;
     position: fixed !important;
@@ -959,16 +962,17 @@
 #overlayContent .close-top {
   display: none;
 }
-#overlayContent .close {
-  top: 20px;
-  right: 20px;
+#overlayContent .close-contact {
+  position: absolute;
+  top: 24px;
+  right: 24px;
 }
-#overlayContent .close img {
+#overlayContent .close-contact img {
   height: 23px;
   width: 23px;
   cursor: pointer;
 }
-#overlayContent .close .white {
+#overlayContent .close-contact .white {
   display: none;
 }
 #overlayContent .overlay-right {
@@ -1852,7 +1856,7 @@ body {
     width: 100% !important;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
     overflow: auto !important;
     overflow-x: hidden !important;
