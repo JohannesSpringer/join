@@ -573,7 +573,7 @@ body {
     height: 100%;
     left: 0;
     top: 0;
-    right: 100%;
+    // right: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -771,12 +771,37 @@ body {
         }
     }
 
-    .overlay-add-task {
-        overflow: auto;
-    }
-
     .add-task {
         max-width: 600px !important;
+        overflow: auto;
+        height: calc(100vh - 88px);
+        padding: 32px !important;
+
+        .add-task-header {
+            padding: unset !important;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 7px;
+            background: #A8A8A8;
+        }
+
+        &::-webkit-scrollbar-track-piece:start {
+            margin-top: 32px;
+        }
+
+        &::-webkit-scrollbar-track-piece:end {
+            margin-bottom: 32px;
+        }
+    }
+
+    .add-task-content {
+        padding-bottom: 48px;
     }
 }
 

@@ -1,13 +1,45 @@
 $bgr_color1: #29ABE2;
 $bgr_color2: #2A3647;
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
     .greeting {
         display: none !important;
     }
-}
 
-@media (max-width: 835px) {
+    .main_box {
+        width: calc(100% - 276px);
+    }
+
+    .overview {
+        width: 100%;
+    }
+
+    .summery_head {
+        justify-content: flex-start !important;
+    }
+
+    .task {
+        justify-content: space-between;
+        gap: 32px !important;
+
+        .task_sub {
+            width: 100%;
+        }
+    }
+
+    .prio_date {
+        width: 100% !important;
+    }
+
+    .todo_done {
+        justify-content: space-between;
+        gap: 32px !important;
+
+        .todo_done_sub {
+            width: 100%;
+        }
+    }
+
     .summery_head {
         display: block !important;
 
@@ -30,34 +62,25 @@ $bgr_color2: #2A3647;
         }
 
     }
+}
 
-    .count {
-        font-size: 37px !important;
+@media (max-width: 768px) {
+    .main_box {
+        top: 0 !important;
+        left: 0px !important;
+        margin-bottom: 91px;
+        margin-left: 24px;
+        margin-right: 24px;
+        width: calc(100% - 48px);
+        position: unset !important;
     }
 
-    .status {
-        font-size: 16px !important;
-    }
-
-    .task_sub {
-        width: 124px !important;
-        height: 124px !important;
-
-    }
-
-    .prio_date {
-        width: 444px !important;
-
-        .prio_date_sub {
-            img {
-                width: 50px !important;
-            }
-        }
+    .overview {
+        width: 100%;
     }
 }
 
-
-@media (max-width: 690px) {
+@media (max-width: 600px) {
     .task {
         gap: 0 !important;
         justify-content: space-between;
@@ -98,19 +121,18 @@ $bgr_color2: #2A3647;
     }
 }
 
-@media (max-width: 600px) {
-    .main_box {
-        top: 0 !important;
-        left: 0px !important;
-        margin-bottom: 91px;
-        margin-left: 24px;
-        margin-right: 24px;
-        width: calc(100% - 48px);
-        position: unset !important;
+@media (max-width: 480px) {
+    .todo_done_sub {
+
+        &>img {
+            width: 40px;
+        }
     }
 
-    .overview {
-        width: 100%;
+    .prio_date_sub {
+        &>img {
+            width: 40px !important;
+        }
     }
 }
 
@@ -147,6 +169,7 @@ a {
     display: flex;
     align-items: center;
     gap: 70px;
+    margin-right: 36px;
 }
 
 .greeting {
@@ -188,7 +211,7 @@ a {
 }
 
 .task {
-    gap: 35px;
+    gap: 32px;
     margin-top: 100px;
     display: flex;
 }
@@ -222,7 +245,7 @@ a {
     width: 580px;
     height: 150px;
     @include bgr();
-    margin-top: 35px;
+    margin-top: 32px;
     transition: 300ms;
 
     &:hover {
@@ -232,8 +255,8 @@ a {
 
 .todo_done {
     display: flex;
-    margin-top: 35px;
-    gap: 35px;
+    margin-top: 32px;
+    gap: 32px;
 }
 
 .todo_done_sub {

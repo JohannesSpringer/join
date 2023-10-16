@@ -639,22 +639,22 @@
 
 
 // responsive
-@media (max-width: 1000px) {
-    .add-task-content {
-        margin: 0 0 0 0;
-        padding: 32px;
-    }
+// @media (max-width: 1000px) {
+//     // .add-task-content {
+//     //     margin: 0 0 0 0;
+//     //     padding: 32px;
+//     // }
 
-    .add-task-inputs {
-        margin: 0;
-    }
+//     .add-task-inputs {
+//         margin: 0;
+//     }
 
-    .add-task-inputs-submit {
-        margin-bottom: 75px;
-    }
-}
+//     .add-task-inputs-submit {
+//         margin-bottom: 75px;
+//     }
+// }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .add-task-content {
         margin: 0 0 0 0;
         padding: 32px;
