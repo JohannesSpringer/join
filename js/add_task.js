@@ -83,6 +83,9 @@ function toggleSubmitButton() {
     }
 }
 
+/**
+ * This function saves the new task in the backend and displays the board view
+ */
 async function addTask() {
     let newTask = getNewTaskData();
     tasks.push(newTask);
@@ -90,6 +93,10 @@ async function addTask() {
     goToBoard();
 }
 
+/**
+ * This function creates the JSON format of the new task
+ * @returns Data of the new task in JSON format
+ */
 function getNewTaskData() {
     return {
         'title': document.getElementById('taskTitle').value,
@@ -129,6 +136,9 @@ function getDate() {
     return today.toISOString().split('T')[0];
 }
 
+/**
+ * This functions opens or closes the category drop down menu
+ */
 function toggleCategory() {
     if (!menuOpenCategory) {
         openMenu('categories', 'dropDownCategory')
@@ -139,6 +149,9 @@ function toggleCategory() {
     menuOpenCategory = !menuOpenCategory;
 }
 
+/**
+ * This functions opens or closes the contacts drop down menu to assign users to the task
+ */
 function toggleContacts() {
     if (!menuOpenContacts) {
         openMenu('contacts', 'dropDownContacts')
@@ -153,6 +166,9 @@ function toggleContacts() {
     menuOpenContacts = !menuOpenContacts;
 }
 
+/**
+ * This function selects the users which are already assigned to the task
+ */
 function markAlreadySelectedContacts() {
     selectedContacts.forEach(cntct => {
         let cntctBox = document.getElementById(`cntcts${cntct}`);
@@ -161,6 +177,9 @@ function markAlreadySelectedContacts() {
     });
 }
 
+/**
+ * 
+ */
 function createFilterOption() {
     let filterDiv = document.getElementById('dropDownContacts');
     filterDiv.innerHTML = filterDivHtml();
@@ -179,6 +198,10 @@ function setFocus(id) {
     elem.focus();
 }
 
+/**
+ * 
+ * @returns HTML-Code to filter contacts of the user
+ */
 function filterDivHtml() {
     return `
         <input type="text" id="findContact" placeholder="Search" autocomplete="off" onkeyup="filterContacts()" onclick="event.stopPropagation()">
@@ -186,22 +209,35 @@ function filterDivHtml() {
     `;
 }
 
+/**
+ * This functions filters the contacts of one user
+ */
 function filterContacts() {
     let val = document.getElementById('findContact').value;
-    for (let i = 0; i < users.length; i++) {
-        const usr = users[i].name;
-        if (valInUserName(val, usr)) {
-            document.getElementById(`cntcts${i}`).style = 'display: flex';
+    for (let i = 0; i < userData.contacts.length; i++) {
+        const usr = userData.contacts[i];
+        if (valInUserName(val, usr.name)) {
+            document.getElementById(`cntcts${usr.id}`).style = 'display: flex';
         } else {
-            document.getElementById(`cntcts${i}`).style = 'display: none';
+            document.getElementById(`cntcts${usr.id}`).style = 'display: none';
         }
     };
 }
 
+/**
+ * This function compares the search string with the name
+ * 
+ * @param {string} val 
+ * @param {string} name 
+ * @returns True if the string "val" can be found in the name
+ */
 function valInUserName(val, name) {
     return name.toLowerCase().includes(val.toLowerCase());
 }
 
+/**
+ * This function opens the dropdown menu with the id's
+ */
 function openMenu(id1, id2) {
     removeBorder(id2)
     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
@@ -210,25 +246,46 @@ function openMenu(id1, id2) {
     setTimeout(removeAnimationClass, 200);
 }
 
+/**
+ * This function removes the bottom border of an element
+ * 
+ * @param {string} id Id of an DOM-Element
+ */
 function removeBorder(id) {
     document.getElementById(id).style.borderBottom = `0`;
 }
 
+/**
+ * This functions closes the category dropdown menu with animation
+ * 
+ * @param {string} id1 
+ */
 function closeMenuCategories(id1) {
     document.getElementById(id1).classList.add('scale-down-ver-top');
     setTimeout(closeCategories, 200);
 }
 
+/**
+ * This functions closes the contacts dropdown menu with animation
+ * 
+ * @param {string} id1 
+ */
 function closeMenuContacts(id1) {
     document.getElementById(id1).classList.add('scale-down-ver-top');
     setTimeout(closeContacts, 200);
 }
 
+/**
+ * This function removes the animation class of the dropdown menu's
+ */
 function removeAnimationClass() {
     document.getElementById(`categories`).classList.remove('scale-up-ver-top');
     document.getElementById(`contacts`).classList.remove('scale-up-ver-top');
 }
 
+/**
+ * This function closes the category dropdown menu
+ */
 function closeCategories() {
     document.getElementById('categories').innerHTML = '';
     document.getElementById('dropDownCategory').style.borderBottom = `1px solid #D1D1D1`;
@@ -237,6 +294,9 @@ function closeCategories() {
     document.getElementById(`categories`).classList.remove('scale-down-ver-top');
 }
 
+/**
+ * This function closes the contacts dropdown menu
+ */
 function closeContacts() {
     document.getElementById('contacts').innerHTML = '';
     document.getElementById('dropDownContacts').style.borderBottom = `1px solid #D1D1D1`;
@@ -250,6 +310,9 @@ function closeContacts() {
     document.getElementById('initials').style.display = 'flex';
 }
 
+/**
+ * This functions displays the initials of the assigned users of the task
+ */
 function showInitialsFromAssignedContacts() {
     let divInitials = document.getElementById('initials');
     divInitials.innerHTML = '';
