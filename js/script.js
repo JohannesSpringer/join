@@ -153,8 +153,6 @@ async function checkValidCredentials() {
  * @returns 
  */
 async function isPasswordValid(password, hashedPassword) {
-    if (rememberMeChecked) return password === hashedPassword;
-
     let hasehdLoginPassword = await hashWithSHA256(password)
     return hasehdLoginPassword.toString() === hashedPassword;
 }
@@ -172,6 +170,7 @@ function userIsExisting() {
 * hash a string with SHA-256
 */
 async function hashWithSHA256(string) {
+    if (string.length == 64) return string;
     const encoder = new TextEncoder();
     const data = encoder.encode(string);
     const hash = await crypto.subtle.digest('SHA-256', data);
@@ -304,6 +303,7 @@ function loadLoginData() {
 
     if (storedEmail && storedPassword && rememberMeChecked) {
         document.getElementById("loginEmail").value = storedEmail;
+
         document.getElementById("loginPassword").value = storedPassword;
         rememberCheckbox.checked = true;
     } else {
@@ -322,6 +322,11 @@ function guestLogin() {
     goToSummary();
 }
 
+/**
+ * This functions cuts the first letters of the surname and lastname
+ * @param {string} name - The complete name of the user you want to have the initials
+ * @returns Initials with 2 letters of the name
+ */
 function getInitialsFromName(name) {
     let nameParts = name.split(" ");
     if (nameParts.length == 1) {
@@ -370,6 +375,9 @@ function getIndexOfArray(a, s) {
     }
 }
 
+/**
+ * This functions displays the initials of the current user in the top right corner
+ */
 function displayInitialsFromCurrentUser() {
     let divElem = document.getElementById('profil-icon');
     divElem.innerHTML = userData.initials;
