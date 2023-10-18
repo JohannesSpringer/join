@@ -139,6 +139,7 @@ async function getAllUsers() {
  * Set the current userData
  */
 async function getCurrentUserData() {
+    // setGuestUserData();
     await users.forEach(function users(value, index) {
         if (value.email === regUserMail) {
             userData = value;
@@ -146,6 +147,20 @@ async function getCurrentUserData() {
             contactsA = value.contacts || [];
         }
     })
+}
+
+/**
+ * This function set userData for the Guest Login
+ */
+function setGuestUserData() {
+    userData = {
+        name: 'Guest',
+        initials: 'GU',
+        id: -1,
+        color: '#00FF00',
+        email: 'test@test.de',
+        contacts: []
+    }
 }
 
 /**
@@ -223,10 +238,12 @@ function editContact(id) {
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
     let initials = getInitialsFromName(name);
-    contactsA[id].name = name;
-    contactsA[id].email = email;
-    contactsA[id].phone = phone;
-    contactsA[id].initials = initials;
+    let cntctElem = getIndexOfArray(contactsA, id);
+    let idInContactsA = contactsA.indexOf(cntctElem);
+    contactsA[idInContactsA].name = name;
+    contactsA[idInContactsA].email = email;
+    contactsA[idInContactsA].phone = phone;
+    contactsA[idInContactsA].initials = initials;
     animationAndPushToServer();
     showContact(contactsA.findIndex((elem) => {
         return elem.email == email;
@@ -256,7 +273,14 @@ function addContactsToUser() {
     userData = { ...userData, contacts: contactsA };
     users.splice(userArrayId, 1);
     users.push(userData);
+    overwriteContactsForOtherUsers();
     pushToServer();
+}
+
+function overwriteContactsForOtherUsers() {
+    users.forEach(usr => {
+        usr.contacts = userData.contacts;
+    });
 }
 
 /**

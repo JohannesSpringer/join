@@ -29,7 +29,7 @@ function greet() {
 async function init() {
     await loadTasks();
     await loadUsers();
-    getCurrentUserData();
+    await getCurrentUserData();
     user_name = current_user['name'];
     if (tasks !== null) {
         console.log(tasks);

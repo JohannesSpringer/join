@@ -319,6 +319,7 @@ function guestLogin() {
     currentUser = 'Guest';
     localStorage.setItem('currentUser', 'Guest');
     clearLoginData();
+    localStorage.setItem('loginEmail', 'test@test.de');
     goToSummary();
 }
 
