@@ -117,6 +117,9 @@ function checkStatus(status) {
 
 // HTML Teil
 
+/**
+ * HTML-Code for the summary page
+ */
 function genHtmlToSite() {
     document.getElementById('overview').innerHTML = /*html */`
     

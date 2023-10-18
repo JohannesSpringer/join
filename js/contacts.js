@@ -7,10 +7,8 @@ let userArrayId;
 
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
 
-
 /**
- * Load Data from server
- * 
+ * This function loads data from server
  */
 async function init() {
     await getAllUsers();
@@ -19,12 +17,19 @@ async function init() {
     displayInitialsFromCurrentUser();
 };
 
+/**
+ * This function show an animation div
+ */
 function showAlert() {
     document.getElementById('alert').classList.add('animate');
     setTimeout(() => {
         document.getElementById('alert').classList.remove('animate');
     }, 2500);
 }
+
+/**
+ * This function saves the users in backend
+ */
 async function addContacts() {
     await setItem('users', JSON.stringify(contactsA));
 }
@@ -61,7 +66,6 @@ function sortContacts() {
 
 /**
  * Sort Contacts alphabetical to orderedContacts
- * 
  */
 function orderContacts() {
     sortContacts();
@@ -94,6 +98,9 @@ function getInitial(username) {
     }
 }
 
+/**
+ * This function changes the highlighted contact
+ */
 function changeActiv() {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
@@ -120,11 +127,17 @@ async function showContact(id) {
     showDetails(contactId);
 }
 
+/**
+ * Loads all user and set the userData
+ */
 async function getAllUsers() {
     await loadUsers();
     await getCurrentUserData();
 }
 
+/**
+ * Set the current userData
+ */
 async function getCurrentUserData() {
     await users.forEach(function users(value, index) {
         if (value.email === regUserMail) {
@@ -135,6 +148,11 @@ async function getCurrentUserData() {
     })
 }
 
+/**
+ * Deleting a contact by userId
+ * 
+ * @param {number} userId 
+ */
 function delContact(userId) {
     contactsA.splice(contactsA.indexOf(getIndexOfArray(contactsA, userId)), 1);
     animationAndPushToServer();
@@ -146,6 +164,9 @@ function delContact(userId) {
     hideDetailsAtMobile();
 }
 
+/**
+ * Hiding contact details in mobile version
+ */
 function hideDetailsAtMobile() {
     let windowWidth = window.innerWidth;
     if (windowWidth < 1000) {
@@ -154,6 +175,9 @@ function hideDetailsAtMobile() {
     }
 }
 
+/**
+ * Adding a new contact
+ */
 function addContact() {
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
@@ -173,11 +197,12 @@ function addContact() {
     animationAndPushToServer();
     showAlert();
     showContact(singleContact.id);
-    // showContact(contactsA.findIndex((elem) => {
-    //     return elem == singleContact;
-    // }));
 }
 
+/**
+ * 
+ * @returns An unused unique userId to identify the contact
+ */
 function getUnusedContactsId() {
     let contactsFromCurrentUser = users[userArrayId].contacts;
     let alreadyUsedIds = [];
@@ -208,16 +233,25 @@ function editContact(id) {
     }));
 }
 
+/**
+ * Displays an animation after adding a user and push the data to the server
+ */
 function animationAndPushToServer() {
     addContactsToUser();
     toggleDNone('overlayContent');
     insertContactsToContactList();
 }
 
+/**
+ * Push users to the server
+ */
 async function pushToServer() {
     await setItem('users', JSON.stringify(users));
 }
 
+/**
+ * Adding the new user to the contacts of the current registered user
+ */
 function addContactsToUser() {
     userData = { ...userData, contacts: contactsA };
     users.splice(userArrayId, 1);
@@ -225,10 +259,12 @@ function addContactsToUser() {
     pushToServer();
 }
 
+/**
+ * This function renders the contact details for mobile version
+ */
 function showDetailsAtMobile() {
     let windowWidth = window.innerWidth;
     if (windowWidth < 1000) {
-        // document.getElementById('contacts-list').classList.add('d-none');
         document.getElementsByClassName('contacts')[0].classList.add('d-none');
         document.getElementsByClassName('contact-info')[0].classList.remove('d-none-mobile');
         document.getElementsByClassName('new-contact')[0].classList.add('d-none');
@@ -239,22 +275,6 @@ function showDetailsAtMobile() {
     }
 }
 
-function hideContactInfo() {
-    document.getElementsByClassName('contacts')[0].classList.remove('d-none');
-    document.getElementById('contacts-list').classList.remove('d-none');
-    document.getElementsByClassName('contact-info')[0].classList.add('d-none-mobile');
-    document.getElementsByClassName('new-contact')[0].classList.remove('d-none');
-    document.getElementsByClassName('contact-changes')[0].classList.remove('d-none');
-    document.getElementById('mobile-menu').innerHTML = '';
-}
-
-function addScroll() {
-    document.getElementById('overlayAddTask').classList.remove('display-none');
-    document.getElementById('overlayAddTask').classList.add('overlay-add-task');
-    document.getElementById('mobileCreate').style.visibility = 'visible';
-    renderOverlayAddTask();
-    getDateOverlay();
-}
 
 /*Gen HTML Content */
 
@@ -265,14 +285,13 @@ function addScroll() {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact" onclick="showContact(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
+        <div class="list-contact" onclick="showContact(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
             <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
                 <p>${contact.email}</p>
             </div>
         </div>   
-    
     `;
 }
 
@@ -289,6 +308,11 @@ function genContactsHeader(i) {
     `;
 }
 
+/**
+ * Render the details of a contact
+ * 
+ * @param {number} id 
+ */
 function showDetails(id) {
     changeActiv();
     let editname = id;
@@ -326,6 +350,11 @@ function showDetails(id) {
         <div id="mobile-menu" onclick="showMobileMenuContact(${id})"></div>`;
 }
 
+/**
+ * Renders the editing mode for the contact
+ * 
+ * @param {number} contact 
+ */
 function editShowContact(contact) {
     document.getElementById('overlayContent').innerHTML = '';
 
@@ -337,6 +366,11 @@ function editShowContact(contact) {
     toggleDNone('overlayContent');
 }
 
+/**
+ * Renders the contact menu for mobile version
+ * 
+ * @param {number} id 
+ */
 function showMobileMenuContact(id) {
     let mobilemenu = document.getElementById('mobile-menu');
     mobilemenu.setAttribute('onclick', `hideMobileMenuContact(${id})`);
@@ -354,12 +388,20 @@ function showMobileMenuContact(id) {
         `;
 }
 
+/**
+ * Hides the contact menu for mobile version
+ * 
+ * @param {number} id 
+ */
 function hideMobileMenuContact(id) {
     let mobilemenu = document.getElementById('mobile-menu');
     mobilemenu.setAttribute('onclick', `showMobileMenuContact(${id})`);
     mobilemenu.innerHTML = '<div class="mobile-icon"><img src="./assets/img/contactsMobileMenu.png"></div>';
 }
 
+/**
+ * Renders the view to add/create a new contact
+ */
 function showCreateContact() {
     document.getElementById('overlayContent').innerHTML =  /*html */`
     <div class="close-top">
@@ -389,6 +431,11 @@ function showCreateContact() {
     </div>`
 }
 
+/**
+ * Renders the view to edit the contact
+ * 
+ * @param {number} id 
+ */
 function showEditContact(id) {
     let userId = id;
     document.getElementById('overlayContent').innerHTML =  /*html */
