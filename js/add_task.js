@@ -44,7 +44,6 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
     document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
-    // document.getElementById('reqTaskTitle').style.color = 'red';
 }
 
 /**
@@ -199,17 +198,6 @@ function setFocus(id) {
 }
 
 /**
- * 
- * @returns HTML-Code to filter contacts of the user
- */
-function filterDivHtml() {
-    return `
-        <input type="text" id="findContact" placeholder="Search" autocomplete="off" onkeyup="filterContacts()" onclick="event.stopPropagation()">
-        <img class="down_image" src="./assets/img/drop-down-arrow.png" style="transform: rotate(180deg)">
-    `;
-}
-
-/**
  * This functions filters the contacts of one user
  */
 function filterContacts() {
@@ -325,11 +313,20 @@ function showInitialsFromAssignedContacts() {
     });
 }
 
+/**
+ * This functions returns the initials of the users contact id
+ * 
+ * @param {number} cntct 
+ * @returns Initials as 2 letters
+ */
 function getInitialsFromCntct(cntct) {
     let name = getIndexOfArray(userData.contacts, cntct).name;
     return getInitialsFromName(name);
 }
 
+/**
+ * This function renders the dropdown category with all availabe categories
+ */
 function renderCategories() {
     document.getElementById('categories').innerHTML = `<div class="render_categories" onclick="createNewCategory()">New category</div>`;
     for (let i = 0; i < categories.length; i++) {
@@ -339,6 +336,11 @@ function renderCategories() {
     }
 }
 
+/**
+ * This funtion renders the dropdown for contacts to be assigned to the task
+ * 
+ * @param {number} id 
+ */
 function renderContacts(id) {
     userData.id = -1;
     userData.initials = getInitialsFromName(userData.name);
@@ -350,18 +352,29 @@ function renderContacts(id) {
     }
 }
 
+/**
+ * This function creates a new category
+ */
 function createNewCategory() {
     selectedCategory = [];
     showCreateNewCategoryHTML();
     checkFormFilled();
 }
 
+/**
+ * This function selects the color of the new category
+ * 
+ * @param {string} clr Color in Format '#00AAFF'
+ */
 function setColor(clr) {
     removeSelectedColors();
     selectedCategory[1] = clr;
     document.getElementById(clr).classList.add('selected');
 }
 
+/**
+ * This function removes the highlight of the category color
+ */
 function removeSelectedColors() {
     categoryColors.forEach(ctgryClr => {
         document.getElementById(ctgryClr).classList.remove('selected');
@@ -388,42 +401,18 @@ function toggleSetContact(id) {
     }
 }
 
+/**
+ * 
+ * @param {number} id 
+ * @returns If the contact of user is already assigned to the task
+ */
 function contactAlreadySelected(id) {
     return selectedContacts.includes(id);
 }
 
-function setPrio(prio) {
-    document.getElementById('prio').style.borderColor = `#F6F7F8`;
-    if (prio == currentPrio) removePrio();
-    else {
-        changePrio(prio);
-    }
-    checkFormFilled();
-};
-
-function removePrio() {
-    document.getElementById('prioUrgent').classList.remove('prio_button_urgent');
-    document.getElementById('prioMedium').classList.remove('prio_button_medium');
-    document.getElementById('prioLow').classList.remove('prio_button_low');
-    currentPrio = undefined;
-};
-
-function changePrio(prio) {
-    removePrio();
-    if (prio == 'urgent') {
-        document.getElementById('prioUrgent').classList.add('prio_button_urgent');
-        currentPrio = 'urgent';
-    }
-    if (prio == 'medium') {
-        document.getElementById('prioMedium').classList.add('prio_button_medium');
-        currentPrio = 'medium';
-    }
-    if (prio == 'low') {
-        document.getElementById('prioLow').classList.add('prio_button_low');
-        currentPrio = 'low';
-    }
-}
-
+/**
+ * This function adds a subtask to the current task
+ */
 function addSubtask() {
     let inputSubtask = document.getElementById('taskSubtask');
     let valueSubtask = inputSubtask.value;
@@ -435,17 +424,33 @@ function addSubtask() {
     inputSubtask.value = '';
 }
 
+/**
+ * This function displays the edit function for a subtask
+ * 
+ * @param {string} id DOM-element id of the subtask
+ * @param {string} tsk Id of the task
+ */
 function editSubtask(id, tsk) {
     let divId = document.getElementById(id);
     divId.innerHTML = htmlEditSubtask(tsk, id.slice(-1));
     setFocus(`changedSubtaskValue${id.slice(-1)}`);
 }
 
+/**
+ * This function saves the subtask in the backend
+ * 
+ * @param {string} id DOM-element id of the subtask
+ */
 function saveSubtask(id) {
     subtasks[id.slice(-1)] = document.getElementById(id).value;
     renderSubtasksInAddTask();
 }
 
+/**
+ * This function deletes the subtask from the backend
+ * 
+ * @param {string} id DOM-element id of the subtask
+ */
 function deleteSubtask(id) {
     subtasks.splice(id.slice(-1), 1);
     subtaskStatus.splice(id.slice(-1), 1);
@@ -468,16 +473,16 @@ function clearInputField(id) {
 }
 
 /**
- * This function restores the category selection
+ * 
+ * @returns If the category has no value
  */
-function restoreCategorySelection() {
-    document.getElementById('categoryBox').innerHTML = restoreCategoriesHtml();
-}
-
 function noName() {
     return document.getElementById('categoryName').value == '';
 }
 
+/**
+ * This functions adds a new category when all required fields are filled
+ */
 async function addNewCategory() {
     selectedCategory[0] = document.getElementById('categoryName').value;
     if (selectedCategory[0].length < 1 || !selectedCategory[1]) {
@@ -488,6 +493,9 @@ async function addNewCategory() {
     }
 }
 
+/**
+ * This function saves the new category
+ */
 async function saveAndDisplayNewCategory() {
     categories.push([selectedCategory[0], selectedCategory[1]]);
     await setItem('categories', JSON.stringify(categories));
@@ -497,6 +505,12 @@ async function saveAndDisplayNewCategory() {
     checkFormFilled();
 }
 
+/**
+ * This function selects the category of the dropdown
+ * 
+ * @param {string} ctgry 
+ * @param {string} clr 
+ */
 function setCategory(ctgry, clr) {
     toggleCategory();
     selectedCategory = [ctgry, clr];
@@ -507,213 +521,4 @@ function setCategory(ctgry, clr) {
             <img class="down_image" src="assets/img/drop-down-arrow.png">
         </div>`;
     checkFormFilled();
-}
-
-function renderCategoriesHTML(i, cat, clr) {
-    return document.getElementById('categories').innerHTML += `
-        <div class="render_categories" id="ctgry${i}" onclick="setCategory('${cat}', '${clr}')">
-            <div class="category-box">
-                ${cat}
-                <div class="category-color" style="background-color: ${clr};"></div>
-            </div>
-        </div>`;
-}
-
-function renderContactsHTML(con, ini, id) {
-    return document.getElementById(id).innerHTML += `
-        <div class="render_contacts" id="cntcts${con.id}" onclick="toggleSetContact('${con.id}')">
-            <div class="contact-box">
-                <div class="contact-initials" style="background-color: ${con.color}">${ini}</div>
-                <div class="contact-name"">${con.name}${isLoggedInUser(con)}</div>
-            </div>
-            <label class="checkbox-container">
-                <input type="checkbox">
-                <span class="checkmark" onclick="toggleSetContact('${con.id}')"></span>
-            </label> 
-        </div>`;
-}
-
-function isLoggedInUser(usr) {
-    if (usr.id == -1) return ' (You)';
-    else return '';
-}
-
-function genHtmlInputTitle() {
-    return `<div class="task-title">
-                <label>Title</label>
-                <input type="text" id="taskTitle" placeholder="Enter a title" required>
-                <span id="reqTaskTitle">This field is required</span>
-            </div>`;
-}
-
-function genHtmlInputDescription() {
-    return `<div class="task-description">
-                <label>Description</label>
-                <textarea id="taskDescription" placeholder="Enter a Description" rows="4" required></textarea>
-                <span id="reqTaskDescription">This field is required</span>
-            </div>`;
-}
-
-function genHtmlInputCategory() {
-    return `<div id="categoryBox" class="task-category">
-                <label>Category</label>
-                <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
-                    Select task category
-                    <img class="down_image" src="./assets/img/drop-down-arrow.png">
-                </div>
-                <div id="categories" class="render_categories_box"></div>
-                <span id="reqTaskDescription">This field is required</span>
-            </div>`;
-}
-
-function genHtmlInputAssign() {
-    return `<div id="contactBox" class="task-category">
-                <label>Assigned to</label>
-                <div class="drop_down" id="dropDownContacts" onclick="toggleContacts()">
-                    Select contacts to assign
-                    <img class="down_image" src="./assets/img/drop-down-arrow.png">
-                </div>
-                <div id="contacts" class="render_categories_box"></div>
-                <div id="initials" class="initialsAssignedContacts"></div>
-                <span id="reqTaskAssign">This field is required</span>
-            </div>`;
-}
-
-function showCreateNewCategoryHTML() {
-    return document.getElementById('categoryBox').innerHTML = `
-        <label>Category</label>
-        <div class="category-name-box">  
-            <input type="text" placeholder="New category name" id="categoryName" required maxlength="29">
-            <div class="confirm-category">
-                <div onclick="clearInputField('categoryName')" class="delete-category">
-                    <img src="./assets/img/x.svg" alt="">
-                </div>
-                <div class="confirm-border"></div>
-                <div onclick="addNewCategory()">
-                    <img class="verifyCategory" src="./assets/img/haken.png">
-                </div>
-            </div>
-        </div>
-        <div class="color-points">
-            ${getCategoriesHtml()}
-        </div>
-        <span id="reqCatTitleAndColor">Please fill out name and select color!</span>
-        `;
-};
-
-function getCategoriesHtml() {
-    let htmlCategories = '';
-    categoryColors.forEach(ctgry => {
-        htmlCategories += `<div id="${ctgry}" class="color-point" onclick="setColor('${ctgry}')" style="background-color: ${ctgry};"></div>`;
-    });
-    return htmlCategories;
-}
-
-function showNewCreatedCategoryHtml() {
-    document.getElementById('categoryBox').innerHTML = `
-        <label>Category</label>
-        <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
-            Select task category
-            <img class="down_image" src="./assets/img/drop-down-arrow.png">
-        </div>
-        <div id="categories" class="render_categories_box"></div>
-        <span id="reqTaskDescription">This field is required</span>`;
-}
-
-function restoreCategoriesHtml() {
-    return `<label>Category</label>
-            <div class="drop_down" id="dropDownCategory" onclick="toggleCategory()">
-                Select task category
-                <img class="down_image" src="./assets/img/drop-down-arrow.png">
-            </div>
-            <div id="categories" class="render_categories_box"></div>
-            <span id="reqTaskDescription">This field is required</span>`;
-}
-
-function genHtmlInputDueDate() {
-    return `<div class="task-due-date">
-                <label>Due date</label>
-                <input type="date" id="taskDate" onchange="checkFormFilled()" name="date" min="${getDate()}" required>
-                <span id="reqTaskTitle">This field is required</span>
-            </div>`;
-}
-
-function genHtmlInputPrio() {
-    return `<div class="task-prio">
-                <label>Prio</label>
-                <div class="prio" id="prio">
-                    <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">
-                        Urgent
-                        <img src="assets/img/prioUrgent.png">
-                    </div>
-                    <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">
-                        Medium
-                        <img src="assets/img/prioMedium.png">
-                    </div>
-                    <div class="prio_button" id="prioLow" onclick="setPrio('low')">
-                        Low 
-                        <img src="assets/img/prioLow.png">
-                    </div>
-                </div>
-                <span id="reqTaskTitle">This field is required</span>
-            </div>`;
-}
-
-function genHtmlInputSubtasks() {
-    return `<div class="task-subtask">
-                <label>Subtasks</label>
-                <input type="text" id="taskSubtask" placeholder="Add new subtask">
-                <img class="add-subtask-img" src="./assets/img/plus.svg" onclick="addSubtask()">
-                <div class="subtasks" id="subtasks"></div>
-            </div>`;
-}
-
-function renderSubtasksInAddTask() {
-    let divSubtasks = document.getElementById('subtasks');
-    divSubtasks.innerHTML = '';
-    for (let i = 0; i < subtasks.length; i++) {
-        const tsk = subtasks[i];
-        divSubtasks.innerHTML += renderHtmlSubtask(tsk, i);
-    }
-}
-
-function renderHtmlSubtask(tsk, i) {
-    return `<div class="subtask" id="subtask${i}">
-                <span>&#9899;</span>
-                <div>${tsk}</div>
-                <div class="change-subtask">
-                    <div class="edit-subtask" onclick="editSubtask('subtask${i}', '${tsk}')">
-                        <img src="./assets/img/edit.png">
-                    </div> 
-                    <div class="delete-subtask" onclick="deleteSubtask('subtask${i}')">
-                        <img src="./assets/img/delete.png">
-                    </div>      
-                </div>
-            </div>`;
-}
-
-function htmlEditSubtask(tsk, i) {
-    return `<input class="edit-subtask-input" type="text" id="changedSubtaskValue${i}" value="${tsk}" required>
-            <div class="change-subtask" style="top: 7px">
-                <div class="edit-subtask" onclick="deleteSubtask('subtask${i}')">
-                    <img src="./assets/img/delete.png">
-                </div> 
-                <div class="delete-subtask" onclick="saveSubtask('changedSubtaskValue${i}')">
-                    <img src="./assets/img/checkmark.svg">
-                </div>      
-            </div>
-    `;
-}
-
-function genHtmlInputSubmit() {
-    return `<div class="submit-buttons">
-                <button>
-                    Clear
-                    <img src="./assets/img/x.svg"> 
-                </button>
-                <button id="submitButton" type="button" disabled>
-                    <input id="submitForm" type="submit" value="Create Task" disabled>
-                    <img src="./assets/img/checkmark.svg"> 
-                </button>
-            </div>`;
 }
