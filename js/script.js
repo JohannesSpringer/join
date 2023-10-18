@@ -412,3 +412,16 @@ async function initLegalNotice() {
     await getAllUsers();
     displayInitialsFromCurrentUser();
 }
+
+/**
+ * show and hide E-Mail sent Popup
+ */
+function showEmailSentMessage() {
+    let popup = document.getElementById('email-sent-popup');
+    popup.style.display = 'flex';
+    setTimeout(hideEmailSentMessage, 3000);
+}
+
+function hideEmailSentMessage() {
+    document.getElementById('email-sent-popup').style.display = 'none';
+}
