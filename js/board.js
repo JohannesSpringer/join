@@ -7,85 +7,43 @@ let editContacts = [];
 let selectedSubtasks = [];
 let menuContactsOpen;
 
+/**
+ * This function initialize the board page
+ */
 async function initBoard() {
     await loadData();
     displayInitialsFromCurrentUser();
     renderTasks(tasks);
 }
 
-
-//displays the current date
+/**
+ * This function displays the current date
+ */
 function getDateOverlay() {
     document.getElementById('taskDate').valueAsDate = new Date();
     date = document.getElementById('taskDate').value;
 };
 
-
-// load data from backend
+/**
+ * This function load data from backend
+ */
 async function loadData() {
     await loadTasks();
     await loadCategories();
     await getAllUsers();
 }
 
+/**
+ * This function renders all tasks on the board
+ * 
+ * @param {Array} inputArray 
+ */
 function renderTasks(inputArray) {
     deleteTasksOnBoard();
-
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
         renderSingleTask(task);
     }
-}
-
-/**
- * render card for single task
- * @param {string} taskStatus - Status / column of the task
- * @todo complete task
- */
-function renderSingleTask(task) {
-    let destination = document.getElementById(`${checkTaskStatus(task)}`);
-    destination.innerHTML += `
-        <div draggable="true" onclick="openTaskDetailView(${task['task-id']})" ondragstart="startDragging(${task['task-id']})" class="single-task" id="task${task['task-id']}">
-            ${htmlTaskTopic(task)}
-            ${htmlTaskTitle(task)}
-            ${htmlTaskDescription(task)}
-            ${htmlTaskSubtasks(task)}
-            ${htmlTaskDivBottom(task)}
-        </div>`;
-}
-
-/**
- * 
- * @returns html code for the topic of the task
- */
-function htmlTaskTopic(task) {
-    return `<div class="task-topic" style="background-color: ${task['category'][1]}">${task['category'][0]}</div>`;
-}
-
-function htmlTaskTitle(task) {
-    return `<h4>${task['title']}</h4>`;
-}
-
-function htmlTaskDescription(task) {
-    return `<div class="task-description-board">${task['description']}</div>`;
-}
-
-/**
- * 
- * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
- * @returns html code for progress in subtasks
- * check first for available subtasks
- * task has property 'done' as array with booleans, if true, subtask is already done
- * filter(Boolean) returns only true values of array
- */
-function htmlTaskSubtasks(task) {
-    if (task['subtasks'].length == 0) return '<div class="task-subtasks"></div>';
-    return `<div class="task-subtasks">
-                <div class="task-subtasks-line">
-                    <div class="progress" style="width: ${calcProgress(task)}%"></div>
-                </div>
-                <span>${task['done'].filter(Boolean).length}/${task['subtasks'].length} Done</span>
-            </div>`;
 }
 
 /**
@@ -97,60 +55,11 @@ function calcProgress(task) {
     return task['done'].filter(Boolean).length / task['subtasks'].length * 100;
 }
 
-function htmlTaskDivBottom(task) {
-    return `<div class="task-bottom">
-                ${htmlTaskEditors(task)}
-                ${htmlTaskPrio(task)}
-            </div>`;
-}
-
 /**
+ * This function shows the details of a task
  * 
- * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
- * @returns html code for the editors of the task 
- * 
- * all available editors are loaded from server and are stored global
- * get assigned contact id's from param task
- * get initials and color with contact id from global editors
- * if more than 2 editors, only show number of left over editors
+ * @param {number} id 
  */
-function htmlTaskEditors(task) {
-    let htmlCodeTemp = '';
-    selectedContacts = task['contacts'];
-    for (let i = 0; i < selectedContacts.length; i++) {
-        const editor = selectedContacts[i];
-        if (editor == null) break; // exit for each loop when no editor is available - prevent error
-        if (moreThan2Editors(i)) {
-            htmlCodeTemp += htmlTaskLeftOverEditors(selectedContacts);
-            break;
-        }
-        htmlCodeTemp += htmlTaskSingleEditor(editor);
-    }
-    return `<div class="editors">${htmlCodeTemp}</div>`;
-}
-
-function htmlTaskSingleEditor(editor) {
-    return `<div class="contact-frame" style="background-color: ${getIndexOfArray(userData.contacts, editor).color}">
-                ${getIndexOfArray(userData.contacts, editor).initials}
-            </div>`;
-}
-
-function htmlTaskLeftOverEditors(editors) {
-    return `<div class="contact-frame">
-                +${editors.length - 2}
-            </div>`;
-}
-
-function moreThan2Editors(i) {
-    return i > 1;
-}
-
-function htmlTaskPrio(task) {
-    return `<div class="task-prio">
-                <img src="assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
-            </div>`;
-}
-
 function openTaskDetailView(id) {
     document.getElementById('boardContent').classList.add('board-content-mobile');
     editContacts.length = 0
@@ -174,57 +83,11 @@ function getTaskDataToLocal() {
     }
 }
 
-function renderTaskDetailView(task) {
-    let detailView = document.getElementById('taskDetailView');
-    detailView.classList.remove('display-none');
-    detailView.innerHTML = htmlTaskDetailView(task);
-}
-
-function htmlTaskDetailView(task) {
-    return `
-        <div class="content" onclick="noClose(event)">
-            <div class="close">
-                <img src="./assets/img/close.png" onclick="closeDetailView()">
-            </div>
-            <div id="content" class="task-details">
-                <div class="category" style="background-color: ${task['category'][1]}">${task['category'][0]}</div>
-                <div class="title">${task['title']}</div>
-                <div>${task['description']}</div>
-                <div class="date">
-                    <b>Due date:</b>
-                    <div>${task['date']}</div>
-                </div>
-                <div class="priority">
-                    <b>Priority:</b>
-                    <div class="prio-icon" style="background-color: ${getCategoryColor(task['prio'])}">
-                        <div>${task['prio']}</div>
-                        <img src="./assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
-                    </div>
-                </div>
-                <div class="editors">
-                    <b>Assigned To:</b>
-                    ${htmlAllEditors(task)}
-                </div>
-                <div class="subtasks">
-                    <b>Subtasks</b>
-                    ${htmlSubtasks(task)}
-                </div>
-            </div>
-            <div id="icons" class="icons">
-                <div class="delete-button" onclick="deleteTask(${tasks.indexOf(task)})">
-                    <img src="./assets/img/delete.png">
-                    Delete
-                </div>
-                <div class="vertical-line"></div>
-                <div class="edit-button" onclick="editTask(${tasks.indexOf(task)})">
-                    <img src="./assets/img/edit.png">
-                    Edit
-                </div>
-            </div>
-        </div>
-    `;
-}
-
+/**
+ * This function opens the task in edit mode
+ * 
+ * @param {number} index 
+ */
 async function editTask(index) {
     edit_active = true;
     let content = document.getElementById('content');
@@ -240,12 +103,18 @@ async function editTask(index) {
     showInitialsOfAssignedContacts();
 };
 
+/**
+ * This function saves the editors globally
+ */
 function pushEditorsToContacts() {
     editors.forEach(element => {
         editContacts.push(element);
     });
 };
 
+/**
+ * This function renders the initials of the editors
+ */
 function renderEditorsInitials() {
     document.getElementById('initials').innerHTML = '';
     for (let i = 0; i < selectedContacts.length; i++) {
@@ -258,71 +127,32 @@ function renderEditorsInitials() {
     }
 }
 
+/**
+ * This function sets the prio in task edit mode
+ * 
+ * @param {Object} task 
+ */
 function setPrioInEditTask(task) {
     currentPrioEditTask = task['prio'];
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
 }
 
+/**
+ * This function changes the prio in task edit mode
+ * 
+ * @param {string} prio 
+ */
 function editPrio(prio) {
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.remove(`prio_button_${currentPrioEditTask}`);
     currentPrioEditTask = prio;
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
 }
 
-function htmlEditTask(task) {
-    return `
-            <div class="task-title">
-                Title
-                <input type="text" id="editTaskTitle" value="${task['title']}">
-            </div>
-            <div class="task-description">
-                Description
-                <textarea id="taskDescription" rows="5" required>${task['description']}</textarea>
-            </div>
-            <div class="task-due-date">
-                Due date:
-                <input type="date" id="editTaskDueDate" value="${task['date']}">
-            </div>
-            <div class="priority">
-                Prio
-                <div class="edit-prio-buttons">
-                    <div class="prio_button" id="editPrioUrgent" onclick="editPrio('urgent')">
-                        Urgent
-                        <img src="./assets/img/prioUrgent.png">
-                    </div>
-                    <div class="prio_button" id="editPrioMedium" onclick="editPrio('medium')">
-                        Medium
-                        <img src="./assets/img/prioMedium.png">
-                    </div>
-                    <div class="prio_button" id="editPrioLow" onclick="editPrio('low')">
-                        Low
-                        <img src="./assets/img/prioLow.png">
-                    </div>
-                </div>
-            </div>
-            <div class="editors">
-                Assigned to
-                <div id="contactBox" class="task-category">
-                    <div class="drop_down" id="dropDownEditContacts" onclick="openEditTaskContacts()">
-                        Select contacts to assign
-                        <img class="down_image" src="assets/img/drop-down-arrow.png">
-                    </div>
-                    <div id="editContacts" class="render_categories_box"></div>
-                </div>
-                <div id="initials" class="initials_box"></div>
-            </div>
-            ${genHtmlInputSubtasks()}
-    `;
-}
-
-function htmlCheckIcon(index) {
-    return `
-        <div class="check-button" onclick="saveTask(${index})">
-            OK
-            <img src="./assets/img/checkmark-white.svg">
-        </div>`;
-}
-
+/**
+ * This function saves the task and show afterwards all tasks on board
+ * 
+ * @param {number} idx 
+ */
 async function saveTask(idx) {
     saveChangedDataLocal(idx);
     await setItem('tasks', JSON.stringify(tasks));
@@ -333,6 +163,11 @@ async function saveTask(idx) {
     await initBoard();
 }
 
+/**
+ * This function saves the task data globally
+ * 
+ * @param {number} idx 
+ */
 function saveChangedDataLocal(idx) {
     tasks[idx]['title'] = document.getElementById('editTaskTitle').value;
     tasks[idx]['description'] = document.getElementById('taskDescription').value;
@@ -341,7 +176,11 @@ function saveChangedDataLocal(idx) {
     tasks[idx]['contacts'] = selectedContacts;
 }
 
-
+/**
+ * This function deletes the task with index
+ * 
+ * @param {number} index 
+ */
 async function deleteTask(index) {
     tasks.splice(index, 1);
     document.getElementById('taskDetailView').classList.add('display-none');
@@ -350,27 +189,11 @@ async function deleteTask(index) {
     await initBoard();
 }
 
-function htmlAllEditors(task) {
-    let htmlCodeTemp = '';
-    selectedContacts = task['contacts'];
-    for (let i = 0; i < selectedContacts.length; i++) {
-        const id = selectedContacts[i];
-        const editor = getIndexOfArray(userData.contacts, id);
-        if (editor == null) break; // exit for each loop when no editor is available - prevent error
-        htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
-    }
-    return htmlCodeTemp;
-}
-
-function htmlTaskSingleEditorDetail(ed) {
-    return `
-        <div class="single-editor">
-            <div class="ed-initials" style="background-color: ${ed['color']}">${ed['initials']}</div>
-            <div>${ed['name']}</div>
-        </div>
-    `;
-}
-
+/**
+ * 
+ * @param {string} prio 
+ * @returns The color of the category
+ */
 function getCategoryColor(prio) {
     if (prio == 'low') {
         return '#7AE229';
@@ -383,15 +206,30 @@ function getCategoryColor(prio) {
     };
 }
 
+/**
+ * 
+ * @param {string} str 
+ * @returns Input string with the first letter capitalized
+ */
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+/**
+ * This function starts the drag & drop mode for a task in board
+ * 
+ * @param {number} id 
+ */
 function startDragging(id) {
     currentDraggedElement = id;
     markDraggableArea(`2px dotted #a8a8a8`);
 }
 
+/**
+ * This function allows to drop the task by event
+ * 
+ * @param {event} ev 
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -409,6 +247,9 @@ async function moveTo(status) {
     renderTasks(tasks);
 }
 
+/**
+ * This functions deletes the HTML-Code for all tasks on board
+ */
 function deleteTasksOnBoard() {
     document.getElementById('tasks-todo').innerHTML = '';
     document.getElementById('tasks-progress').innerHTML = '';
@@ -430,6 +271,11 @@ function checkTaskStatus(task) {
     }
 }
 
+/**
+ * This function highlights the draggable areas
+ * 
+ * @param {string} style String to style the border of the draggable area
+ */
 function markDraggableArea(style) {
     let draggableArea = document.getElementsByClassName('task-body');
     for (let i = 0; i < draggableArea.length; i++) {
@@ -438,18 +284,23 @@ function markDraggableArea(style) {
     }
 }
 
+/**
+ * This functions displays the overlay to add a new task
+ */
 function overlayAddTask() {
     selectedContacts = []
     document.documentElement.scrollTop = 0;
     document.getElementById('boardContent').classList.add('board-content-mobile');
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
-    // document.getElementById('mobileCreate').style.visibility = 'visible';
     document.body.classList.add('overflow-hidden');
     renderAddTask();
     getDateOverlay();
 }
 
+/**
+ * This functions hides the overlay to add a new task
+ */
 function closeOverlay() {
     clearAll();
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
@@ -461,6 +312,9 @@ function closeOverlay() {
     // document.getElementById('mobileCreate').style.visibility = 'hidden';
 }
 
+/**
+ * This function closes the task detail view
+ */
 function closeDetailView() {
     editContacts = [];
     document.getElementById('boardContent').classList.remove('board-content-mobile');
@@ -471,10 +325,18 @@ function closeDetailView() {
     console.log(selectedSubtasks);
 }
 
+/**
+ * This function stopps to execute onclick functions on specific DOM-elements
+ * 
+ * @param {event} event 
+ */
 function noClose(event) {
     event.stopPropagation();
 }
 
+/**
+ * This function filters the task with the search input field
+ */
 function filterTasks() {
     filteredTasks = [];
     let inputValue = document.getElementById('search-input').value;
@@ -485,40 +347,20 @@ function filterTasks() {
     renderTasks(filteredTasks);
 }
 
+/**
+ * This function selects the tasks which includes the search string
+ * 
+ * @param {string} input 
+ * @param {object} task 
+ * @returns If the search value (input) is in the task description or in the task title
+ */
 function inputValueIsInTask(input, task) {
     return task['title'].toLowerCase().includes(input.toLowerCase()) || task['description'].toLowerCase().includes(input.toLowerCase());
 }
 
-function createTaskonBoard() {
-    if (allFilled()) addTask();
-    else showTasknotFull();
-}
-
-async function addTask() {
-    closeMenu('contacts', 'dropDownContacts')
-    showNotice('addBordBox');
-    await fillTaskjJson();
-    task = {};
-    contacts = {};
-    selectedContacts = {};
-    clearAll();
-    closeOverlay();
-    initBoard();
-}
-
-function showTasknotFull() {
-    if (!button_delay) {
-        button_delay = true;
-        if (!taskCategory) clearInputField();
-        if (taskCategory) setCategory(taskCategory, color);
-        if (enter_email) clearEmailField();
-        closeMenu('contacts', 'dropDownContacts');
-        showNotice('missing');
-        checkWhichFieldIsEmpty();
-        setTimeout(() => button_delay = false, 2500);
-    }
-}
-
+/**
+ * This function opens the dropdown for the contacts of the user in task edit mode
+ */
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
@@ -545,6 +387,9 @@ function markDoneSubtasks() {
     }
 }
 
+/**
+ * This function closes the contact dropdown menu in task edit mode
+ */
 function closeMenu() {
     document.getElementById('editContacts').innerHTML = '';
     document.getElementById('dropDownEditContacts').style.borderBottom = `1px solid #D1D1D1`;
@@ -558,26 +403,12 @@ function closeMenu() {
     document.getElementById('initials').style.display = 'flex';
 }
 
-// function markAssignedContacts() {
-//     selectedContacts.forEach(cntct => {
-//         let cntctBox = document.getElementById(`cntcts${cntct}`);
-//         cntctBox.classList.add('background-darkblue');
-//         cntctBox.querySelector('input').checked = true;
-//     });
-// }
-
-function showInitialsOfAssignedContacts() {
-    let divInitials = document.getElementById('initials');
-    divInitials.innerHTML = '';
-    selectedContacts.forEach(cntct => {
-        if (cntct == -1) {
-            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${userData.color}">${getInitialsFromName(userData.name)}</div>`;
-        } else {
-            divInitials.innerHTML += `<div class="contact-initials" style="background-color: ${getIndexOfArray(userData.contacts, cntct).color}">${getIndexOfArray(userData.contacts, cntct).initials}</div>`;
-        }
-    });
-}
-
+/**
+ * This function opens the editors dropdown menu with animation
+ * 
+ * @param {string} id1 
+ * @param {string} id2 
+ */
 function openAssignedToMenu(id1, id2) {
     removeBorder(id2);
     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
@@ -586,68 +417,18 @@ function openAssignedToMenu(id1, id2) {
     setTimeout(removeAnimationClassInBoard(), 200);
 }
 
+/**
+ * This function removes the animation class
+ */
 function removeAnimationClassInBoard() {
     document.getElementById(`editContacts`).classList.remove('scale-up-ver-top');
 }
 
-function renderEditContacts() {
-    document.getElementById('editContacts').innerHTML = ``;
-    document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact()">Invite new contact</div>`;
-    for (let i = 0; i < editContacts.length; i++) {
-        let userId = editContacts[i];
-        renderEditTaskContactsHTML(userId);
-        if (selectedContacts.includes(editContacts[i])) {
-            document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-        }
-    }
-};
-
-function renderEditTaskContactsHTML(id) {
-    document.getElementById('editContacts').innerHTML += `
-            <div class="render_categorys" onclick="editTaskSetContacts(${id})">
-                ${getIndexOfArray(userData.contacts, id).name}  
-                <div class="custom_checkBox">
-                    <div id="Checkbox${id}"></div>
-                </div>
-            </div>`;
-};
-
-function editTaskSetContacts(i) {
-    let index = selectedContacts.indexOf(editContacts[i]);
-    if (index == -1) {
-        document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-        if (editContacts[i]['name'] == 'You') editContacts[i]['name'] = current_user;
-        selectedContacts.push(editContacts[i]);
-        renderEditorsInitials();
-    } else {
-        document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
-        selectedContacts.splice(index, 1);
-        renderEditorsInitials();
-    }
-};
-
-function htmlSubtasks(task) {
-    subtasks = task.subtasks;
-    let htmlAllSubtasks = '';
-    for (let i = 0; i < task['subtasks'].length; i++) {
-        const subtask = task['subtasks'][i];
-        htmlAllSubtasks += htmlSingleSubtaskDetail(subtask, i);
-    }
-    return htmlAllSubtasks;
-}
-
-function htmlSingleSubtaskDetail(text, i) {
-    return `
-        <div class="single-subtask" id="subtask${i}" onclick="toggleSetSubtask('subtask${i}')">
-            <label class="checkbox-container">
-                <input type="checkbox">
-                <span class="checkmark" onclick="toggleSetSubtask('subtask${i}')"></span>
-            </label>
-            <div>${text}</div>
-        </div>
-    `;
-}
-
+/**
+ * This function toggles the checkboxes of the subtasks in detail view
+ * 
+ * @param {number} id 
+ */
 function toggleSetSubtask(id) {
     let tempSubtask = document.getElementById(id);
     if (subtaskAlreadySelected(id)) {
@@ -661,10 +442,18 @@ function toggleSetSubtask(id) {
     console.log(selectedSubtasks);
 }
 
+/**
+ * 
+ * @param {number} id 
+ * @returns If the subtask is already selected
+ */
 function subtaskAlreadySelected(id) {
     return selectedSubtasks.includes(id.slice(-1));
 }
 
+/**
+ * This functions saves the checked subtasks in backend
+ */
 async function saveDoneSubtasks() {
     openedTask['done'].fill(false);
     selectedSubtasks.forEach(subT => {
@@ -674,20 +463,20 @@ async function saveDoneSubtasks() {
     renderTasks(tasks);
 }
 
+/**
+ * This function clears the fields in a task
+ */
 function clearAll() {
     document.getElementById('taskDescription').value = '';
     document.getElementById('taskTitle').value = '';
     document.getElementById('taskSubtask').innerHTML = '';
-    // color = undefined;
-    // taskCategory = undefined;
-    // subTasks.length = 0;
-    // task_contacts.length = 0;
-    // clearInputField();
     removePrio();
     clearContacts();
 };
 
-//deletes the selected contacts and closes the contacts menu if it's open
+/**
+ * deletes the selected contacts and closes the contacts menu if it's open
+ */
 function clearContacts() {
     // initials['initials'].length = 0;
     // initials['mail'].length = 0;
