@@ -560,6 +560,8 @@ function setCategory(ctgry, clr) {
 function clearTask() {
     subtasks = [];
     selectedContacts = [];
+    selectedCategory = [];
+    currentPrio = undefined;
     document.getElementById('addTaskInputsLeft').innerHTML = '';
     document.getElementById('addTaskInputsRight').innerHTML = '';
     renderAddTask();
