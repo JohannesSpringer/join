@@ -28,7 +28,7 @@
                 <input type="search" id="search-input" placeholder="Find Task" onkeyup="filterTasks()" style="margin-bottom: 0;">
                 <img src="./assets/img/search-icon.png" class="search-input-icon">
             </div>
-            <button class="btn-add-task" onclick="overlayAddTask()">
+            <button class="btn-add-task" onclick="overlayAddTask('todo')">
                 <div class="btn-add-task-text">Add Task</div>
                 <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
             </button>
@@ -38,7 +38,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>To do</h3>
-                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask('todo')">
                 </div>
                 <div id="tasks-todo" class="task-body" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
 
@@ -47,7 +47,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>In progress</h3>
-                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask('progress')">
                 </div>
                 <div id="tasks-progress" class="task-body" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
 
@@ -56,7 +56,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Awaiting Feedback</h3>
-                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask('feedback')">
                 </div>
                 <div id="tasks-feedback" class="task-body" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
 
@@ -65,7 +65,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Done</h3>
-                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask('done')">
                 </div>
                 <div id="tasks-done" class="task-body" ondrop="moveTo('done')" ondragover="allowDrop(event)">
 
@@ -89,7 +89,7 @@
             <div class="add-task-header">
                 <h1>Add Task</h1>
             </div>
-            <form id="addTaskInputs" class="add-task-inputs" onkeyup="checkFormFilled()" onsubmit="addTask(); return false">
+            <form id="addTaskInputs" class="add-task-inputs" onkeyup="checkFormFilled()" onsubmit="addTask('todo'); return false">
                 <div class="add-task-inputs-fields">
                     <div id="addTaskInputsLeft" class="add-task-inputs-left"></div>
                     <div id="addTaskInputsRight" class="add-task-inputs-right"></div>

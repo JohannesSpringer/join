@@ -68,6 +68,15 @@
 
             button:disabled {
                 background-color: $gray;
+
+                &:hover {
+                    background-color: $gray;
+                    cursor: default !important;
+                }
+
+                input {
+                    cursor: default;
+                }
             }
         }
 

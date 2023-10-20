@@ -2299,6 +2299,13 @@ a {
 .add-task-inputs .add-task-inputs-submit .submit-buttons button:disabled {
   background-color: #a8a8a8;
 }
+.add-task-inputs .add-task-inputs-submit .submit-buttons button:disabled:hover {
+  background-color: #a8a8a8;
+  cursor: default !important;
+}
+.add-task-inputs .add-task-inputs-submit .submit-buttons button:disabled input {
+  cursor: default;
+}
 .add-task-inputs .add-task-inputs-submit button:first-child {
   color: #2A3647;
   background-color: white;
@@ -2354,7 +2361,7 @@ a {
 }
 .task-title span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-title input {
   padding: 10px;
@@ -2373,7 +2380,7 @@ a {
 }
 .task-description span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-description #taskDescription {
   resize: none;
@@ -2393,7 +2400,7 @@ a {
 }
 .task-due-date span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-due-date input {
   padding: 10px;
@@ -2448,7 +2455,7 @@ a {
 }
 .task-category span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-category .drop_down_open {
   margin-bottom: 0;
@@ -2655,7 +2662,7 @@ a {
 }
 .task-prio span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-prio input {
   padding: 10px;
@@ -2732,7 +2739,7 @@ a {
 }
 .task-subtask span {
   font-size: 12px;
-  color: #F6F7F8;
+  color: red;
 }
 .task-subtask input {
   padding: 10px;

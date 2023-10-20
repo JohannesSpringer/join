@@ -288,7 +288,7 @@ function markDraggableArea(style) {
 /**
  * This functions displays the overlay to add a new task
  */
-function overlayAddTask() {
+function overlayAddTask(state) {
     selectedContacts = [];
     subtasks = [];
     document.getElementById('addTaskInputsLeft').innerHTML = '';
@@ -300,6 +300,7 @@ function overlayAddTask() {
     document.body.classList.add('overflow-hidden');
     renderAddTask();
     getDateOverlay();
+    document.getElementById('addTaskInputs').setAttribute("onsubmit", `addTask('${state}'); return false`);
 }
 
 /**

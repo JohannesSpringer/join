@@ -66,7 +66,7 @@ function showNewCreatedCategoryHtml() {
             <img class="down_image" src="./assets/img/drop-down-arrow.png">
         </div>
         <div id="categories" class="render_categories_box"></div>
-        <span id="reqTaskDescription">This field is required</span>`;
+        <span id="reqTaskCategory">This field is required</span>`;
 }
 
 /**
@@ -80,7 +80,7 @@ function restoreCategoriesHtml() {
                 <img class="down_image" src="./assets/img/drop-down-arrow.png">
             </div>
             <div id="categories" class="render_categories_box"></div>
-            <span id="reqTaskDescription">This field is required</span>`;
+            <span id="reqTaskCategory">This field is required</span>`;
 }
 
 /**
@@ -91,7 +91,7 @@ function genHtmlInputDueDate() {
     return `<div class="task-due-date">
                 <label>Due date</label>
                 <input type="date" id="taskDate" onchange="checkFormFilled()" name="date" min="${getDate()}" required>
-                <span id="reqTaskTitle">This field is required</span>
+                <span id="reqTaskDate">This field is required</span>
             </div>`;
 }
 
@@ -116,7 +116,7 @@ function genHtmlInputPrio() {
                         <img src="assets/img/prioLow.png">
                     </div>
                 </div>
-                <span id="reqTaskTitle">This field is required</span>
+                <span id="reqTaskPrio">This field is required</span>
             </div>`;
 }
 
@@ -169,7 +169,7 @@ function genHtmlInputCategory() {
                     <img class="down_image" src="./assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categories" class="render_categories_box"></div>
-                <span id="reqTaskDescription">This field is required</span>
+                <span id="reqTaskCategory">This field is required</span>
             </div>`;
 }
 

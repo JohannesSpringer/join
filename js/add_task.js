@@ -57,15 +57,44 @@ function checkFormFilled() {
         formIsFilled = true;
         inputIds.forEach(id => {
             let elem = document.getElementById(id);
-            if (elem.value == '') formIsFilled = false;
+            if (elem.value == '') {
+                formIsFilled = false;
+                setStyleOfReqField(elem, 'red');
+            }
+            else {
+                setStyleOfReqField(elem, '#F6F7F8');
+            }
         });
         if ((selectedContacts.length == 0) || !currentPrio || selectedCategory.length == 0) {
             formIsFilled = false;
         }
+        toggleRequiredFields();
         toggleSubmitButton();
     } catch (e) {
         if (!e instanceof TypeError) throw e;
     }
+}
+
+/**
+ * This functions toggles the required fields for assigned contacts, prio and category
+ */
+function toggleRequiredFields() {
+    if (selectedContacts.length == 0) document.getElementById('reqTaskAssign').style.color = 'red'
+    else document.getElementById('reqTaskAssign').style.color = '#F6F7F8';
+    if (!currentPrio) document.getElementById('reqTaskPrio').style.color = 'red'
+    else document.getElementById('reqTaskPrio').style.color = '#F6F7F8';
+    if (selectedCategory.length == 0) document.getElementById('reqTaskCategory').style.color = 'red'
+    else document.getElementById('reqTaskCategory').style.color = '#F6F7F8';
+}
+
+/**
+ * This function sets the color of the required field
+ * 
+ * @param {Object} elem DOM-Element of the input field
+ * @param {string} clr Color for the text
+ */
+function setStyleOfReqField(elem, clr) {
+    elem.parentNode.querySelector('span').style.color = clr;
 }
 
 /**
@@ -86,8 +115,8 @@ function toggleSubmitButton() {
 /**
  * This function saves the new task in the backend and displays the board view
  */
-async function addTask() {
-    let newTask = getNewTaskData();
+async function addTask(state) {
+    let newTask = getNewTaskData(state);
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
     goToPage('board');
@@ -97,7 +126,7 @@ async function addTask() {
  * This function creates the JSON format of the new task
  * @returns Data of the new task in JSON format
  */
-function getNewTaskData() {
+function getNewTaskData(state) {
     return {
         'title': document.getElementById('taskTitle').value,
         'description': document.getElementById('taskDescription').value,
@@ -108,7 +137,7 @@ function getNewTaskData() {
         'subtasks': subtasks,
         'done': new Array(subtasks.length).fill(false),
         'task-id': findUnusedTaskIndex(),
-        'status': 'todo'
+        'status': state
     };
 }
 
