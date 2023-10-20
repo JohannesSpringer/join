@@ -130,7 +130,7 @@ function genHtmlToSite() {
             <div class="seperator" style="display: none;"></div>
         </div>
         <div class="task">
-            <a class="task_sub" onclick="goToPage('board'))">
+            <a class="task_sub" onclick="goToPage('board')">
                 <span class="count">
                     ${taskInBoard}
                 </span>
