@@ -328,7 +328,6 @@ function closeDetailView() {
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
     renderTasks(tasks);
-    console.log(selectedSubtasks);
 }
 
 /**
@@ -445,7 +444,6 @@ function toggleSetSubtask(id) {
         selectedSubtasks.push(id.slice(-1));
     }
     saveDoneSubtasks();
-    console.log(selectedSubtasks);
 }
 
 /**

@@ -9,30 +9,7 @@ async function goBackToPrevious() {
     previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
     previousSelectedMenuItems = shortenArrayTo2Elements(previousSelectedMenuItems);
     localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-
-    switch (previousSelectedMenuItems[0]) {
-        case 'summary':
-            goToSummary();
-            break;
-        case 'board':
-            goToBoard();
-            break;
-        case 'addTask':
-            goToAddTask();
-            break;
-        case 'contacts':
-            goToContacts();
-            break;
-        case 'privacyPolicy':
-            goToPrivacyPolicy();
-            break;
-        case 'legalNotice':
-            goToLegalNotice();
-            break;
-
-        default:
-            break;
-    }
+    goToPage(previousSelectedMenuItems[0]);
 }
 
 /**
@@ -63,72 +40,18 @@ function goToIndex() {
 }
 
 /**
- * This function changes the current shown webpage to summary.html
+ * This function changes the displayed page
+ * 
+ * @param {string} page Name of the target page
  */
-async function goToSummary() {
+async function goToPage(page) {
     previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
     if (previousSelectedMenuItems == null) previousSelectedMenuItems = [];
-    previousSelectedMenuItems.push('summary');
+    previousSelectedMenuItems.push(page);
     localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "summary.html";
-    localStorage.setItem('selectedMenuItem', 'summary');
+    window.location.href = `${page}.html`;
+    localStorage.setItem('selectedMenuItem', page);
 }
-
-/**
- * This function changes the current shown webpage to summary.html
- */
-async function goToAddTask() {
-    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
-    previousSelectedMenuItems.push('addTask');
-    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "add_task.html";
-    localStorage.setItem('selectedMenuItem', 'addTask');
-}
-
-/**
- * This function changes the current shown webpage to board.html
- */
-async function goToBoard() {
-    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
-    previousSelectedMenuItems.push('board');
-    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "board.html";
-    localStorage.setItem('selectedMenuItem', 'board');
-}
-
-/**
- * This function changes the current shown webpage to contacts.html
- */
-async function goToContacts() {
-    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
-    previousSelectedMenuItems.push('contacts');
-    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "contacts.html";
-    localStorage.setItem('selectedMenuItem', 'contacts');
-}
-
-/**
- * This function changes the current shown webpage to privacy_policy.html
- */
-async function goToPrivacyPolicy() {
-    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
-    previousSelectedMenuItems.push('privacyPolicy');
-    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "privacy_policy.html";
-    localStorage.setItem('selectedMenuItem', 'privacyPolicy');
-}
-
-/**
- * This function changes the current shown webpage to legal_notice.html
- */
-async function goToLegalNotice() {
-    previousSelectedMenuItems = await JSON.parse(localStorage.getItem('previousSelectedMenuItems'));
-    previousSelectedMenuItems.push('legalNotice');
-    localStorage.setItem('previousSelectedMenuItems', JSON.stringify(previousSelectedMenuItems));
-    window.location.href = "legal_notice.html";
-    localStorage.setItem('selectedMenuItem', 'legalNotice');
-}
-
 
 /**
  * This functions loads all users from backend and checks if the current user
@@ -229,7 +152,7 @@ function handleLoginSuccess(email, password, rememberMe, user) {
         clearLoginData();
     }
     setCurrentUser(user);
-    goToSummary();
+    goToPage('summary');
 }
 
 /**
@@ -251,16 +174,16 @@ function highlightSelectedMenuItem() {
         case 'board':
             bgBoard.classList.add('highlight-nav');
             break;
-        case 'addTask':
+        case 'add_task':
             bgAddTask.classList.add('highlight-nav');
             break;
         case 'contacts':
             bgContacts.classList.add('highlight-nav');
             break;
-        case 'privacyPolicy':
+        case 'privacy_policy':
             bgPrivacyPolicy.classList.add('highlight-nav');
             break;
-        case 'legalNotice':
+        case 'legal_notice':
             bgLegalNotice.classList.add('highlight-nav');
             break;
         default:
@@ -326,7 +249,7 @@ function guestLogin() {
     localStorage.setItem('currentUser', 'Guest');
     clearLoginData();
     localStorage.setItem('loginEmail', 'test@test.de');
-    goToSummary();
+    goToPage('summary');
 }
 
 /**

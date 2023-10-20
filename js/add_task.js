@@ -90,7 +90,7 @@ async function addTask() {
     let newTask = getNewTaskData();
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
-    goToBoard();
+    goToPage('board');
 }
 
 /**

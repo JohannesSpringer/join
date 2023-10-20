@@ -85,6 +85,6 @@ async function addUserToLocalArray() {
         color: getRandomColor(),
         id: -1,
         initials: getInitialsFromName(registerName.value),
-        contacts: []
+        contacts: users[0].contacts
     });
 }

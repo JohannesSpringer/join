@@ -32,7 +32,6 @@ async function init() {
     await getCurrentUserData();
     user_name = current_user['name'];
     if (tasks !== null) {
-        console.log(tasks);
         taskInBoard = tasks.length;
         tasks.forEach(task => {
             checkPrioAndDate(task);
@@ -131,7 +130,7 @@ function genHtmlToSite() {
             <div class="seperator" style="display: none;"></div>
         </div>
         <div class="task">
-            <a class="task_sub" onclick="goToBoard()">
+            <a class="task_sub" onclick="goToPage('board'))">
                 <span class="count">
                     ${taskInBoard}
                 </span>
@@ -140,7 +139,7 @@ function genHtmlToSite() {
                     Board
                 </span>
             </a>
-            <a class="task_sub" onclick="goToBoard()">
+            <a class="task_sub" onclick="goToPage('board')">
                 <span class="count">
                     ${inProgessCount}
                 </span>
@@ -149,7 +148,7 @@ function genHtmlToSite() {
                     Progress
                 </span>
             </a>
-            <a class="task_sub" onclick="goToBoard()">
+            <a class="task_sub" onclick="goToPage('board')">
                 <span class="count">
                     ${awaitFeedbackCount}
                 </span>
@@ -159,7 +158,7 @@ function genHtmlToSite() {
                 </span>
             </a>
         </div>
-        <a class="prio_date" onclick="goToBoard()">
+        <a class="prio_date" onclick="goToPage('board')">
             <div class="prio_date_sub">
                 <img src="assets/img/urgent.svg" alt="">
                 <div class="todo">
@@ -182,7 +181,7 @@ function genHtmlToSite() {
             </div>
         </a>
         <div class="todo_done">
-            <a class="todo_done_sub" onclick="goToBoard()">
+            <a class="todo_done_sub" onclick="goToPage('board')">
                 <img src="assets/img/pencil.svg" alt="">
                 <div class="todo">
                     <span class="count">
@@ -193,7 +192,7 @@ function genHtmlToSite() {
                     </span>
                 </div>
             </a>
-            <a class="todo_done_sub" onclick="goToBoard()">
+            <a class="todo_done_sub" onclick="goToPage('board')">
                 <img src="assets/img/check.svg" alt="">
                 <div class="todo">
                     <span class="count">
