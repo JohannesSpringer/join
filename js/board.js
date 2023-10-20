@@ -161,6 +161,7 @@ async function saveTask(idx) {
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
     await initBoard();
+    subtasks = [];
 }
 
 /**
@@ -288,7 +289,10 @@ function markDraggableArea(style) {
  * This functions displays the overlay to add a new task
  */
 function overlayAddTask() {
-    selectedContacts = []
+    selectedContacts = [];
+    subtasks = [];
+    document.getElementById('addTaskInputsLeft').innerHTML = '';
+    document.getElementById('addTaskInputsRight').innerHTML = '';
     document.documentElement.scrollTop = 0;
     document.getElementById('boardContent').classList.add('board-content-mobile');
     document.getElementById('overlayAddTask').classList.remove('display-none');
@@ -317,8 +321,10 @@ function closeOverlay() {
  */
 function closeDetailView() {
     editContacts = [];
+    clearTask();
     document.getElementById('boardContent').classList.remove('board-content-mobile');
     document.getElementById('taskDetailView').classList.add('display-none');
+    document.getElementById('taskDetailView').innerHTML = '';
     document.body.classList.remove('overflow-hidden');
     menuContactsOpen = false;
     renderTasks(tasks);
@@ -478,10 +484,6 @@ function clearAll() {
  * deletes the selected contacts and closes the contacts menu if it's open
  */
 function clearContacts() {
-    // initials['initials'].length = 0;
-    // initials['mail'].length = 0;
-    // initials['color'].length = 0;
-    // showInitials();
     if (menuContactsOpen) {
         closeMenu('contacts', 'dropDownContacts')
     }

@@ -44,7 +44,7 @@ function htmlEditSubtask(tsk, i) {
  */
 function genHtmlInputSubmit() {
     return `<div class="submit-buttons">
-                <button>
+                <button onclick="clearTask()">
                     Clear
                     <img src="./assets/img/x.svg"> 
                 </button>

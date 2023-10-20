@@ -44,6 +44,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputCategory();
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
     document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
+    getDateOverlay();
 }
 
 /**
@@ -521,4 +522,14 @@ function setCategory(ctgry, clr) {
             <img class="down_image" src="assets/img/drop-down-arrow.png">
         </div>`;
     checkFormFilled();
+}
+
+/**
+ * This function clears the task form
+ */
+function clearTask() {
+    subtasks = [];
+    document.getElementById('addTaskInputsLeft').innerHTML = '';
+    document.getElementById('addTaskInputsRight').innerHTML = '';
+    renderAddTask();
 }
