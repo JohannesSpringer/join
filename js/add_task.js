@@ -45,6 +45,7 @@ function renderAddTask() {
     document.getElementById('addTaskInputsRight').innerHTML += genHtmlInputSubtasks();
     document.getElementById('addTaskInputsSubmit').innerHTML = genHtmlInputSubmit();
     getDateOverlay();
+    checkFormFilled();
 }
 
 /**
@@ -558,6 +559,7 @@ function setCategory(ctgry, clr) {
  */
 function clearTask() {
     subtasks = [];
+    selectedContacts = [];
     document.getElementById('addTaskInputsLeft').innerHTML = '';
     document.getElementById('addTaskInputsRight').innerHTML = '';
     renderAddTask();
