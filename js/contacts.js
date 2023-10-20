@@ -245,9 +245,7 @@ function editContact(id) {
     contactsA[idInContactsA].phone = phone;
     contactsA[idInContactsA].initials = initials;
     animationAndPushToServer();
-    showContact(contactsA.findIndex((elem) => {
-        return elem.email == email;
-    }));
+    showContact(id);
 }
 
 /**
