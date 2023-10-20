@@ -485,3 +485,12 @@ function showEditContact(id) {
         </div>
     </div>`
 }
+
+/**
+ * This function hides the contact detail mobile view
+ */
+function hideContactInfo() {
+    let elem = document.getElementById('contacts-container');
+    elem.querySelector('.contact-info').classList.add('d-none-mobile');
+    elem.querySelector('.contacts').classList.remove('d-none');
+}
