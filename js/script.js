@@ -23,6 +23,12 @@ async function goBackToPrevious() {
         case 'contacts':
             goToContacts();
             break;
+        case 'privacyPolicy':
+            goToPrivacyPolicy();
+            break;
+        case 'legalNotice':
+            goToLegalNotice();
+            break;
 
         default:
             break;
