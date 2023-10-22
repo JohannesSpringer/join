@@ -494,7 +494,11 @@ body {
                 background-color: #F6F7F8;
 
                 &:hover {
-                    filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                    color: $lightblue;
+
+                    img {
+                        filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                    }
                 }
             }
 
@@ -507,8 +511,12 @@ body {
                 background-color: #F6F7F8;
 
                 &:hover {
-                    filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
-                }
+                    color: $lightblue;
+
+                    img {
+                        filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                    }
+                }                
             }
 
             .vertical-line {
